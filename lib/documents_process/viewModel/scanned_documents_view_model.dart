@@ -23,9 +23,7 @@ class ScannedDocumentsViewModel extends ChangeNotifier {
         userId,
         files,
       );
-      if (response != null &&
-          response.data.isNotEmpty &&
-          response.status == 200) {
+      if (response.data.isNotEmpty && response.status == 200) {
         Navigator.pushAndRemoveUntil(
           context,
           PageRouteBuilder(
