@@ -43,7 +43,6 @@ flutter:
   assets:
     - assets/images/background_gradient.jpg
     - assets/icons/app_logo.png
-    - assets/icons/google.png
     - assets/loader/loading.json
     - assets/loader/profile.json
     - assets/images/home_background_gradient.png
@@ -60,5 +59,3 @@ flutter:
     - assets/images/copy_link.png
     - assets/images/open_link.png
     - assets/images/log_out.png
-    - assets/icons/scanner_app_logo.png
-    - assets/icons/splash_screen_logo.png

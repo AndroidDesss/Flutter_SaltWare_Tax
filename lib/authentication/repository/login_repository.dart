@@ -25,24 +25,4 @@ class LoginRepository {
       rethrow;
     }
   }
-
-  Future<CommonApiResponse<LoginResponse>> gmailLogin(String email) async {
-    Map<String, String> body = {
-      'email': email,
-      'password': '',
-      'logintype': 'gmail'
-    };
-    try {
-      final response = await _apiService.postResponse('login', body);
-
-      if (response != null) {
-        return CommonApiResponse.fromJson(
-            response, (item) => LoginResponse.fromJson(item));
-      } else {
-        throw Exception('Invalid response from server');
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
 }

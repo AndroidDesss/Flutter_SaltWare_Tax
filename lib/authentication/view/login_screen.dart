@@ -278,49 +278,49 @@ class LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                             const SizedBox(height: 15),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, animation,
-                                          secondaryAnimation) {
-                                        return const ForgotPasswordScreen();
-                                      },
-                                      transitionsBuilder: (context, animation,
-                                          secondaryAnimation, child) {
-                                        const begin = Offset(1.0,
-                                            0.0); // Start from right to left
-                                        const end = Offset
-                                            .zero; // End at current position
-                                        const curve = Curves
-                                            .easeInOut; // Smooth transition
-                                        var tween = Tween(
-                                                begin: begin, end: end)
-                                            .chain(CurveTween(curve: curve));
-                                        var offsetAnimation =
-                                            animation.drive(tween);
-                                        return SlideTransition(
-                                            position: offsetAnimation,
-                                            child: child);
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  AppStrings.forgotPassword,
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.blue,
-                                    fontFamily: 'PoppinsSemiBold',
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 30),
+                            // Align(
+                            //   alignment: Alignment.centerRight,
+                            //   child: GestureDetector(
+                            //     onTap: () {
+                            //       Navigator.push(
+                            //         context,
+                            //         PageRouteBuilder(
+                            //           pageBuilder: (context, animation,
+                            //               secondaryAnimation) {
+                            //             return const ForgotPasswordScreen();
+                            //           },
+                            //           transitionsBuilder: (context, animation,
+                            //               secondaryAnimation, child) {
+                            //             const begin = Offset(1.0,
+                            //                 0.0); // Start from right to left
+                            //             const end = Offset
+                            //                 .zero; // End at current position
+                            //             const curve = Curves
+                            //                 .easeInOut; // Smooth transition
+                            //             var tween = Tween(
+                            //                     begin: begin, end: end)
+                            //                 .chain(CurveTween(curve: curve));
+                            //             var offsetAnimation =
+                            //                 animation.drive(tween);
+                            //             return SlideTransition(
+                            //                 position: offsetAnimation,
+                            //                 child: child);
+                            //           },
+                            //         ),
+                            //       );
+                            //     },
+                            //     child: const Text(
+                            //       AppStrings.forgotPassword,
+                            //       textAlign: TextAlign.end,
+                            //       style: TextStyle(
+                            //         fontSize: 16,
+                            //         color: Colors.blue,
+                            //         fontFamily: 'PoppinsSemiBold',
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // const SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [

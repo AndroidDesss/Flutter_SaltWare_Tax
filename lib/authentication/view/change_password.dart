@@ -21,8 +21,9 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   bool _isChangePasswordPressed = false;
 
-  late TextEditingController _passwordController = TextEditingController();
-  late TextEditingController _confirmPasswordController =
+  late final TextEditingController _passwordController =
+      TextEditingController();
+  late final TextEditingController _confirmPasswordController =
       TextEditingController();
 
   final _passwordFocusNode = FocusNode();
