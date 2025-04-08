@@ -51,4 +51,5 @@ class AppStrings {
   static const batchNameContent = 'Create a Batch Name for your documents..!';
   static const enterBatchName = 'Enter your Batch Name';
   static const batchName = 'Batch Name';
+  static const userName = 'User Name';
 }

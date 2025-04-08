@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/authentication/view/forgot_password_screen.dart';
 import 'package:salt_ware_tax/authentication/view/new_user_sign_up_screen.dart';
 import 'package:salt_ware_tax/authentication/viewModel/login_view_model.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
@@ -22,23 +21,23 @@ class LoginScreenState extends State<LoginScreen> {
 
   bool _isLoginPressed = false;
 
-  late TextEditingController _phoneNumberController = TextEditingController();
+  late TextEditingController _emailController = TextEditingController();
   late TextEditingController _passwordController = TextEditingController();
 
-  final FocusNode _phoneNumberFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _phoneNumberController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _phoneNumberController.dispose();
-    _phoneNumberFocusNode.dispose();
+    _emailController.dispose();
+    _emailFocusNode.dispose();
     _passwordController.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
@@ -112,7 +111,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 25),
                             const Text(
-                              AppStrings.phoneNumber,
+                              AppStrings.userName,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'PoppinsSemiBold',
@@ -126,7 +125,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6),
-                                    boxShadow: _phoneNumberFocusNode.hasFocus
+                                    boxShadow: _emailFocusNode.hasFocus
                                         ? [
                                             BoxShadow(
                                               color: Colors.blue.withOpacity(1),
@@ -138,15 +137,15 @@ class LoginScreenState extends State<LoginScreen> {
                                         : [],
                                   ),
                                   child: TextFormField(
-                                    controller: _phoneNumberController,
-                                    focusNode: _phoneNumberFocusNode,
+                                    controller: _emailController,
+                                    focusNode: _emailFocusNode,
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'PoppinsRegular',
                                         fontSize: 16),
                                     cursorColor: const Color(0xFF4370FF),
                                     decoration: InputDecoration(
-                                      hintText: AppStrings.enterPhoneNumber,
+                                      hintText: AppStrings.enterEmail,
                                       hintStyle: TextStyle(
                                         color: Colors.white.withOpacity(0.5),
                                         fontFamily: 'PoppinsRegular',
@@ -175,8 +174,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     onEditingComplete: () {
                                       setState(() {});
                                     },
-                                    keyboardType: TextInputType.phone,
-                                    maxLength: 10,
+                                    keyboardType: TextInputType.text,
                                     buildCounter: (BuildContext context,
                                         {int? currentLength,
                                         int? maxLength,
@@ -186,13 +184,11 @@ class LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 if (_isLoginPressed &&
-                                    (_phoneNumberController.text.isEmpty ||
-                                        _phoneNumberController.text.length <
-                                            10))
+                                    _emailController.text.isEmpty)
                                   const Padding(
                                     padding: EdgeInsets.only(top: 8),
                                     child: Text(
-                                      'Please enter a valid number',
+                                      'Please enter a valid Email-Id',
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontFamily: 'PoppinsRegular',
@@ -320,7 +316,7 @@ class LoginScreenState extends State<LoginScreen> {
                             //     ),
                             //   ),
                             // ),
-                            // const SizedBox(height: 30),
+                            const SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -385,16 +381,11 @@ class LoginScreenState extends State<LoginScreen> {
                                     setState(() {
                                       _isLoginPressed = true;
                                     });
-                                    if (_phoneNumberController
-                                            .text.isNotEmpty &&
-                                        _phoneNumberController.text.length ==
-                                            10 &&
-                                        _passwordController.text.isNotEmpty &&
-                                        _passwordController.text.length >= 8) {
+                                    if (_passwordController.text.length >= 8) {
                                       FocusScope.of(context)
                                           .requestFocus(FocusNode());
                                       loginViewModel.callLoginApi(
-                                          _phoneNumberController.text,
+                                          _emailController.text,
                                           _passwordController.text,
                                           context);
                                     }
@@ -418,7 +409,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 60),
                           ],
                         ),
                       ),

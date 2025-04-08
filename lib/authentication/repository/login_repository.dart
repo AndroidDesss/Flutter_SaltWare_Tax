@@ -6,9 +6,9 @@ class LoginRepository {
   final NetworkApiService _apiService = NetworkApiService();
 
   Future<CommonApiResponse<LoginResponse>> login(
-      String phoneNumber, String password) async {
+      String email, String password) async {
     Map<String, String> body = {
-      'email': phoneNumber,
+      'email': email,
       'password': password,
       'logintype': 'normal'
     };

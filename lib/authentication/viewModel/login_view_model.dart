@@ -10,10 +10,10 @@ class LoginViewModel extends ChangeNotifier {
 
   //login
   Future<void> callLoginApi(
-      String phoneNumber, String password, BuildContext context) async {
+      String email, String password, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
-      final response = await _loginRepository.login(phoneNumber, password);
+      final response = await _loginRepository.login(email, password);
 
       if (response.status == 200) {
         await SharedPrefsHelper.init();
@@ -52,5 +52,4 @@ class LoginViewModel extends ChangeNotifier {
   void _showErrorMessage(String message, BuildContext context) {
     CommonUtilities.showToast(context, message: message);
   }
-
 }
