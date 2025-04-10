@@ -59,18 +59,10 @@ class LoginScreenState extends State<LoginScreen> {
         },
         child: SafeArea(
           child: Scaffold(
+            backgroundColor: AppColors.customWhite,
             body:
                 Consumer<LoginViewModel>(builder: (context, viewModel, child) {
               return Stack(children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image:
-                          AssetImage('assets/images/background_gradient.jpg'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
                 Center(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -83,15 +75,15 @@ class LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 10),
                             Image.asset(
                               'assets/icons/app_logo.png',
-                              width: 90,
-                              height: 90,
+                              width: 100,
+                              height: 100,
                               fit: BoxFit.contain,
                             ),
                             const SizedBox(height: 35),
                             const Text(
                               AppStrings.login,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 fontFamily: 'PoppinsSemiBold',
                                 fontSize: 28,
                               ),
@@ -103,7 +95,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 AppStrings.loginContentText,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsRegular',
                                   fontSize: 14,
                                 ),
@@ -113,7 +105,7 @@ class LoginScreenState extends State<LoginScreen> {
                             const Text(
                               AppStrings.userName,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 fontFamily: 'PoppinsSemiBold',
                                 fontSize: 15,
                               ),
@@ -128,7 +120,8 @@ class LoginScreenState extends State<LoginScreen> {
                                     boxShadow: _emailFocusNode.hasFocus
                                         ? [
                                             BoxShadow(
-                                              color: Colors.blue.withOpacity(1),
+                                              color: AppColors.customBlack
+                                                  .withOpacity(0.5),
                                               blurRadius: 5,
                                               spreadRadius: 1,
                                               offset: const Offset(0, 1),
@@ -140,19 +133,20 @@ class LoginScreenState extends State<LoginScreen> {
                                     controller: _emailController,
                                     focusNode: _emailFocusNode,
                                     style: const TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.customBlack,
                                         fontFamily: 'PoppinsRegular',
                                         fontSize: 16),
-                                    cursorColor: const Color(0xFF4370FF),
+                                    cursorColor: AppColors.customBlue,
                                     decoration: InputDecoration(
                                       hintText: AppStrings.enterEmail,
                                       hintStyle: TextStyle(
-                                        color: Colors.white.withOpacity(0.5),
-                                        fontFamily: 'PoppinsRegular',
-                                        fontSize: 14,
-                                      ),
+                                          color: AppColors.customBlack
+                                              .withOpacity(0.5),
+                                          fontFamily: 'PoppinsRegular',
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
                                       filled: true,
-                                      fillColor: const Color(0xFF0E0E22),
+                                      fillColor: AppColors.customGrey,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: BorderSide(
@@ -163,7 +157,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: const BorderSide(
-                                          color: Color(0xFF4370FF),
+                                          color: AppColors.customBlue,
                                           width: 1,
                                         ),
                                       ),
@@ -201,7 +195,7 @@ class LoginScreenState extends State<LoginScreen> {
                             const Text(
                               AppStrings.password,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 fontFamily: 'PoppinsSemiBold',
                                 fontSize: 15,
                               ),
@@ -216,7 +210,8 @@ class LoginScreenState extends State<LoginScreen> {
                                     boxShadow: _passwordFocusNode.hasFocus
                                         ? [
                                             BoxShadow(
-                                              color: Colors.blue.withOpacity(1),
+                                              color: AppColors.customBlue
+                                                  .withOpacity(0.5),
                                               blurRadius: 5,
                                               spreadRadius: 1,
                                               offset: const Offset(0, 1),
@@ -229,19 +224,21 @@ class LoginScreenState extends State<LoginScreen> {
                                     focusNode: _passwordFocusNode,
                                     obscureText: true,
                                     style: const TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.customBlack,
                                         fontFamily: 'PoppinsRegular',
-                                        fontSize: 16),
-                                    cursorColor: const Color(0xFF4370FF),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                    cursorColor: AppColors.customBlue,
                                     decoration: InputDecoration(
                                       hintText: AppStrings.enterPassword,
                                       hintStyle: TextStyle(
-                                        color: Colors.white.withOpacity(0.5),
+                                        color: AppColors.customBlack
+                                            .withOpacity(0.5),
                                         fontFamily: 'PoppinsRegular',
                                         fontSize: 14,
                                       ),
                                       filled: true,
-                                      fillColor: const Color(0xFF0E0E22),
+                                      fillColor: AppColors.customGrey,
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: BorderSide(
@@ -252,7 +249,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: const BorderSide(
-                                          color: Color(0xFF4370FF),
+                                          color: AppColors.customBlue,
                                           width: 1,
                                         ),
                                       ),
@@ -327,7 +324,7 @@ class LoginScreenState extends State<LoginScreen> {
                                         text: AppStrings.alreadyHaveAccount,
                                         style: TextStyle(
                                           fontSize: 13,
-                                          color: Colors.white70,
+                                          color: AppColors.customBlack,
                                           fontFamily: 'PoppinsRegular',
                                         ),
                                       ),
@@ -335,7 +332,7 @@ class LoginScreenState extends State<LoginScreen> {
                                         text: AppStrings.registerHere,
                                         style: const TextStyle(
                                           fontSize: 15,
-                                          color: Colors.blue,
+                                          color: AppColors.customBlue,
                                           fontFamily: 'PoppinsSemiBold',
                                         ), // color for "Register here"
                                         recognizer: TapGestureRecognizer()
@@ -393,7 +390,7 @@ class LoginScreenState extends State<LoginScreen> {
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 16, horizontal: 24),
-                                    backgroundColor: Colors.blue,
+                                    backgroundColor: AppColors.customBlue,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
