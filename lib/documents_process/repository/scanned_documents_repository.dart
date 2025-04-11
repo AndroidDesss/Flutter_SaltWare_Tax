@@ -6,7 +6,7 @@ import 'package:salt_ware_tax/network/api_response.dart';
 
 class ScannedDocumentsRepository {
   final String _url =
-      'https://speedyscanner.desss-portfolio.com/dynamic/dynamicapi.php?action=multiple_image';
+      'https://saltwaretax.desss-portfolio.com/dynamic/dynamicapi.php?action=multiple_image';
 
   // Post multiple files to the server
   Future<CommonApiResponse<ScannedDocumentsResponse>> postScannedDocuments(
