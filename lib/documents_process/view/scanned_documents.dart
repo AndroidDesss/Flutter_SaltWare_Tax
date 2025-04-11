@@ -47,7 +47,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
           title: const Text(
             AppStrings.deleteImage,
             style: TextStyle(
-                color: AppColors.customDarkBlue,
+                color: AppColors.customBlue,
                 fontFamily: 'PoppinsRegular',
                 fontSize: 18),
           ),
@@ -56,7 +56,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
               onPressed: () => Navigator.pop(context),
               child: const Text('No',
                   style: TextStyle(
-                    color: AppColors.customDarkBlue,
+                    color: AppColors.customBlue,
                     fontFamily: 'PoppinsRegular',
                     fontSize: 16,
                   )),
@@ -70,7 +70,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
               },
               child: const Text('Yes',
                   style: TextStyle(
-                    color: AppColors.customDarkBlue,
+                    color: AppColors.customBlue,
                     fontFamily: 'PoppinsRegular',
                     fontSize: 16,
                   )),

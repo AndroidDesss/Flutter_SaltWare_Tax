@@ -19,7 +19,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   final ProfileViewModel profileViewModel = ProfileViewModel();
 
   late String userId = '';
-  String loginType = '';
 
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
@@ -53,8 +52,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   Future<void> _getSharedPrefData() async {
     await SharedPrefsHelper.init();
     userId = SharedPrefsHelper.getString('user_id')!;
-    loginType = SharedPrefsHelper.getString('loginType')!;
-
     if (userId.isNotEmpty) {
       profileViewModel.getProfileDetails(userId, context);
     }
@@ -63,7 +60,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.customDarkBlueBottomNavigation,
+      backgroundColor: AppColors.customWhite,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -72,7 +69,7 @@ class ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(
             fontFamily: 'PoppinsSemiBold',
             fontSize: 26,
-            color: Colors.white,
+            color: AppColors.customBlack,
           ),
         ),
         actions: [
@@ -84,7 +81,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   title: const Text(
                     "Are you sure you want to log out?",
                     style: TextStyle(
-                        color: AppColors.customDarkBlue,
+                        color: AppColors.customBlue,
                         fontFamily: 'PoppinsRegular',
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
@@ -94,7 +91,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () => Navigator.of(context).pop(false),
                       child: const Text("No",
                           style: TextStyle(
-                              color: AppColors.customDarkBlue,
+                              color: AppColors.customBlue,
                               fontFamily: 'PoppinsRegular',
                               fontWeight: FontWeight.bold,
                               fontSize: 16)),
@@ -109,7 +106,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       },
                       child: const Text("Yes",
                           style: TextStyle(
-                              color: AppColors.customDarkBlue,
+                              color: AppColors.customBlue,
                               fontFamily: 'PoppinsRegular',
                               fontWeight: FontWeight.bold,
                               fontSize: 16)),
@@ -128,9 +125,9 @@ class ProfileScreenState extends State<ProfileScreen> {
               }
             },
             child: Image.asset(
-              color: Colors.white,
-              'assets/images/log_out.png', // Replace with your image path
-              width: 30, // Adjust size as needed
+              color: AppColors.customBlack,
+              'assets/images/log_out.png',
+              width: 30,
               height: 25,
             ),
           ),
@@ -150,15 +147,6 @@ class ProfileScreenState extends State<ProfileScreen> {
             }
             return Stack(
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/home_background_gradient.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -167,12 +155,12 @@ class ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 25),
                       Center(
                         child: Container(
-                          width: 140, // radius * 2 + border width * 2
+                          width: 140,
                           height: 140,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.white, // Border color
+                              color: AppColors.customBlue, // Border color
                               width: 2, // Border width
                             ),
                           ),
@@ -183,7 +171,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       const Text(
                         AppStrings.name,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.customBlack,
                           fontFamily: 'PoppinsSemiBold',
                           fontSize: 15,
                         ),
@@ -195,7 +183,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                           boxShadow: _nameFocusNode.hasFocus
                               ? [
                                   BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                    color:
+                                        AppColors.customBlue.withOpacity(0.5),
                                     blurRadius: 5,
                                     spreadRadius: 1,
                                     offset: const Offset(0, 1),
@@ -208,10 +197,10 @@ class ProfileScreenState extends State<ProfileScreen> {
                           focusNode: _nameFocusNode,
                           readOnly: true,
                           style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.customBlack,
                               fontFamily: 'PoppinsRegular',
                               fontSize: 16),
-                          cursorColor: const Color(0xFF4370FF),
+                          cursorColor: AppColors.customBlue,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               color: Colors.white.withOpacity(0.5),
@@ -219,7 +208,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                               fontSize: 14,
                             ),
                             filled: true,
-                            fillColor: const Color(0xFF0E0E22),
+                            fillColor: AppColors.customGrey,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
@@ -230,7 +219,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: const BorderSide(
-                                color: Color(0xFF4370FF),
+                                color: AppColors.customBlue,
                                 width: 1,
                               ),
                             ),
@@ -253,7 +242,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       const Text(
                         AppStrings.phoneNumber,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.customBlack,
                           fontFamily: 'PoppinsSemiBold',
                           fontSize: 15,
                         ),
@@ -265,7 +254,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                           boxShadow: _phoneNumberFocusNode.hasFocus
                               ? [
                                   BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                    color:
+                                        AppColors.customBlue.withOpacity(0.5),
                                     blurRadius: 5,
                                     spreadRadius: 1,
                                     offset: const Offset(0, 1),
@@ -278,10 +268,10 @@ class ProfileScreenState extends State<ProfileScreen> {
                           focusNode: _phoneNumberFocusNode,
                           readOnly: true,
                           style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.customBlack,
                               fontFamily: 'PoppinsRegular',
                               fontSize: 16),
-                          cursorColor: const Color(0xFF4370FF),
+                          cursorColor: AppColors.customBlue,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               color: Colors.white.withOpacity(0.5),
@@ -289,7 +279,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                               fontSize: 14,
                             ),
                             filled: true,
-                            fillColor: const Color(0xFF0E0E22),
+                            fillColor: AppColors.customGrey,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
@@ -300,7 +290,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: const BorderSide(
-                                color: Color(0xFF4370FF),
+                                color: AppColors.customBlue,
                                 width: 1,
                               ),
                             ),
@@ -323,7 +313,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       const Text(
                         AppStrings.email,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.customBlack,
                           fontFamily: 'PoppinsSemiBold',
                           fontSize: 15,
                         ),
@@ -335,7 +325,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                           boxShadow: _emailFocusNode.hasFocus
                               ? [
                                   BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                    color:
+                                        AppColors.customBlue.withOpacity(0.5),
                                     blurRadius: 5,
                                     spreadRadius: 1,
                                     offset: const Offset(0, 1),
@@ -348,10 +339,10 @@ class ProfileScreenState extends State<ProfileScreen> {
                           focusNode: _emailFocusNode,
                           readOnly: true,
                           style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.customBlack,
                               fontFamily: 'PoppinsRegular',
                               fontSize: 16),
-                          cursorColor: const Color(0xFF4370FF),
+                          cursorColor: AppColors.customBlue,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               color: Colors.white.withOpacity(0.5),
@@ -359,7 +350,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                               fontSize: 14,
                             ),
                             filled: true,
-                            fillColor: const Color(0xFF0E0E22),
+                            fillColor: AppColors.customGrey,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
@@ -370,7 +361,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: const BorderSide(
-                                color: Color(0xFF4370FF),
+                                color: AppColors.customBlue,
                                 width: 1,
                               ),
                             ),
@@ -393,7 +384,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       const Text(
                         AppStrings.password,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.customBlack,
                           fontFamily: 'PoppinsSemiBold',
                           fontSize: 15,
                         ),
@@ -405,7 +396,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                           boxShadow: _passwordFocusNode.hasFocus
                               ? [
                                   BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                    color:
+                                        AppColors.customBlue.withOpacity(0.5),
                                     blurRadius: 5,
                                     spreadRadius: 1,
                                     offset: const Offset(0, 1),
@@ -418,10 +410,10 @@ class ProfileScreenState extends State<ProfileScreen> {
                           focusNode: _passwordFocusNode,
                           readOnly: true,
                           style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.customBlack,
                               fontFamily: 'PoppinsRegular',
                               fontSize: 16),
-                          cursorColor: const Color(0xFF4370FF),
+                          cursorColor: AppColors.customBlue,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               color: Colors.white.withOpacity(0.5),
@@ -429,7 +421,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                               fontSize: 14,
                             ),
                             filled: true,
-                            fillColor: const Color(0xFF0E0E22),
+                            fillColor: AppColors.customGrey,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
@@ -440,7 +432,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: const BorderSide(
-                                color: Color(0xFF4370FF),
+                                color: AppColors.customBlue,
                                 width: 1,
                               ),
                             ),

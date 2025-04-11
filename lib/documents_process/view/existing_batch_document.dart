@@ -57,22 +57,13 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.customDarkBlueBottomNavigation,
+      backgroundColor: AppColors.customWhite,
       body: ChangeNotifierProvider<ExistingDocumentViewModel>(
         create: (BuildContext context) => existingDocumentViewModel,
         child: Consumer<ExistingDocumentViewModel>(
           builder: (context, viewModel, child) {
             return Stack(
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/home_background_gradient.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -81,7 +72,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 1.0),
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: AppColors.customGrey,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.7),
@@ -98,7 +89,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                   viewModel.searchFolders(value);
                                 },
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsRegular',
                                   fontSize: 16,
                                 ),
@@ -106,13 +97,13 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                 decoration: const InputDecoration(
                                   hintText: "Search",
                                   hintStyle: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     fontFamily: 'PoppinsRegular',
                                     fontSize: 16,
                                   ),
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                   ),
                                   border: InputBorder.none,
                                   contentPadding:
@@ -123,7 +114,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                             IconButton(
                               icon: Image.asset(
                                 'assets/icons/home_alpha.png',
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 width: 25,
                                 height: 25,
                               ),
@@ -134,7 +125,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                 isGridView
                                     ? 'assets/icons/home_list.png'
                                     : 'assets/icons/home_grid.png',
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 width: 25,
                                 height: 25,
                               ),
@@ -152,7 +143,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                         height: 110,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: AppColors.customGrey,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Row(
@@ -164,9 +155,10 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                             const SizedBox(width: 10),
                             DefaultTextStyle(
                               style: const TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'PoppinsSemiBold',
-                              ),
+                                  color: AppColors.customBlack,
+                                  fontSize: 14.0,
+                                  fontFamily: 'PoppinsSemiBold',
+                                  fontWeight: FontWeight.bold),
                               child: Expanded(
                                 child: AnimatedTextKit(
                                   repeatForever: true,

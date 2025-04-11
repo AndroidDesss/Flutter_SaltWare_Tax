@@ -103,7 +103,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 25),
                             const Text(
-                              AppStrings.userName,
+                              AppStrings.email,
                               style: TextStyle(
                                 color: AppColors.customBlack,
                                 fontFamily: 'PoppinsSemiBold',
@@ -429,28 +429,29 @@ class LoginScreenState extends State<LoginScreen> {
           title: const Text(
             AppStrings.exitMessage,
             style: TextStyle(
-                color: AppColors.customDarkBlue,
+                color: AppColors.customBlue,
                 fontFamily: 'PoppinsRegular',
-                fontSize: 18),
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
               child: const Text('No',
                   style: TextStyle(
-                    color: AppColors.customDarkBlue,
-                    fontFamily: 'PoppinsRegular',
-                    fontSize: 16,
-                  )),
+                      color: AppColors.customBlue,
+                      fontFamily: 'PoppinsRegular',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold)),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               child: const Text('Yes',
                   style: TextStyle(
-                    color: AppColors.customDarkBlue,
-                    fontFamily: 'PoppinsRegular',
-                    fontSize: 16,
-                  )),
+                      color: AppColors.customBlue,
+                      fontFamily: 'PoppinsRegular',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold)),
             ),
           ],
         );

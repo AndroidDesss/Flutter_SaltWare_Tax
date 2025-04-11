@@ -41,7 +41,7 @@ class AppStrings {
   static const signUpContentText = 'Enter your details to get started.';
   static const name = 'Name';
   static const email = 'E-Mail';
-  static const enterName = 'Enter your Name';
+  static const enterUserName = 'Enter your User Name';
   static const enterEmail = 'Enter your E-Mail Id';
   static const logOut = 'Log Out';
   static const noImages = 'No Images..!';
@@ -52,4 +52,10 @@ class AppStrings {
   static const enterBatchName = 'Enter your Batch Name';
   static const batchName = 'Batch Name';
   static const userName = 'User Name';
+  static const firstName = 'First Name';
+  static const lastName = 'Last Name';
+  static const taxPayerId = 'Tax Payer Id';
+  static const enterFirstName = 'Enter your First Name';
+  static const enterLastName = 'Enter your Last Name';
+  static const enterTaxPayer = 'Enter your TaxPayer Id';
 }

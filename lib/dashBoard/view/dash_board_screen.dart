@@ -56,7 +56,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
   Future<void> _showBottomPopup(BuildContext context) async {
     _isBatchCreatePressed = false;
     showModalBottomSheet(
-      backgroundColor: AppColors.customDarkBlueBottomNavigation,
+      backgroundColor: AppColors.customGrey,
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -80,7 +80,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                     style: TextStyle(
                       fontFamily: 'PoppinsSemiBold',
                       fontSize: 18,
-                      color: Colors.white,
+                      color: AppColors.customBlack,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -111,8 +111,8 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                           cursorColor: const Color(0xFF4370FF),
                           decoration: InputDecoration(
                             hintText: "Enter batch name",
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
+                            hintStyle: const TextStyle(
+                              color: Colors.white,
                               fontFamily: 'PoppinsRegular',
                               fontSize: 14,
                             ),
@@ -162,7 +162,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: AppColors.customBlue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -172,7 +172,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                     child: const Text(
                       "Create",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: AppColors.customWhite,
                         fontFamily: 'PoppinsRegular',
                         fontSize: 16,
                       ),
@@ -243,7 +243,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
           title: const Text(
             "Are you sure you want to log out?",
             style: TextStyle(
-                color: AppColors.customDarkBlue,
+                color: AppColors.customBlue,
                 fontFamily: 'PoppinsRegular',
                 fontWeight: FontWeight.bold,
                 fontSize: 18),
@@ -253,7 +253,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
               onPressed: () => Navigator.of(context).pop(false),
               child: const Text("No",
                   style: TextStyle(
-                      color: AppColors.customDarkBlue,
+                      color: AppColors.customBlue,
                       fontFamily: 'PoppinsRegular',
                       fontWeight: FontWeight.bold,
                       fontSize: 16)),
@@ -267,7 +267,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
               },
               child: const Text("Yes",
                   style: TextStyle(
-                      color: AppColors.customDarkBlue,
+                      color: AppColors.customBlue,
                       fontFamily: 'PoppinsRegular',
                       fontWeight: FontWeight.bold,
                       fontSize: 16)),
@@ -294,16 +294,16 @@ class DashBoardScreenState extends State<DashBoardScreen> {
       onWillPop: _onPopScope,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: AppColors.customDarkBlueBottomNavigation,
+          backgroundColor: AppColors.customWhite,
           body: pages[_selectedIndex],
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               _showBottomPopup(context);
             },
-            backgroundColor: Colors.black,
+            backgroundColor: AppColors.customGrey,
             shape: const CircleBorder(),
             child: Image.asset('assets/icons/bottom_nav_scan.png',
-                width: 25, height: 25),
+                color: AppColors.customBlack, width: 25, height: 25),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
@@ -321,15 +321,15 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                       width: 30,
                       height: 30,
                       color: isActive
-                          ? Colors.white
-                          : Colors.grey, // Optional tint
+                          ? AppColors.customBlack
+                          : AppColors.customBlack, // Optional tint
                     ),
                     if (isActive)
                       Container(
                         margin: const EdgeInsets.only(top: 5),
                         width: 3,
                         height: 3,
-                        color: Colors.white,
+                        color: AppColors.customBlue,
                       ),
                   ],
                 ),
@@ -339,7 +339,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
             gapLocation: GapLocation.center,
             notchSmoothness: NotchSmoothness.smoothEdge,
             onTap: navigateToPage,
-            backgroundColor: Colors.black,
+            backgroundColor: AppColors.customGrey,
           ),
         ),
       ),

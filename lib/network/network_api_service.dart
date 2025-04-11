@@ -11,6 +11,7 @@ class NetworkApiService extends BaseApiService {
       final response =
           await http.post(Uri.parse(baseUrl + url), body: jsonBody);
       responseJson = returnResponse(response);
+      print("ServerResponse:$responseJson");
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     } catch (e) {
