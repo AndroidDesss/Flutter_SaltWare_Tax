@@ -68,7 +68,6 @@ flutter:
     - assets/images/open_link.png
     - assets/images/log_out.png
     - assets/images/splash_screen_logo.png
-    - assets/images/main_app_logo.png
 
 
 flutter_native_splash:
