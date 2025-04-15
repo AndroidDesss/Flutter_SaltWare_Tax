@@ -47,9 +47,23 @@ class ExistingBatchFolderImagesRepository {
   }
 
   Future<CommonApiResponse<OcrResponse>> sendDataToOcr(
-      String email, String categoryName, String pdfUrl) async {
+      String userName,
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      String phoneNumber,
+      String taxId,
+      String categoryName,
+      String pdfUrl) async {
     Map<String, String> body = {
+      'username': userName,
       'email': email,
+      'password': password,
+      'first_name': firstName,
+      'last_name': lastName,
+      'phone': phoneNumber,
+      'tax_id': taxId,
       'category_name': categoryName,
       'url': pdfUrl,
     };

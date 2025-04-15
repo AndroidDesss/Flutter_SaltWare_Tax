@@ -20,6 +20,16 @@ class LoginViewModel extends ChangeNotifier {
         await SharedPrefsHelper.setString('user_id', response.data.first.id);
         await SharedPrefsHelper.setString(
             'email_id', response.data.first.email);
+        await SharedPrefsHelper.setString(
+            'user_name', response.data.first.userName);
+        await SharedPrefsHelper.setString(
+            'password', response.data.first.password);
+        await SharedPrefsHelper.setString(
+            'phone_number', response.data.first.phone);
+        await SharedPrefsHelper.setString(
+            'first_name', response.data.first.phone);
+        await SharedPrefsHelper.setString(
+            'last_name', response.data.first.phone);
         Navigator.pushAndRemoveUntil(
           context,
           PageRouteBuilder(

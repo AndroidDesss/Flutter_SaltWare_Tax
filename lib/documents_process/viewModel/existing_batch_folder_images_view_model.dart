@@ -70,11 +70,11 @@ class ExistingBatchFolderImagesViewModel extends ChangeNotifier {
           await _existingBatchFolderImagesRepository.getBatchPdf(batchId);
       if (response.data.isNotEmpty && response.status == 200) {
         _pdfList = response.data;
-        await SharedPrefsHelper.init();
-        String emailId = SharedPrefsHelper.getString('email_id')!;
-
-        await sendPdfToOcr(
-            emailId, batchName, response.data.first.pdfPath, context);
+        // await SharedPrefsHelper.init();
+        // String emailId = SharedPrefsHelper.getString('email_id')!;
+        //
+        // await sendPdfToOcr(
+        //     emailId, batchName, response.data.first.pdfPath, context);
       } else {
         _pdfList = [];
       }
@@ -84,11 +84,28 @@ class ExistingBatchFolderImagesViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> sendPdfToOcr(String email, String batchName, String pdfUrl,
+  Future<void> sendPdfToOcr(
+      String userName,
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      String phoneNumber,
+      String taxId,
+      String categoryName,
+      String pdfUrl,
       BuildContext context) async {
     try {
       final response = await _existingBatchFolderImagesRepository.sendDataToOcr(
-          email, batchName, pdfUrl);
+          userName,
+          email,
+          password,
+          firstName,
+          lastName,
+          phoneNumber,
+          taxId,
+          categoryName,
+          pdfUrl);
       if (response.data.isNotEmpty && response.status == 200) {
         _showErrorMessage("Document Processed To Ocr..!", context);
       }
