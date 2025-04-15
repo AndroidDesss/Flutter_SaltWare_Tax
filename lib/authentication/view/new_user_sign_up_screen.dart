@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/viewModel/new_user_sign_up_screen_view_model.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
-import 'package:salt_ware_tax/common/common_utilities.dart';
 
 class NewUserSignUpScreen extends StatefulWidget {
   const NewUserSignUpScreen({super.key});

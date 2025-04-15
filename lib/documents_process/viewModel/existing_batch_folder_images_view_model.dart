@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/custom_loader.dart';
-import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/documents_process/model/existing_batch_folder_images_model.dart';
 import 'package:salt_ware_tax/documents_process/model/pdf_model.dart';
 import 'package:salt_ware_tax/documents_process/repository/existing_batch_folder_images_repository.dart';
