@@ -12,13 +12,13 @@ class AppStrings {
   static const forgotPassword = 'Forgot Password';
   static const pleaseWait = 'Please wait... !';
   static const rotateAnimatedTextOne =
-      'Scan, save, and share your notes effortlessly with Zmart Doc!';
+      'Scan, save, and share your notes effortlessly with Salt-ware!';
   static const rotateAnimatedTextTwo =
       'Transform your physical notes into digital files with our smart scanner.';
   static const rotateAnimatedTextThree =
       'Easily organize, search, and access your notes anytime, anywhere!';
   static const rotateAnimatedTextFour =
-      'Digitize Your Notes with Zmart Doc Scanner!';
+      'Digitize Your Notes with Salt-ware Scanner!';
   static const deleteImage = 'Are you sure you want to delete this image?';
   static const forgotPasswordContentText =
       'Enter the phone number associated with your account';
