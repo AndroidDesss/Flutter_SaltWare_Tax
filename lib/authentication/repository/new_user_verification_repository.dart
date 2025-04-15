@@ -24,17 +24,22 @@ class NewUserVerificationRepository {
   }
 
   Future<CommonApiResponse<VerifyUserResponse>> verifyNewUser(
-      String phoneNumber,
-      String email,
+      String userName,
       String password,
-      String firstName) async {
+      String firstName,
+      String lastName,
+      String email,
+      String phoneNumber,
+      String taxPayerId) async {
     Map<String, String> body = {
       'is_active': '1',
-      'email': email,
-      'phone': phoneNumber,
+      'user_name': userName,
       'password': password,
       'first_name': firstName,
-      'last_name': ''
+      'last_name': lastName,
+      'email': email,
+      'phone': phoneNumber,
+      'tax_payer_id': taxPayerId
     };
     try {
       final response = await _apiService.postResponse('sign_up', body);

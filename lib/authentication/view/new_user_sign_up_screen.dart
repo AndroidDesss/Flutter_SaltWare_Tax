@@ -788,16 +788,18 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                         });
                                         if (_formKey.currentState?.validate() ??
                                             false) {
-                                          // FocusScope.of(context)
-                                          //     .requestFocus(FocusNode());
-                                          // newUserSignUpScreenViewModel
-                                          //     .callCheckUserApi(
-                                          //         _nameController.text,
-                                          //         _phoneNumberController.text,
-                                          //         _selectedCountryCode,
-                                          //         _emailController.text,
-                                          //         _passwordController.text,
-                                          //         context);
+                                          FocusScope.of(context)
+                                              .requestFocus(FocusNode());
+                                          newUserSignUpScreenViewModel
+                                              .callCheckUserApi(
+                                                  _userNameController.text,
+                                                  _passwordController.text,
+                                                  _firstNameController.text,
+                                                  _lastNameController.text,
+                                                  _emailController.text,
+                                                  _phoneNumberController.text,
+                                                  _taxPayerIdController.text,
+                                                  context);
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(

@@ -5,17 +5,23 @@ import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 
 class NewUserVerificationScreen extends StatefulWidget {
-  final String localName;
-  final String localPhoneNumber;
-  final String localEmail;
+  final String localUserName;
   final String localPassword;
+  final String localFirstName;
+  final String localLastName;
+  final String localEmail;
+  final String localPhoneNumber;
+  final String localTaxPayerId;
 
   const NewUserVerificationScreen(
       {super.key,
-      required this.localName,
-      required this.localPhoneNumber,
+      required this.localUserName,
+      required this.localPassword,
+      required this.localFirstName,
+      required this.localLastName,
       required this.localEmail,
-      required this.localPassword});
+      required this.localPhoneNumber,
+      required this.localTaxPayerId});
 
   @override
   NewUserVerificationScreenState createState() =>
@@ -212,10 +218,13 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                                           message: "Success..!");
                                       newUserVerificationViewModel
                                           .callSignUpApi(
-                                              widget.localPhoneNumber,
-                                              widget.localEmail,
+                                              widget.localUserName,
                                               widget.localPassword,
-                                              widget.localName,
+                                              widget.localFirstName,
+                                              widget.localLastName,
+                                              widget.localEmail,
+                                              widget.localPhoneNumber,
+                                              widget.localTaxPayerId,
                                               context);
                                     } else {
                                       CommonUtilities.showToast(context,

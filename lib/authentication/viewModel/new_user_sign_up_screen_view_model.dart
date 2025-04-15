@@ -9,12 +9,19 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
       NewUserSignUpScreenRepository();
 
   //signup
-  Future<void> callCheckUserApi(String name, String phoneNumber, String email,
-      String password, BuildContext context) async {
+  Future<void> callCheckUserApi(
+      String userName,
+      String password,
+      String firstName,
+      String lastName,
+      String email,
+      String phoneNumber,
+      String taxPayerId,
+      BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
       final response =
-          await _newUserSignUpScreenRepository.checkUser(email, phoneNumber);
+          await _newUserSignUpScreenRepository.checkUser(userName, phoneNumber);
 
       if (response.status == 200) {
         if (response.data.first.msg == 'You can go ahead') {
@@ -23,10 +30,14 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
                 return NewUserVerificationScreen(
-                    localName: name,
-                    localPhoneNumber: phoneNumber,
-                    localEmail: email,
-                    localPassword: password);
+                  localUserName: userName,
+                  localPassword: password,
+                  localFirstName: firstName,
+                  localLastName: lastName,
+                  localEmail: email,
+                  localPhoneNumber: phoneNumber,
+                  localTaxPayerId: taxPayerId,
+                );
               },
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {

@@ -14,8 +14,8 @@ class NewUserVerificationViewModel extends ChangeNotifier {
       String phoneNumber, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
-      final response = await _newUserVerificationRepository.getVerificationOtp(
-          phoneNumber);
+      final response =
+          await _newUserVerificationRepository.getVerificationOtp(phoneNumber);
 
       if (response.status == 200) {
         _setLocalOtp(response.data.first.otp);
@@ -27,12 +27,25 @@ class NewUserVerificationViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> callSignUpApi(String phoneNumber, String email, String password,
-      String firstName, BuildContext context) async {
+  Future<void> callSignUpApi(
+      String userName,
+      String password,
+      String firstName,
+      String lastName,
+      String email,
+      String phoneNumber,
+      String taxPayerId,
+      BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
       final response = await _newUserVerificationRepository.verifyNewUser(
-          phoneNumber, email, password, firstName);
+          userName,
+          password,
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          taxPayerId);
       if (response.status == 200) {
         Navigator.pop(context);
         _showErrorMessage("Thanks for signing up..!", context);

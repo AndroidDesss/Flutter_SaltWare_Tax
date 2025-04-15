@@ -22,23 +22,23 @@ class LoginScreenState extends State<LoginScreen> {
 
   bool _isLoginPressed = false;
 
-  late TextEditingController _emailController = TextEditingController();
+  late TextEditingController _userNameController = TextEditingController();
   late TextEditingController _passwordController = TextEditingController();
 
-  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _userNameFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
+    _userNameController = TextEditingController();
     _passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _emailFocusNode.dispose();
+    _userNameController.dispose();
+    _userNameFocusNode.dispose();
     _passwordController.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
@@ -104,7 +104,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 25),
                             const Text(
-                              AppStrings.email,
+                              AppStrings.userName,
                               style: TextStyle(
                                 color: AppColors.customBlack,
                                 fontFamily: 'PoppinsSemiBold',
@@ -118,7 +118,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6),
-                                    boxShadow: _emailFocusNode.hasFocus
+                                    boxShadow: _userNameFocusNode.hasFocus
                                         ? [
                                             BoxShadow(
                                               color: AppColors.customBlack
@@ -131,8 +131,8 @@ class LoginScreenState extends State<LoginScreen> {
                                         : [],
                                   ),
                                   child: TextFormField(
-                                    controller: _emailController,
-                                    focusNode: _emailFocusNode,
+                                    controller: _userNameController,
+                                    focusNode: _userNameFocusNode,
                                     style: const TextStyle(
                                       color: AppColors.customBlack,
                                       fontFamily: 'PoppinsRegular',
@@ -140,7 +140,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     ),
                                     cursorColor: AppColors.customBlue,
                                     decoration: InputDecoration(
-                                      hintText: AppStrings.enterEmail,
+                                      hintText: AppStrings.enterUserName,
                                       hintStyle: TextStyle(
                                         color: AppColors.customBlack
                                             .withOpacity(0.5),
@@ -181,8 +181,7 @@ class LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 if (_isLoginPressed &&
-                                    (_emailController.text.isEmpty ||
-                                        !_isValidEmail(_emailController.text)))
+                                    (_userNameController.text.isEmpty))
                                   const Padding(
                                     padding: EdgeInsets.only(top: 8),
                                     child: Text(
@@ -401,7 +400,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       FocusScope.of(context)
                                           .requestFocus(FocusNode());
                                       loginViewModel.callLoginApi(
-                                          _emailController.text,
+                                          _userNameController.text,
                                           _passwordController.text,
                                           context);
                                     }
@@ -477,10 +476,5 @@ class LoginScreenState extends State<LoginScreen> {
       },
     );
     return shouldExit ?? false;
-  }
-
-  bool _isValidEmail(String email) {
-    final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-    return emailRegex.hasMatch(email);
   }
 }

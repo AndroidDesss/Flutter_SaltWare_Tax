@@ -6,8 +6,8 @@ class NewUserSignUpScreenRepository {
   final NetworkApiService _apiService = NetworkApiService();
 
   Future<CommonApiResponse<CheckUserResponse>> checkUser(
-      String email, String phoneNumber) async {
-    Map<String, String> body = {'email': email, 'phone': phoneNumber};
+      String userName, String phoneNumber) async {
+    Map<String, String> body = {'user_name': userName, 'phone': phoneNumber};
     try {
       final response = await _apiService.postResponse('check_is_user', body);
 
