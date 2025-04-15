@@ -11,11 +11,11 @@ class NewUserVerificationViewModel extends ChangeNotifier {
 
   //forgot password
   Future<void> callVerificationOtpApi(
-      String phoneNumber, String region, BuildContext context) async {
+      String phoneNumber, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
       final response = await _newUserVerificationRepository.getVerificationOtp(
-          phoneNumber, region);
+          phoneNumber);
 
       if (response.status == 200) {
         _setLocalOtp(response.data.first.otp);

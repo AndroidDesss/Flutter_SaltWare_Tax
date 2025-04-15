@@ -103,7 +103,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                   ),
                                   prefixIcon: Icon(
                                     Icons.search,
-                                    color: AppColors.customBlack,
+                                    color: AppColors.customBlue,
                                   ),
                                   border: InputBorder.none,
                                   contentPadding:
@@ -114,7 +114,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                             IconButton(
                               icon: Image.asset(
                                 'assets/icons/home_alpha.png',
-                                color: AppColors.customBlack,
+                                color: AppColors.customBlue,
                                 width: 25,
                                 height: 25,
                               ),
@@ -125,7 +125,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                 isGridView
                                     ? 'assets/icons/home_list.png'
                                     : 'assets/icons/home_grid.png',
-                                color: AppColors.customBlack,
+                                color: AppColors.customBlue,
                                 width: 25,
                                 height: 25,
                               ),
@@ -197,7 +197,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                           Text(
                             "Folders",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 fontSize: 18.0,
                                 fontFamily: 'PoppinsSemiBold',
                                 fontWeight: FontWeight.bold),
@@ -211,17 +211,14 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      'assets/icons/app_logo.png',
-                                      width: 200,
-                                      height: 200,
-                                    ),
+                                    Lottie.asset('assets/loader/no_data.json',
+                                        width: 150, height: 150),
                                     const SizedBox(height: 20),
                                     const Text(
                                       AppStrings.noFolders,
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: Colors.white,
+                                        color: AppColors.customBlack,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'PoppinsRegular',
                                       ),
@@ -316,7 +313,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlues.withOpacity(0.2),
+            color: AppColors.customGrey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
@@ -324,18 +321,18 @@ class ListViewCard extends StatelessWidget {
               'assets/icons/folder.png',
               width: 70,
               height: 70,
-              color: Colors.white,
+              color: AppColors.customBlue,
             ),
             title: Text(character.description,
                 maxLines: 1,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: AppColors.customBlack,
                   fontSize: 14,
                   fontFamily: 'PoppinsRegular',
                 )),
             subtitle: Text(character.createdDate,
                 style: const TextStyle(
-                  color: Colors.white70,
+                  color: AppColors.customBlack,
                   fontSize: 10,
                   fontFamily: 'PoppinsRegular',
                 )),
@@ -388,7 +385,7 @@ class GridViewCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: AppColors.customLightBlues.withOpacity(0.2),
+            color: AppColors.customGrey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -398,7 +395,7 @@ class GridViewCard extends StatelessWidget {
                 'assets/icons/folder.png',
                 width: 70,
                 height: 70,
-                color: Colors.white,
+                color: AppColors.customBlue,
               ),
               Expanded(
                 child: Center(
@@ -408,7 +405,7 @@ class GridViewCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppColors.customBlack,
                       fontSize: 14,
                       fontFamily: 'PoppinsSemiBold',
                     ),
@@ -419,7 +416,7 @@ class GridViewCard extends StatelessWidget {
               Text(
                 character.createdDate,
                 style: const TextStyle(
-                  color: Colors.white70,
+                  color: AppColors.customBlack,
                   fontSize: 10,
                   fontFamily: 'PoppinsRegular',
                 ),

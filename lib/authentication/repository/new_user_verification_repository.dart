@@ -7,8 +7,8 @@ class NewUserVerificationRepository {
   final NetworkApiService _apiService = NetworkApiService();
 
   Future<CommonApiResponse<NewUserVerificationResponse>> getVerificationOtp(
-      String phoneNumber, String region) async {
-    Map<String, String> body = {'region': region, 'phone': phoneNumber};
+      String phoneNumber) async {
+    Map<String, String> body = {'region': '1', 'phone': phoneNumber};
     try {
       final response = await _apiService.postResponse('otp1', body);
 

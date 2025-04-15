@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/viewModel/forgot_password_view_model.dart';
+import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -48,20 +49,11 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       create: (BuildContext context) => forgotPasswordViewModel,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.customWhite,
           body: Consumer<ForgotPasswordViewModel>(
             builder: (context, viewModel, child) {
               return Stack(
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image:
-                            AssetImage('assets/images/background_gradient.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  // Main Content
                   Center(
                     child: SingleChildScrollView(
                       child: Padding(
@@ -82,7 +74,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               const Text(
                                 AppStrings.forgotPassword,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsSemiBold',
                                   fontSize: 28,
                                 ),
@@ -94,7 +86,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   AppStrings.forgotPasswordContentText,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     fontFamily: 'PoppinsRegular',
                                     fontSize: 14,
                                   ),
@@ -149,8 +141,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     ),
                                   ),
                                   const SizedBox(width: 10), // Spacing
-
-                                  // Phone Number Input Field
                                   Expanded(
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -213,8 +203,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   ),
                                 ],
                               ),
-
-                              // Validation Message
                               if (_isGetOtpPressed &&
                                   (_phoneNumberController.text.isEmpty ||
                                       _phoneNumberController.text.length < 10))
@@ -253,7 +241,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 16, horizontal: 24),
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor: AppColors.customBlue,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -285,7 +273,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       },
                       icon: const Icon(
                         Icons.arrow_back,
-                        color: Colors.white,
+                        color: AppColors.customBlack,
                       ),
                     ),
                   ),

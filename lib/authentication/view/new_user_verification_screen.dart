@@ -7,7 +7,6 @@ import 'package:salt_ware_tax/common/common_utilities.dart';
 class NewUserVerificationScreen extends StatefulWidget {
   final String localName;
   final String localPhoneNumber;
-  final String localRegion;
   final String localEmail;
   final String localPassword;
 
@@ -15,7 +14,6 @@ class NewUserVerificationScreen extends StatefulWidget {
       {super.key,
       required this.localName,
       required this.localPhoneNumber,
-      required this.localRegion,
       required this.localEmail,
       required this.localPassword});
 
@@ -50,7 +48,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
   void initState() {
     super.initState();
     newUserVerificationViewModel.callVerificationOtpApi(
-        widget.localPhoneNumber, widget.localRegion, context);
+        widget.localPhoneNumber, context);
   }
 
   @override
@@ -175,9 +173,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                                     });
                                     newUserVerificationViewModel
                                         .callVerificationOtpApi(
-                                            widget.localPhoneNumber,
-                                            widget.localRegion,
-                                            context);
+                                            widget.localPhoneNumber, context);
                                   },
                                   child: const Text(
                                     AppStrings.reSendOtp,

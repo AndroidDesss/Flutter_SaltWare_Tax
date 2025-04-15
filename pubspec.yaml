@@ -41,11 +41,10 @@ flutter:
         - asset: assets/fonts/poppins_regular.ttf
 
   assets:
-    - assets/images/background_gradient.jpg
     - assets/icons/app_logo.png
     - assets/loader/loading.json
     - assets/loader/profile.json
-    - assets/images/home_background_gradient.png
+    - assets/loader/no_data.json
     - assets/icons/folder.png
     - assets/loader/home_gradient_lottie.json
     - assets/icons/bottom_nav_home.png
@@ -59,4 +58,3 @@ flutter:
     - assets/images/copy_link.png
     - assets/images/open_link.png
     - assets/images/log_out.png
-    - assets/images/saltware_logo.png

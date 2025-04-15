@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
@@ -53,22 +54,13 @@ class ExistingBatchFolderImagesScreenState
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.customDarkBlueBottomNavigation,
+        backgroundColor: AppColors.customWhite,
         body: ChangeNotifierProvider<ExistingBatchFolderImagesViewModel>(
           create: (BuildContext context) => existingBatchFolderImagesViewModel,
           child: Consumer<ExistingBatchFolderImagesViewModel>(
             builder: (context, viewModel, child) {
               return Stack(
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                            'assets/images/home_background_gradient.png'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -84,7 +76,7 @@ class ExistingBatchFolderImagesScreenState
                                     Navigator.pop(context);
                                   },
                                   child: Image.asset(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     'assets/images/back_arrow.png', // Replace with your image path
                                     width: 30, // Adjust size as needed
                                     height: 30,
@@ -98,7 +90,7 @@ class ExistingBatchFolderImagesScreenState
                                   child: Text(
                                     widget.batchName,
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.customBlack,
                                       fontSize: 20,
                                       fontFamily: 'PoppinsSemiBold',
                                       fontWeight: FontWeight.bold,
@@ -117,7 +109,7 @@ class ExistingBatchFolderImagesScreenState
                                         viewModel.pdfList.first.pdfPath);
                                   },
                                   child: Image.asset(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     'assets/images/copy_link.png', // Replace with your image path
                                     width: 30, // Adjust size as needed
                                     height: 30,
@@ -129,7 +121,7 @@ class ExistingBatchFolderImagesScreenState
                                     _launchUrl(viewModel.pdfList.first.pdfPath);
                                   },
                                   child: Image.asset(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     'assets/images/open_link.png', // Replace with your image path
                                     width: 30, // Adjust size as needed
                                     height: 30,
@@ -147,17 +139,14 @@ class ExistingBatchFolderImagesScreenState
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Image.asset(
-                                        'assets/icons/app_logo.png',
-                                        width: 150,
-                                        height: 150,
-                                      ),
+                                      Lottie.asset('assets/loader/no_data.json',
+                                          width: 150, height: 150),
                                       const SizedBox(height: 20),
                                       const Text(
                                         AppStrings.noImages,
                                         style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.white,
+                                          color: AppColors.customBlack,
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'PoppinsRegular',
                                         ),

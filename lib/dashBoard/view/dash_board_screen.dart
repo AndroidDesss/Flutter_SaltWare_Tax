@@ -303,7 +303,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
             backgroundColor: AppColors.customGrey,
             shape: const CircleBorder(),
             child: Image.asset('assets/icons/bottom_nav_scan.png',
-                color: AppColors.customBlack, width: 25, height: 25),
+                color: AppColors.customBlue, width: 25, height: 25),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
@@ -321,15 +321,15 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                       width: 30,
                       height: 30,
                       color: isActive
-                          ? AppColors.customBlack
-                          : AppColors.customBlack, // Optional tint
+                          ? AppColors.customBlue
+                          : AppColors.customBlue, // Optional tint
                     ),
                     if (isActive)
                       Container(
                         margin: const EdgeInsets.only(top: 5),
                         width: 3,
                         height: 3,
-                        color: AppColors.customBlue,
+                        color: AppColors.customBlack,
                       ),
                   ],
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:salt_ware_tax/authentication/view/forgot_password_screen.dart';
 import 'package:salt_ware_tax/authentication/view/new_user_sign_up_screen.dart';
 import 'package:salt_ware_tax/authentication/viewModel/login_view_model.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
@@ -133,18 +134,20 @@ class LoginScreenState extends State<LoginScreen> {
                                     controller: _emailController,
                                     focusNode: _emailFocusNode,
                                     style: const TextStyle(
-                                        color: AppColors.customBlack,
-                                        fontFamily: 'PoppinsRegular',
-                                        fontSize: 16),
+                                      color: AppColors.customBlack,
+                                      fontFamily: 'PoppinsRegular',
+                                      fontSize: 16,
+                                    ),
                                     cursorColor: AppColors.customBlue,
                                     decoration: InputDecoration(
                                       hintText: AppStrings.enterEmail,
                                       hintStyle: TextStyle(
-                                          color: AppColors.customBlack
-                                              .withOpacity(0.5),
-                                          fontFamily: 'PoppinsRegular',
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
+                                        color: AppColors.customBlack
+                                            .withOpacity(0.5),
+                                        fontFamily: 'PoppinsRegular',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       filled: true,
                                       fillColor: AppColors.customGrey,
                                       enabledBorder: OutlineInputBorder(
@@ -168,7 +171,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     onEditingComplete: () {
                                       setState(() {});
                                     },
-                                    keyboardType: TextInputType.text,
+                                    keyboardType: TextInputType.emailAddress,
                                     buildCounter: (BuildContext context,
                                         {int? currentLength,
                                         int? maxLength,
@@ -178,15 +181,17 @@ class LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 if (_isLoginPressed &&
-                                    _emailController.text.isEmpty)
+                                    (_emailController.text.isEmpty ||
+                                        !_isValidEmail(_emailController.text)))
                                   const Padding(
                                     padding: EdgeInsets.only(top: 8),
                                     child: Text(
                                       'Please enter a valid Email-Id',
                                       style: TextStyle(
-                                          color: Colors.red,
-                                          fontFamily: 'PoppinsRegular',
-                                          fontSize: 12),
+                                        color: Colors.red,
+                                        fontFamily: 'PoppinsRegular',
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
                               ],
@@ -268,51 +273,65 @@ class LoginScreenState extends State<LoginScreen> {
                                     },
                                   ),
                                 ),
+                                if (_isLoginPressed &&
+                                    (_passwordController.text.isEmpty ||
+                                        _passwordController.text.length < 8))
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      'Please enter a valid Password',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontFamily: 'PoppinsRegular',
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ),
-                            const SizedBox(height: 15),
-                            // Align(
-                            //   alignment: Alignment.centerRight,
-                            //   child: GestureDetector(
-                            //     onTap: () {
-                            //       Navigator.push(
-                            //         context,
-                            //         PageRouteBuilder(
-                            //           pageBuilder: (context, animation,
-                            //               secondaryAnimation) {
-                            //             return const ForgotPasswordScreen();
-                            //           },
-                            //           transitionsBuilder: (context, animation,
-                            //               secondaryAnimation, child) {
-                            //             const begin = Offset(1.0,
-                            //                 0.0); // Start from right to left
-                            //             const end = Offset
-                            //                 .zero; // End at current position
-                            //             const curve = Curves
-                            //                 .easeInOut; // Smooth transition
-                            //             var tween = Tween(
-                            //                     begin: begin, end: end)
-                            //                 .chain(CurveTween(curve: curve));
-                            //             var offsetAnimation =
-                            //                 animation.drive(tween);
-                            //             return SlideTransition(
-                            //                 position: offsetAnimation,
-                            //                 child: child);
-                            //           },
-                            //         ),
-                            //       );
-                            //     },
-                            //     child: const Text(
-                            //       AppStrings.forgotPassword,
-                            //       textAlign: TextAlign.end,
-                            //       style: TextStyle(
-                            //         fontSize: 16,
-                            //         color: Colors.blue,
-                            //         fontFamily: 'PoppinsSemiBold',
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            const SizedBox(height: 10),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation,
+                                          secondaryAnimation) {
+                                        return const ForgotPasswordScreen();
+                                      },
+                                      transitionsBuilder: (context, animation,
+                                          secondaryAnimation, child) {
+                                        const begin = Offset(1.0,
+                                            0.0); // Start from right to left
+                                        const end = Offset
+                                            .zero; // End at current position
+                                        const curve = Curves
+                                            .easeInOut; // Smooth transition
+                                        var tween = Tween(
+                                                begin: begin, end: end)
+                                            .chain(CurveTween(curve: curve));
+                                        var offsetAnimation =
+                                            animation.drive(tween);
+                                        return SlideTransition(
+                                            position: offsetAnimation,
+                                            child: child);
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  AppStrings.forgotPassword,
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.customBlue,
+                                    fontFamily: 'PoppinsSemiBold',
+                                  ),
+                                ),
+                              ),
+                            ),
                             const SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -458,5 +477,10 @@ class LoginScreenState extends State<LoginScreen> {
       },
     );
     return shouldExit ?? false;
+  }
+
+  bool _isValidEmail(String email) {
+    final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+    return emailRegex.hasMatch(email);
   }
 }

@@ -98,6 +98,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.customWhite,
       body: ChangeNotifierProvider<ScannedDocumentsViewModel>(
           create: (BuildContext context) => scannedDocumentsViewModel,
           child: Consumer<ScannedDocumentsViewModel>(
@@ -130,7 +131,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
                                 },
                                 icon: const Icon(
                                   Icons.arrow_back,
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -138,7 +139,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
                                 child: Text(
                                   AppStrings.scannedDocuments,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     fontSize: 20.0,
                                     fontFamily: 'PoppinsSemiBold',
                                     fontWeight: FontWeight.bold,
@@ -171,7 +172,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
                                 'No scanned documents yet..!',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsSemiBold',
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
@@ -186,15 +187,18 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
           })),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _uploadImages,
-        icon: const Icon(Icons.cloud_upload),
+        icon: const Icon(
+          Icons.cloud_upload,
+          color: AppColors.customWhite,
+        ),
         label: const Text('Upload',
             style: TextStyle(
-              color: Colors.black,
+              color: AppColors.customWhite,
               fontFamily: 'PoppinsSemiBold',
               fontWeight: FontWeight.bold,
               fontSize: 16,
             )),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.customBlue,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

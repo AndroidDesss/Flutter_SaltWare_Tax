@@ -9,8 +9,8 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
       NewUserSignUpScreenRepository();
 
   //signup
-  Future<void> callCheckUserApi(String name, String phoneNumber, String region,
-      String email, String password, BuildContext context) async {
+  Future<void> callCheckUserApi(String name, String phoneNumber, String email,
+      String password, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
       final response =
@@ -25,7 +25,6 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
                 return NewUserVerificationScreen(
                     localName: name,
                     localPhoneNumber: phoneNumber,
-                    localRegion: region,
                     localEmail: email,
                     localPassword: password);
               },
