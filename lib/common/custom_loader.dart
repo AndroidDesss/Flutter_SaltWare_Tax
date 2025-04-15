@@ -13,7 +13,7 @@ class CustomLoader {
           ModalBarrier(
               color: Colors.black.withOpacity(0.9), dismissible: false),
           Center(
-            child: Lottie.asset('assets/loader/no_data.json',
+            child: Lottie.asset('assets/loader/loading.json',
                 width: 130, height: 130),
           ),
         ],

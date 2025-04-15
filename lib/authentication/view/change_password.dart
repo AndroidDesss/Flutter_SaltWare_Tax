@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/viewModel/change_password_view_model.dart';
+import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 
@@ -44,20 +45,11 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
       create: (BuildContext context) => changePasswordViewModel,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.customWhite,
           body: Consumer<ChangePasswordViewModel>(
             builder: (context, viewModel, child) {
               return Stack(
                 children: [
-                  // Background Image
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image:
-                            AssetImage('assets/images/background_gradient.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
                   Center(
                     child: SingleChildScrollView(
                       child: Padding(
@@ -78,7 +70,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               const Text(
                                 AppStrings.changePassword,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsSemiBold',
                                   fontSize: 28,
                                 ),
@@ -90,7 +82,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   AppStrings.changePasswordContentText,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.customBlack,
                                     fontFamily: 'PoppinsRegular',
                                     fontSize: 14,
                                   ),
@@ -100,7 +92,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               const Text(
                                 AppStrings.password,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsSemiBold',
                                   fontSize: 15,
                                 ),
@@ -115,8 +107,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       boxShadow: _passwordFocusNode.hasFocus
                                           ? [
                                               BoxShadow(
-                                                color:
-                                                    Colors.blue.withOpacity(1),
+                                                color: AppColors.customBlue
+                                                    .withOpacity(0.5),
                                                 blurRadius: 5,
                                                 spreadRadius: 1,
                                                 offset: const Offset(0, 1),
@@ -129,19 +121,20 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                       focusNode: _passwordFocusNode,
                                       obscureText: true,
                                       style: const TextStyle(
-                                          color: Colors.white,
+                                          color: AppColors.customBlack,
                                           fontFamily: 'PoppinsRegular',
                                           fontSize: 16),
-                                      cursorColor: const Color(0xFF4370FF),
+                                      cursorColor: AppColors.customBlue,
                                       decoration: InputDecoration(
                                         hintText: AppStrings.enterPassword,
                                         hintStyle: TextStyle(
-                                          color: Colors.white.withOpacity(0.5),
+                                          color: AppColors.customBlack
+                                              .withOpacity(0.5),
                                           fontFamily: 'PoppinsRegular',
                                           fontSize: 14,
                                         ),
                                         filled: true,
-                                        fillColor: const Color(0xFF0E0E22),
+                                        fillColor: AppColors.customGrey,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -154,7 +147,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                           borderRadius:
                                               BorderRadius.circular(6),
                                           borderSide: const BorderSide(
-                                            color: Color(0xFF4370FF),
+                                            color: AppColors.customBlue,
                                             width: 1,
                                           ),
                                         ),
@@ -192,7 +185,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               const Text(
                                 AppStrings.confirmPassword,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.customBlack,
                                   fontFamily: 'PoppinsSemiBold',
                                   fontSize: 15,
                                 ),
@@ -204,37 +197,38 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6),
-                                      boxShadow: _confirmPasswordFocusNode
-                                              .hasFocus
-                                          ? [
-                                              BoxShadow(
-                                                color:
-                                                    Colors.blue.withOpacity(1),
-                                                blurRadius: 5,
-                                                spreadRadius: 1,
-                                                offset: const Offset(0, 1),
-                                              ),
-                                            ]
-                                          : [],
+                                      boxShadow:
+                                          _confirmPasswordFocusNode.hasFocus
+                                              ? [
+                                                  BoxShadow(
+                                                    color: AppColors.customBlue
+                                                        .withOpacity(0.5),
+                                                    blurRadius: 5,
+                                                    spreadRadius: 1,
+                                                    offset: const Offset(0, 1),
+                                                  ),
+                                                ]
+                                              : [],
                                     ),
                                     child: TextFormField(
                                       controller: _confirmPasswordController,
                                       focusNode: _confirmPasswordFocusNode,
                                       obscureText: true,
                                       style: const TextStyle(
-                                          color: Colors.white,
+                                          color: AppColors.customBlack,
                                           fontFamily: 'PoppinsRegular',
                                           fontSize: 16),
-                                      cursorColor: const Color(0xFF4370FF),
+                                      cursorColor: AppColors.customBlue,
                                       decoration: InputDecoration(
                                         hintText: AppStrings.reEnterPassword,
                                         hintStyle: TextStyle(
-                                          color: Colors.white.withOpacity(0.5),
+                                          color: AppColors.customBlack
+                                              .withOpacity(0.5),
                                           fontFamily: 'PoppinsRegular',
                                           fontSize: 14,
                                         ),
                                         filled: true,
-                                        fillColor: const Color(0xFF0E0E22),
+                                        fillColor: AppColors.customGrey,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -247,7 +241,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                           borderRadius:
                                               BorderRadius.circular(6),
                                           borderSide: const BorderSide(
-                                            color: Color(0xFF4370FF),
+                                            color: AppColors.customBlue,
                                             width: 1,
                                           ),
                                         ),
@@ -321,7 +315,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 16, horizontal: 24),
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor: AppColors.customBlue,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -353,7 +347,7 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       },
                       icon: const Icon(
                         Icons.arrow_back,
-                        color: Colors.white,
+                        color: AppColors.customBlack,
                       ),
                     ),
                   ),

@@ -23,13 +23,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   final FocusNode _phoneNumberFocusNode = FocusNode();
 
-  String _selectedCountryCode = '91';
-
-  final List<Map<String, String>> countryCodes = [
-    {'code': '91', 'name': 'India'},
-    {'code': '1', 'name': 'USA'},
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -102,106 +95,61 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  // Country Code Dropdown
-                                  Container(
-                                    decoration: BoxDecoration(
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+                                  boxShadow: _phoneNumberFocusNode.hasFocus
+                                      ? [
+                                          BoxShadow(
+                                            color: AppColors.customBlue
+                                                .withOpacity(0.5),
+                                            blurRadius: 5,
+                                            spreadRadius: 1,
+                                            offset: const Offset(0, 1),
+                                          ),
+                                        ]
+                                      : [],
+                                ),
+                                child: TextFormField(
+                                  controller: _phoneNumberController,
+                                  focusNode: _phoneNumberFocusNode,
+                                  style: const TextStyle(
+                                      color: AppColors.customBlack,
+                                      fontSize: 16,
+                                      fontFamily: 'PoppinsRegular'),
+                                  cursorColor: AppColors.customBlue,
+                                  decoration: InputDecoration(
+                                    hintText: AppStrings.enterPhoneNumber,
+                                    hintStyle: TextStyle(
+                                      color: AppColors.customBlack
+                                          .withOpacity(0.5),
+                                      fontSize: 14,
+                                    ),
+                                    filled: true,
+                                    fillColor: AppColors.customGrey,
+                                    enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
-                                      border: Border.all(
-                                          color: Colors.white, width: 1),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: DropdownButton<String>(
-                                      value: _selectedCountryCode,
-                                      onChanged: (String? newValue) {
-                                        setState(() {
-                                          _selectedCountryCode = newValue!;
-                                        });
-                                      },
-                                      items: countryCodes
-                                          .map<DropdownMenuItem<String>>(
-                                              (Map<String, String> country) {
-                                        return DropdownMenuItem<String>(
-                                          value: country['code']!,
-                                          child: Text(
-                                            country['code']!,
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      dropdownColor: Colors.black,
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                      iconEnabledColor: Colors.white,
-                                      iconSize: 24,
-                                      underline: Container(),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10), // Spacing
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(6),
-                                        boxShadow: _phoneNumberFocusNode
-                                                .hasFocus
-                                            ? [
-                                                BoxShadow(
-                                                  color: Colors.blue
-                                                      .withOpacity(1),
-                                                  blurRadius: 5,
-                                                  spreadRadius: 1,
-                                                  offset: const Offset(0, 1),
-                                                ),
-                                              ]
-                                            : [],
+                                      borderSide: BorderSide(
+                                        color: Colors.white.withOpacity(1),
+                                        width: 1,
                                       ),
-                                      child: TextFormField(
-                                        controller: _phoneNumberController,
-                                        focusNode: _phoneNumberFocusNode,
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 16),
-                                        cursorColor: const Color(0xFF4370FF),
-                                        decoration: InputDecoration(
-                                          hintText: AppStrings.enterPhoneNumber,
-                                          hintStyle: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            fontSize: 14,
-                                          ),
-                                          filled: true,
-                                          fillColor: const Color(0xFF0E0E22),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFF4370FF),
-                                              width: 1,
-                                            ),
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          setState(() {});
-                                        },
-                                        onEditingComplete: () {
-                                          setState(() {});
-                                        },
-                                        keyboardType: TextInputType.phone,
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                      borderSide: const BorderSide(
+                                        color: AppColors.customBlue,
+                                        width: 1,
                                       ),
                                     ),
                                   ),
-                                ],
+                                  onTap: () {
+                                    setState(() {});
+                                  },
+                                  onEditingComplete: () {
+                                    setState(() {});
+                                  },
+                                  keyboardType: TextInputType.phone,
+                                ),
                               ),
                               if (_isGetOtpPressed &&
                                   (_phoneNumberController.text.isEmpty ||
@@ -234,7 +182,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                         forgotPasswordViewModel
                                             .callForgotPasswordApi(
                                                 _phoneNumberController.text,
-                                                _selectedCountryCode,
                                                 context);
                                       }
                                     },

@@ -754,7 +754,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                         onEditingComplete: () {
                                           setState(() {});
                                         },
-                                        keyboardType: TextInputType.text,
+                                        keyboardType: TextInputType.phone,
                                         buildCounter: (BuildContext context,
                                             {int? currentLength,
                                             int? maxLength,
@@ -786,8 +786,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                         setState(() {
                                           _isSignUpPressed = true;
                                         });
-                                        if (_formKey.currentState?.validate() ??
-                                            false) {
+                                        if (_validateInputs()) {
                                           FocusScope.of(context)
                                               .requestFocus(FocusNode());
                                           newUserSignUpScreenViewModel
@@ -850,5 +849,27 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
         ),
       ),
     );
+  }
+
+  bool _validateInputs() {
+    bool isValid = true;
+    RegExp emailRegex = RegExp(emailPattern);
+
+    if (_userNameController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _firstNameController.text.isEmpty ||
+        _lastNameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _phoneNumberController.text.isEmpty ||
+        _phoneNumberController.text.length < 10 ||
+        _phoneNumberController.text.length > 10 ||
+        _taxPayerIdController.text.isEmpty) {
+      isValid = false;
+    }
+
+    if (!emailRegex.hasMatch(_emailController.text)) {
+      isValid = false;
+    }
+    return isValid;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/viewModel/new_user_verification_view_model.dart';
+import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 
@@ -53,8 +54,12 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
   @override
   void initState() {
     super.initState();
-    newUserVerificationViewModel.callVerificationOtpApi(
-        widget.localPhoneNumber, context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      newUserVerificationViewModel.callVerificationOtpApi(
+        widget.localPhoneNumber,
+        context,
+      );
+    });
   }
 
   @override
@@ -63,17 +68,10 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
       create: (BuildContext context) => newUserVerificationViewModel,
       child: SafeArea(
         child: Scaffold(
+          backgroundColor: AppColors.customWhite,
           body: Consumer<NewUserVerificationViewModel>(
               builder: (context, viewModel, child) {
             return Stack(children: [
-              Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/background_gradient.jpg'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
               Center(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -93,7 +91,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                           const Text(
                             AppStrings.verification,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.customBlack,
                               fontFamily: 'PoppinsSemiBold',
                               fontSize: 28,
                             ),
@@ -105,7 +103,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                               AppStrings.verificationContentText,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.customBlack,
                                 fontFamily: 'PoppinsRegular',
                                 fontSize: 14,
                               ),
@@ -115,7 +113,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                           const Text(
                             AppStrings.otp,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.customBlack,
                               fontFamily: 'PoppinsSemiBold',
                               fontSize: 15,
                             ),
@@ -186,7 +184,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                                     textAlign: TextAlign.end,
                                     style: TextStyle(
                                         fontSize: 18,
-                                        color: Colors.blue,
+                                        color: AppColors.customBlue,
                                         fontFamily: 'PoppinsSemiBold',
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -236,7 +234,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 16, horizontal: 24),
-                                  backgroundColor: Colors.blue,
+                                  backgroundColor: AppColors.customBlue,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
@@ -268,7 +266,8 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                   },
                   icon: const Icon(
                     Icons.arrow_back,
-                    color: Colors.white, // Change this to your desired color
+                    color: AppColors
+                        .customBlack, // Change this to your desired color
                   ),
                 ),
               ),
@@ -300,11 +299,13 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
           controller: controller,
           focusNode: focusNode,
           style: const TextStyle(
-              color: Colors.white, fontFamily: 'PoppinsRegular', fontSize: 16),
-          cursorColor: const Color(0xFF4370FF),
+              color: AppColors.customBlack,
+              fontFamily: 'PoppinsRegular',
+              fontSize: 16),
+          cursorColor: AppColors.customBlue,
           decoration: InputDecoration(
             filled: true,
-            fillColor: const Color(0xFF0E0E22),
+            fillColor: AppColors.customGrey,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: BorderSide(
@@ -315,7 +316,7 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: const BorderSide(
-                color: Color(0xFF4370FF),
+                color: AppColors.customBlue,
                 width: 1,
               ),
             ),

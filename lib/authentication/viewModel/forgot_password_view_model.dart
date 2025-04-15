@@ -10,11 +10,11 @@ class ForgotPasswordViewModel extends ChangeNotifier {
 
   //login
   Future<void> callForgotPasswordApi(
-      String phoneNumber, String region, BuildContext context) async {
+      String phoneNumber, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
       final response = await _forgotPasswordRepository.getVerificationOtp(
-          phoneNumber, region);
+          phoneNumber);
 
       if (response.status == 200) {
         if (response.data.first.otp != 'No phone found') {
@@ -24,7 +24,6 @@ class ForgotPasswordViewModel extends ChangeNotifier {
               pageBuilder: (context, animation, secondaryAnimation) {
                 return ForgotPasswordVerificationScreen(
                     localOtp: response.data.first.otp,
-                    localRegion: region,
                     localPhoneNumber: phoneNumber);
               },
               transitionsBuilder:

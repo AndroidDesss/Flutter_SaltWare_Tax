@@ -12,11 +12,11 @@ class ForgotPasswordVerificationViewModel extends ChangeNotifier {
 
   //forgot password
   Future<void> callReSendForgotPasswordVerificationApi(
-      String phoneNumber, String region, BuildContext context) async {
+      String phoneNumber, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
       final response = await _forgotPasswordVerificationRepository
-          .getResendVerificationOtp(phoneNumber, region);
+          .getResendVerificationOtp(phoneNumber);
 
       if (response.status == 200) {
         _setLocalOtp(response.data.first.otp);
