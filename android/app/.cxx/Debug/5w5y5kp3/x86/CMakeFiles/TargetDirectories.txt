@@ -1,0 +1,2 @@
+E:/KarThik/Flutter Projects/salt_ware_tax/android/app/.cxx/Debug/5w5y5kp3/x86/CMakeFiles/edit_cache.dir
+E:/KarThik/Flutter Projects/salt_ware_tax/android/app/.cxx/Debug/5w5y5kp3/x86/CMakeFiles/rebuild_cache.dir
