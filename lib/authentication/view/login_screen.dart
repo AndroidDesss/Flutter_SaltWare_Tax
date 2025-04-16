@@ -120,7 +120,7 @@ class LoginScreenState extends State<LoginScreen> {
                                     boxShadow: _userNameFocusNode.hasFocus
                                         ? [
                                             BoxShadow(
-                                              color: AppColors.customBlack
+                                              color: AppColors.customBlue
                                                   .withOpacity(0.5),
                                               blurRadius: 5,
                                               spreadRadius: 1,

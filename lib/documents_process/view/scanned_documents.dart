@@ -237,7 +237,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(19),
                     border: Border.all(
-                      color: Colors.white, // Border color
+                      color: AppColors.customBlue, // Border color
                       width: 2, // Border width
                     ),
                   ),

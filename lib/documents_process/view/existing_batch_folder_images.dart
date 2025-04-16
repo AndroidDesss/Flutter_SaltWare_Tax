@@ -220,7 +220,7 @@ class CategoryCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(19),
         border: Border.all(
-          color: Colors.white, // Border color
+          color: AppColors.customBlue, // Border color
           width: 2, // Border width
         ),
       ),
@@ -233,7 +233,7 @@ class CategoryCard extends StatelessWidget {
             if (loadingProgress == null) return child;
             return const Center(
                 child: CircularProgressIndicator(
-              color: Colors.white,
+              color: AppColors.customBlack,
             ));
           },
           errorBuilder: (context, error, stackTrace) {
