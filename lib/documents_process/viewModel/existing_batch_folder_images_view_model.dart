@@ -83,36 +83,6 @@ class ExistingBatchFolderImagesViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> sendPdfToOcr(
-      String userName,
-      String email,
-      String password,
-      String firstName,
-      String lastName,
-      String phoneNumber,
-      String taxId,
-      String categoryName,
-      String pdfUrl,
-      BuildContext context) async {
-    try {
-      final response = await _existingBatchFolderImagesRepository.sendDataToOcr(
-          userName,
-          email,
-          password,
-          firstName,
-          lastName,
-          phoneNumber,
-          taxId,
-          categoryName,
-          pdfUrl);
-      if (response.data.isNotEmpty && response.status == 200) {
-        _showErrorMessage("Document Processed To Ocr..!", context);
-      }
-    } catch (e) {
-      _showErrorMessage("Failed to send pdf..!", context);
-    }
-  }
-
   // No Images
   void _setNoImages(bool value) {
     _noImages = value;
