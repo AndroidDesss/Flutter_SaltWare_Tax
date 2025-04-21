@@ -84,7 +84,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
               return Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 35.0),
+                    padding: const EdgeInsets.only(top: 40.0),
                     child: Center(
                       child: SingleChildScrollView(
                         child: Padding(
