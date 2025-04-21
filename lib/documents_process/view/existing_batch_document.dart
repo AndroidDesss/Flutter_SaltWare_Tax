@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -134,58 +133,6 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                   isGridView = !isGridView;
                                 });
                               },
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 110,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: AppColors.customGrey,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Row(
-                          children: [
-                            Lottie.asset(
-                                'assets/loader/home_gradient_lottie.json',
-                                width: 90,
-                                height: 190),
-                            const SizedBox(width: 10),
-                            DefaultTextStyle(
-                              style: const TextStyle(
-                                  color: AppColors.customBlack,
-                                  fontSize: 14.0,
-                                  fontFamily: 'PoppinsSemiBold',
-                                  fontWeight: FontWeight.bold),
-                              child: Expanded(
-                                child: AnimatedTextKit(
-                                  repeatForever: true,
-                                  animatedTexts: [
-                                    RotateAnimatedText(
-                                      duration:
-                                          const Duration(milliseconds: 3000),
-                                      AppStrings.rotateAnimatedTextOne,
-                                    ),
-                                    RotateAnimatedText(
-                                      duration:
-                                          const Duration(milliseconds: 3000),
-                                      AppStrings.rotateAnimatedTextTwo,
-                                    ),
-                                    RotateAnimatedText(
-                                      duration:
-                                          const Duration(milliseconds: 3000),
-                                      AppStrings.rotateAnimatedTextThree,
-                                    ),
-                                    RotateAnimatedText(
-                                      duration:
-                                          const Duration(milliseconds: 3000),
-                                      AppStrings.rotateAnimatedTextFour,
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ],
                         ),
@@ -383,7 +330,6 @@ class GridViewCard extends StatelessWidget {
       child: SizedBox(
         height: 150,
         child: Container(
-          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColors.customGrey.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20),
@@ -397,7 +343,8 @@ class GridViewCard extends StatelessWidget {
                 height: 70,
                 color: AppColors.customBlue,
               ),
-              Expanded(
+              Padding(
+                padding: const EdgeInsets.all(2),
                 child: Center(
                   child: Text(
                     character.description,

@@ -334,6 +334,43 @@ class LoginScreenState extends State<LoginScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _isLoginPressed = true;
+                                    });
+                                    if (_passwordController.text.length >= 8) {
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
+                                      loginViewModel.callLoginApi(
+                                          _userNameController.text,
+                                          _passwordController.text,
+                                          context);
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16, horizontal: 24),
+                                    backgroundColor: AppColors.customBlue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    AppStrings.login,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'PoppinsSemiBold',
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 30),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                                 RichText(
                                   text: TextSpan(
                                     children: [
@@ -387,38 +424,6 @@ class LoginScreenState extends State<LoginScreen> {
                                           },
                                       ),
                                     ],
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _isLoginPressed = true;
-                                    });
-                                    if (_passwordController.text.length >= 8) {
-                                      FocusScope.of(context)
-                                          .requestFocus(FocusNode());
-                                      loginViewModel.callLoginApi(
-                                          _userNameController.text,
-                                          _passwordController.text,
-                                          context);
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16, horizontal: 24),
-                                    backgroundColor: AppColors.customBlue,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  child: const Text(
-                                    AppStrings.login,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'PoppinsSemiBold',
-                                      fontSize: 16,
-                                    ),
                                   ),
                                 ),
                               ],

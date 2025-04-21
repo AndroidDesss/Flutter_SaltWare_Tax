@@ -25,16 +25,16 @@ class LoginResponse {
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
-      id: json['id'],
-      userName: json['user_name'],
-      password: json['password'],
+      id: json['id'] ?? '',
+      userName: json['user_name'] ?? '',
+      password: json['password'] ?? '',
       lastLogin: json['last_login'] ?? '',
-      phone: json['phone'],
-      email: json['email'],
-      isActive: json['is_active'],
-      isAdmin: json['is_admin'],
-      createdDate: json['created_date'],
-      isDeleted: json['is_deleted'],
+      phone: json['phone'] ?? '',
+      email: json['email'] ?? '',
+      isActive: json['is_active'] ?? '',
+      isAdmin: json['is_admin'] ?? '',
+      createdDate: json['created_date'] ?? '',
+      isDeleted: json['is_deleted'] ?? '',
     );
   }
 }

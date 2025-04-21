@@ -55,7 +55,6 @@ flutter:
     - assets/loader/profile.json
     - assets/loader/no_data.json
     - assets/icons/folder.png
-    - assets/loader/home_gradient_lottie.json
     - assets/icons/bottom_nav_home.png
     - assets/icons/bottom_nav_scan.png
     - assets/icons/bottom_nav_profile.png
