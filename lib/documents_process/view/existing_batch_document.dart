@@ -357,7 +357,7 @@ class GridViewCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 2),
               Text(
                 character.createdDate,
                 style: const TextStyle(
@@ -366,6 +366,7 @@ class GridViewCard extends StatelessWidget {
                   fontFamily: 'PoppinsRegular',
                 ),
               ),
+              const SizedBox(height: 2),
             ],
           ),
         ),
