@@ -260,7 +260,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customGrey.withOpacity(0.2),
+            color: AppColors.customLightBlue.withOpacity(0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
@@ -268,7 +268,6 @@ class ListViewCard extends StatelessWidget {
               'assets/icons/folder.png',
               width: 70,
               height: 70,
-              color: AppColors.customBlue,
             ),
             title: Text(character.description,
                 maxLines: 1,
@@ -331,7 +330,7 @@ class GridViewCard extends StatelessWidget {
         height: 150,
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customGrey.withOpacity(0.2),
+            color: AppColors.customLightBlue.withOpacity(0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -341,7 +340,6 @@ class GridViewCard extends StatelessWidget {
                 'assets/icons/folder.png',
                 width: 70,
                 height: 70,
-                color: AppColors.customBlue,
               ),
               Padding(
                 padding: const EdgeInsets.all(2),
