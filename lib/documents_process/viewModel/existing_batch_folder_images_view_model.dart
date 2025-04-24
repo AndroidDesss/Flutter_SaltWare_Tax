@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/custom_loader.dart';
+import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/documents_process/model/existing_batch_folder_images_model.dart';
 import 'package:salt_ware_tax/documents_process/model/pdf_model.dart';
 import 'package:salt_ware_tax/documents_process/repository/existing_batch_folder_images_repository.dart';
@@ -69,17 +70,32 @@ class ExistingBatchFolderImagesViewModel extends ChangeNotifier {
           await _existingBatchFolderImagesRepository.getBatchPdf(batchId);
       if (response.data.isNotEmpty && response.status == 200) {
         _pdfList = response.data;
-        // await SharedPrefsHelper.init();
-        // String emailId = SharedPrefsHelper.getString('email_id')!;
-        //
-        // await sendPdfToOcr(
-        //     emailId, batchName, response.data.first.pdfPath, context);
+        await SharedPrefsHelper.init();
+        String userName = SharedPrefsHelper.getString('user_name')!;
+        String emailId = SharedPrefsHelper.getString('email_id')!;
+        String password = SharedPrefsHelper.getString('password')!;
+
+        await sendPdfToOcr(userName, emailId, password, batchName,
+            response.data.first.pdfPath, context);
       } else {
         _pdfList = [];
       }
     } catch (e) {
       _pdfList = [];
       _showErrorMessage("Failed to fetch pdf..!", context);
+    }
+  }
+
+  Future<void> sendPdfToOcr(String userName, String email, String password,
+      String batchName, String pdfUrl, BuildContext context) async {
+    try {
+      final response = await _existingBatchFolderImagesRepository.sendDataToOcr(
+          userName, email, password, batchName, pdfUrl);
+      if (response.data.isNotEmpty && response.status == 200) {
+        _showErrorMessage("Document Processed To Ocr..!", context);
+      }
+    } catch (e) {
+      _showErrorMessage("Failed to send pdf..!", context);
     }
   }
 

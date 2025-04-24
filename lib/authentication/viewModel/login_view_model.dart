@@ -22,6 +22,8 @@ class LoginViewModel extends ChangeNotifier {
             'email_id', response.data.first.email);
         await SharedPrefsHelper.setString(
             'user_name', response.data.first.userName);
+        await SharedPrefsHelper.setString(
+            'password', response.data.first.password);
         Navigator.pushAndRemoveUntil(
           context,
           PageRouteBuilder(

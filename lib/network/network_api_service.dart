@@ -19,6 +19,20 @@ class NetworkApiService extends BaseApiService {
     return responseJson;
   }
 
+  Future postOcrResponse(String url, Map<String, String> jsonBody) async {
+    dynamic responseJson;
+    try {
+      final response =
+          await http.post(Uri.parse(ocrBaseUrl + url), body: jsonBody);
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw FetchDataException('No Internet Connection');
+    } catch (e) {
+      print(e);
+    }
+    return responseJson;
+  }
+
   Future<dynamic> getResponse(
       String url, Map<String, String> queryParams) async {
     dynamic responseJson;

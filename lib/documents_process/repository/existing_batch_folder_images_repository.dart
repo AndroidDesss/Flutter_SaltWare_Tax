@@ -45,4 +45,28 @@ class ExistingBatchFolderImagesRepository {
       rethrow;
     }
   }
+
+  Future<CommonApiResponse<OcrResponse>> sendDataToOcr(String userName,
+      String email, String password, String categoryName, String pdfUrl) async {
+    Map<String, String> body = {
+      'username': userName,
+      'email': email,
+      'password': password,
+      'category_name': categoryName,
+      'url': pdfUrl,
+    };
+    try {
+      final response =
+          await _apiService.postOcrResponse('upload_pdf_url/', body);
+
+      if (response != null) {
+        return CommonApiResponse.fromJson(
+            response, (item) => OcrResponse.fromJson(item));
+      } else {
+        throw Exception('Invalid response from server');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
