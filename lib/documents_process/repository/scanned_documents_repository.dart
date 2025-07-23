@@ -28,6 +28,8 @@ class ScannedDocumentsRepository {
       }
 
       var response = await request.send();
+      print('ServerResponse: ${response.statusCode}');
+      print('ServerResponse: ${response}');
       if (response.statusCode == 200) {
         final responseBody = await response.stream.bytesToString();
         Map<String, dynamic> responseJson = json.decode(responseBody);
@@ -39,6 +41,7 @@ class ScannedDocumentsRepository {
         throw Exception('Failed to upload files');
       }
     } catch (e) {
+      print('ServerResponse: ${e.toString()}');
       rethrow;
     }
   }

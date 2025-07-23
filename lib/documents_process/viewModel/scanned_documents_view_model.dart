@@ -48,6 +48,7 @@ class ScannedDocumentsViewModel extends ChangeNotifier {
         _showMessage("No data found or invalid response", context);
       }
     } catch (e) {
+      print('ServerResponse${e.toString()}');
       _showMessage("Something went wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
