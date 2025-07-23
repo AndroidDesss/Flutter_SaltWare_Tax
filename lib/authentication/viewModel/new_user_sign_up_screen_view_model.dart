@@ -16,12 +16,13 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
       String lastName,
       String email,
       String phoneNumber,
-      String taxPayerId,
+      String companyName,
+      String loginType,
       BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
-      final response =
-          await _newUserSignUpScreenRepository.checkUser(userName, phoneNumber);
+      final response = await _newUserSignUpScreenRepository.checkUser(
+          userName, phoneNumber, loginType, companyName);
 
       if (response.status == 200) {
         if (response.data.first.msg == 'You can go ahead') {
@@ -36,7 +37,8 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
                   localLastName: lastName,
                   localEmail: email,
                   localPhoneNumber: phoneNumber,
-                  localTaxPayerId: taxPayerId,
+                  localCompanyName: companyName,
+                  localLoginType: loginType,
                 );
               },
               transitionsBuilder:

@@ -12,7 +12,8 @@ class NewUserVerificationScreen extends StatefulWidget {
   final String localLastName;
   final String localEmail;
   final String localPhoneNumber;
-  final String localTaxPayerId;
+  final String localCompanyName;
+  final String localLoginType;
 
   const NewUserVerificationScreen(
       {super.key,
@@ -22,7 +23,8 @@ class NewUserVerificationScreen extends StatefulWidget {
       required this.localLastName,
       required this.localEmail,
       required this.localPhoneNumber,
-      required this.localTaxPayerId});
+      required this.localCompanyName,
+      required this.localLoginType});
 
   @override
   NewUserVerificationScreenState createState() =>
@@ -221,7 +223,8 @@ class NewUserVerificationScreenState extends State<NewUserVerificationScreen> {
                                               widget.localLastName,
                                               widget.localEmail,
                                               widget.localPhoneNumber,
-                                              widget.localTaxPayerId,
+                                              widget.localCompanyName,
+                                              widget.localLoginType,
                                               context);
                                     } else {
                                       CommonUtilities.showToast(context,

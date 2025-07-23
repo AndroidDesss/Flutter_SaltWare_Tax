@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/authentication/viewModel/new_user_sign_up_screen_view_model.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/shared_pref.dart';
+import 'package:salt_ware_tax/company/users/view_model/company_add_users_view_model.dart';
 
-class NewUserSignUpScreen extends StatefulWidget {
-  const NewUserSignUpScreen({super.key});
+class CompanyAddUsersScreen extends StatefulWidget {
+  const CompanyAddUsersScreen({super.key});
 
   @override
-  NewUserSignUpScreenState createState() => NewUserSignUpScreenState();
+  CompanyAddUsersScreenState createState() => CompanyAddUsersScreenState();
 }
 
-class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
-  final NewUserSignUpScreenViewModel newUserSignUpScreenViewModel =
-      NewUserSignUpScreenViewModel();
+class CompanyAddUsersScreenState extends State<CompanyAddUsersScreen> {
+  final CompanyAddUsersViewModel companyAddUsersViewModel =
+      CompanyAddUsersViewModel();
 
   final _formKey = GlobalKey<FormState>();
 
   bool _isSignUpPressed = false;
+
+  late String companyName = '';
 
   late var _userNameController = TextEditingController();
   late var _firstNameController = TextEditingController();
@@ -25,7 +28,6 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
   late var _phoneNumberController = TextEditingController();
   late var _emailController = TextEditingController();
   late var _passwordController = TextEditingController();
-  late var _companyNameController = TextEditingController();
 
   final _userNameFocusNode = FocusNode();
   final _firstNameFocusNode = FocusNode();
@@ -33,11 +35,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
   final _phoneNumberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  final _accountTypeFocusNode = FocusNode();
-  final _companyNameFocusNode = FocusNode();
 
-  late String _selectedAccountType = 'Select';
-  final List<String> _accountTypes = ['Select', 'Individual', 'Company'];
   String emailPattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
   @override
@@ -49,7 +47,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
     _phoneNumberController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _companyNameController = TextEditingController();
+    _getSharedPrefData();
   }
 
   @override
@@ -60,15 +58,12 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
     _phoneNumberController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _companyNameController.dispose();
     _userNameFocusNode.dispose();
     _firstNameFocusNode.dispose();
     _lastNameFocusNode.dispose();
     _phoneNumberFocusNode.dispose();
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
-    _accountTypeFocusNode.dispose();
-    _companyNameFocusNode.dispose();
     super.dispose();
   }
 
@@ -76,14 +71,19 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
     return RegExp(emailPattern).hasMatch(email);
   }
 
+  Future<void> _getSharedPrefData() async {
+    await SharedPrefsHelper.init();
+    companyName = SharedPrefsHelper.getString('company_name')!;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<NewUserSignUpScreenViewModel>(
-      create: (BuildContext context) => newUserSignUpScreenViewModel,
+    return ChangeNotifierProvider<CompanyAddUsersViewModel>(
+      create: (BuildContext context) => companyAddUsersViewModel,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.customWhite,
-          body: Consumer<NewUserSignUpScreenViewModel>(
+          body: Consumer<CompanyAddUsersViewModel>(
             builder: (context, viewModel, child) {
               return Stack(
                 children: [
@@ -128,109 +128,6 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                 ),
                                 const SizedBox(height: 15),
                                 const Text(
-                                  AppStrings.accountType,
-                                  style: TextStyle(
-                                    color: AppColors.customBlack,
-                                    fontFamily: 'PoppinsSemiBold',
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(6),
-                                        boxShadow: _accountTypeFocusNode
-                                                .hasFocus
-                                            ? [
-                                                BoxShadow(
-                                                  color: AppColors.customBlack
-                                                      .withOpacity(0.5),
-                                                  blurRadius: 5,
-                                                  spreadRadius: 1,
-                                                  offset: const Offset(0, 1),
-                                                ),
-                                              ]
-                                            : [],
-                                      ),
-                                      child: DropdownButtonFormField<String>(
-                                        value: _selectedAccountType,
-                                        focusNode: _accountTypeFocusNode,
-                                        decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: AppColors.customGrey,
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
-                                            borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(6)),
-                                            borderSide: BorderSide(
-                                              color: AppColors.customBlue,
-                                              width: 1,
-                                            ),
-                                          ),
-                                        ),
-                                        icon: const Icon(Icons.arrow_drop_down,
-                                            color: AppColors.customBlack),
-                                        dropdownColor: AppColors.customWhite,
-                                        style: const TextStyle(
-                                          color: AppColors.customGrey,
-                                          fontFamily: 'PoppinsRegular',
-                                          fontSize: 14,
-                                        ),
-                                        items:
-                                            _accountTypes.map((String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value,
-                                                style: const TextStyle(
-                                                  color: AppColors.customBlack,
-                                                  fontFamily: 'PoppinsRegular',
-                                                  fontSize: 15,
-                                                )),
-                                          );
-                                        }).toList(),
-                                        onChanged: (newValue) {
-                                          setState(() {
-                                            _selectedAccountType = newValue!;
-                                            if (_selectedAccountType ==
-                                                'Individual') {
-                                              _companyNameController.clear();
-                                            } else if (_selectedAccountType ==
-                                                'Company') {
-                                              _firstNameController.clear();
-                                              _lastNameController.clear();
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                    if (_isSignUpPressed &&
-                                        _selectedAccountType == 'Select')
-                                      const Padding(
-                                        padding: EdgeInsets.only(top: 8),
-                                        child: Text(
-                                          'Please Select the Account Type',
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontFamily: 'PoppinsRegular',
-                                              fontSize: 12),
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                                const SizedBox(height: 5),
-                                const Text(
                                   AppStrings.userName,
                                   style: TextStyle(
                                     color: AppColors.customBlack,
@@ -249,7 +146,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlack
-                                                      .withOpacity(0.5),
+                                                      .withAlpha(255),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -269,7 +166,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintText: AppStrings.enterUserName,
                                           hintStyle: TextStyle(
                                               color: AppColors.customBlack
-                                                  .withOpacity(0.5),
+                                                  .withAlpha(255),
                                               fontFamily: 'PoppinsRegular',
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
@@ -280,7 +177,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
                                               color:
-                                                  Colors.white.withOpacity(1),
+                                                  Colors.white.withAlpha(255),
                                               width: 1,
                                             ),
                                           ),
@@ -342,7 +239,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlue
-                                                      .withOpacity(0.5),
+                                                      .withAlpha(255),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -362,7 +259,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintText: AppStrings.enterPassword,
                                           hintStyle: TextStyle(
                                               color: AppColors.customBlack
-                                                  .withOpacity(0.5),
+                                                  .withAlpha(255),
                                               fontFamily: 'PoppinsRegular',
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
@@ -373,7 +270,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
                                               color:
-                                                  Colors.white.withOpacity(1),
+                                                  Colors.white.withAlpha(255),
                                               width: 1,
                                             ),
                                           ),
@@ -418,303 +315,192 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 5),
-                                if (_selectedAccountType == 'Company') ...[
-                                  const Text(
-                                    AppStrings.companyName,
-                                    style: TextStyle(
-                                      color: AppColors.customBlack,
-                                      fontFamily: 'PoppinsSemiBold',
-                                      fontSize: 15,
-                                    ),
+                                const Text(
+                                  AppStrings.firstName,
+                                  style: TextStyle(
+                                    color: AppColors.customBlack,
+                                    fontFamily: 'PoppinsSemiBold',
+                                    fontSize: 15,
                                   ),
-                                  const SizedBox(height: 5),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          boxShadow: _companyNameFocusNode
-                                                  .hasFocus
-                                              ? [
-                                                  BoxShadow(
-                                                    color: AppColors.customBlack
-                                                        .withOpacity(0.5),
-                                                    blurRadius: 5,
-                                                    spreadRadius: 1,
-                                                    offset: const Offset(0, 1),
-                                                  ),
-                                                ]
-                                              : [],
-                                        ),
-                                        child: TextFormField(
-                                          controller: _companyNameController,
-                                          focusNode: _companyNameFocusNode,
-                                          style: const TextStyle(
-                                              color: AppColors.customBlack,
+                                ),
+                                const SizedBox(height: 5),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        boxShadow: _firstNameFocusNode.hasFocus
+                                            ? [
+                                                BoxShadow(
+                                                  color: AppColors.customBlack
+                                                      .withAlpha(128),
+                                                  blurRadius: 5,
+                                                  spreadRadius: 1,
+                                                  offset: const Offset(0, 1),
+                                                ),
+                                              ]
+                                            : [],
+                                      ),
+                                      child: TextFormField(
+                                        controller: _firstNameController,
+                                        focusNode: _firstNameFocusNode,
+                                        style: const TextStyle(
+                                            color: AppColors.customBlack,
+                                            fontFamily: 'PoppinsRegular',
+                                            fontSize: 16),
+                                        cursorColor: AppColors.customBlue,
+                                        decoration: InputDecoration(
+                                          hintText: AppStrings.enterFirstName,
+                                          hintStyle: TextStyle(
+                                              color: AppColors.customBlack
+                                                  .withAlpha(128),
                                               fontFamily: 'PoppinsRegular',
-                                              fontSize: 16),
-                                          cursorColor: AppColors.customBlue,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                                AppStrings.enterCompanyName,
-                                            hintStyle: TextStyle(
-                                                color: AppColors.customBlack
-                                                    .withOpacity(0.5),
-                                                fontFamily: 'PoppinsRegular',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                            filled: true,
-                                            fillColor: AppColors.customGrey,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              borderSide: BorderSide(
-                                                color:
-                                                    Colors.white.withOpacity(1),
-                                                width: 1,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              borderSide: const BorderSide(
-                                                color: AppColors.customBlue,
-                                                width: 1,
-                                              ),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                          filled: true,
+                                          fillColor: AppColors.customGrey,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.white.withAlpha(255),
+                                              width: 1,
                                             ),
                                           ),
-                                          onTap: () {
-                                            setState(() {});
-                                          },
-                                          onEditingComplete: () {
-                                            setState(() {});
-                                          },
-                                          keyboardType: TextInputType.text,
-                                          buildCounter: (BuildContext context,
-                                              {int? currentLength,
-                                              int? maxLength,
-                                              bool? isFocused}) {
-                                            return null;
-                                          },
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            borderSide: const BorderSide(
+                                              color: AppColors.customBlue,
+                                              width: 1,
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          setState(() {});
+                                        },
+                                        onEditingComplete: () {
+                                          setState(() {});
+                                        },
+                                        keyboardType: TextInputType.text,
+                                        buildCounter: (BuildContext context,
+                                            {int? currentLength,
+                                            int? maxLength,
+                                            bool? isFocused}) {
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    if (_isSignUpPressed &&
+                                        _firstNameController.text.isEmpty)
+                                      const Padding(
+                                        padding: EdgeInsets.only(top: 8),
+                                        child: Text(
+                                          'Please enter a valid FirstName',
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontFamily: 'PoppinsRegular',
+                                              fontSize: 12),
                                         ),
                                       ),
-                                      if (_isSignUpPressed &&
-                                          _selectedAccountType == 'Company' &&
-                                          _companyNameController.text.isEmpty)
-                                        const Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Text(
-                                            'Please enter a valid Company Name',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontFamily: 'PoppinsRegular',
-                                                fontSize: 12),
-                                          ),
-                                        ),
-                                    ],
+                                  ],
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  AppStrings.lastName,
+                                  style: TextStyle(
+                                    color: AppColors.customBlack,
+                                    fontFamily: 'PoppinsSemiBold',
+                                    fontSize: 15,
                                   ),
-                                  const SizedBox(height: 5),
-                                ] else if (_selectedAccountType ==
-                                    'Individual') ...[
-                                  const Text(
-                                    AppStrings.firstName,
-                                    style: TextStyle(
-                                      color: AppColors.customBlack,
-                                      fontFamily: 'PoppinsSemiBold',
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          boxShadow: _firstNameFocusNode
-                                                  .hasFocus
-                                              ? [
-                                                  BoxShadow(
-                                                    color: AppColors.customBlack
-                                                        .withOpacity(0.5),
-                                                    blurRadius: 5,
-                                                    spreadRadius: 1,
-                                                    offset: const Offset(0, 1),
-                                                  ),
-                                                ]
-                                              : [],
-                                        ),
-                                        child: TextFormField(
-                                          controller: _firstNameController,
-                                          focusNode: _firstNameFocusNode,
-                                          style: const TextStyle(
-                                              color: AppColors.customBlack,
+                                ),
+                                const SizedBox(height: 5),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                        boxShadow: _lastNameFocusNode.hasFocus
+                                            ? [
+                                                BoxShadow(
+                                                  color: AppColors.customBlack
+                                                      .withAlpha(128),
+                                                  blurRadius: 5,
+                                                  spreadRadius: 1,
+                                                  offset: const Offset(0, 1),
+                                                ),
+                                              ]
+                                            : [],
+                                      ),
+                                      child: TextFormField(
+                                        controller: _lastNameController,
+                                        focusNode: _lastNameFocusNode,
+                                        style: const TextStyle(
+                                            color: AppColors.customBlack,
+                                            fontFamily: 'PoppinsRegular',
+                                            fontSize: 16),
+                                        cursorColor: AppColors.customBlue,
+                                        decoration: InputDecoration(
+                                          hintText: AppStrings.enterLastName,
+                                          hintStyle: TextStyle(
+                                              color: AppColors.customBlack
+                                                  .withAlpha(128),
                                               fontFamily: 'PoppinsRegular',
-                                              fontSize: 16),
-                                          cursorColor: AppColors.customBlue,
-                                          decoration: InputDecoration(
-                                            hintText: AppStrings.enterFirstName,
-                                            hintStyle: TextStyle(
-                                                color: AppColors.customBlack
-                                                    .withOpacity(0.5),
-                                                fontFamily: 'PoppinsRegular',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                            filled: true,
-                                            fillColor: AppColors.customGrey,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              borderSide: BorderSide(
-                                                color:
-                                                    Colors.white.withOpacity(1),
-                                                width: 1,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              borderSide: const BorderSide(
-                                                color: AppColors.customBlue,
-                                                width: 1,
-                                              ),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                          filled: true,
+                                          fillColor: AppColors.customGrey,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.white.withAlpha(255),
+                                              width: 1,
                                             ),
                                           ),
-                                          onTap: () {
-                                            setState(() {});
-                                          },
-                                          onEditingComplete: () {
-                                            setState(() {});
-                                          },
-                                          keyboardType: TextInputType.text,
-                                          buildCounter: (BuildContext context,
-                                              {int? currentLength,
-                                              int? maxLength,
-                                              bool? isFocused}) {
-                                            return null;
-                                          },
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            borderSide: const BorderSide(
+                                              color: AppColors.customBlue,
+                                              width: 1,
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          setState(() {});
+                                        },
+                                        onEditingComplete: () {
+                                          setState(() {});
+                                        },
+                                        keyboardType: TextInputType.text,
+                                        buildCounter: (BuildContext context,
+                                            {int? currentLength,
+                                            int? maxLength,
+                                            bool? isFocused}) {
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    if (_isSignUpPressed &&
+                                        _lastNameController.text.isEmpty)
+                                      const Padding(
+                                        padding: EdgeInsets.only(top: 8),
+                                        child: Text(
+                                          'Please enter a valid LastName',
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontFamily: 'PoppinsRegular',
+                                              fontSize: 12),
                                         ),
                                       ),
-                                      if (_isSignUpPressed &&
-                                          _selectedAccountType ==
-                                              'Individual' &&
-                                          _firstNameController.text.isEmpty)
-                                        const Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Text(
-                                            'Please enter a valid FirstName',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontFamily: 'PoppinsRegular',
-                                                fontSize: 12),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 5),
-                                  const Text(
-                                    AppStrings.lastName,
-                                    style: TextStyle(
-                                      color: AppColors.customBlack,
-                                      fontFamily: 'PoppinsSemiBold',
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          boxShadow: _lastNameFocusNode.hasFocus
-                                              ? [
-                                                  BoxShadow(
-                                                    color: AppColors.customBlack
-                                                        .withOpacity(0.5),
-                                                    blurRadius: 5,
-                                                    spreadRadius: 1,
-                                                    offset: const Offset(0, 1),
-                                                  ),
-                                                ]
-                                              : [],
-                                        ),
-                                        child: TextFormField(
-                                          controller: _lastNameController,
-                                          focusNode: _lastNameFocusNode,
-                                          style: const TextStyle(
-                                              color: AppColors.customBlack,
-                                              fontFamily: 'PoppinsRegular',
-                                              fontSize: 16),
-                                          cursorColor: AppColors.customBlue,
-                                          decoration: InputDecoration(
-                                            hintText: AppStrings.enterLastName,
-                                            hintStyle: TextStyle(
-                                                color: AppColors.customBlack
-                                                    .withOpacity(0.5),
-                                                fontFamily: 'PoppinsRegular',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                            filled: true,
-                                            fillColor: AppColors.customGrey,
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              borderSide: BorderSide(
-                                                color:
-                                                    Colors.white.withOpacity(1),
-                                                width: 1,
-                                              ),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              borderSide: const BorderSide(
-                                                color: AppColors.customBlue,
-                                                width: 1,
-                                              ),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            setState(() {});
-                                          },
-                                          onEditingComplete: () {
-                                            setState(() {});
-                                          },
-                                          keyboardType: TextInputType.text,
-                                          buildCounter: (BuildContext context,
-                                              {int? currentLength,
-                                              int? maxLength,
-                                              bool? isFocused}) {
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                      if (_isSignUpPressed &&
-                                          _selectedAccountType ==
-                                              'Individual' &&
-                                          _lastNameController.text.isEmpty)
-                                        const Padding(
-                                          padding: EdgeInsets.only(top: 8),
-                                          child: Text(
-                                            'Please enter a valid LastName',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontFamily: 'PoppinsRegular',
-                                                fontSize: 12),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 5),
-                                ],
+                                  ],
+                                ),
+                                const SizedBox(height: 5),
                                 const Text(
                                   AppStrings.email,
                                   style: TextStyle(
@@ -734,7 +520,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlue
-                                                      .withOpacity(0.5),
+                                                      .withAlpha(128),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -755,7 +541,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintText: AppStrings.enterEmail,
                                           hintStyle: TextStyle(
                                             color: AppColors.customBlack
-                                                .withOpacity(0.5),
+                                                .withAlpha(128),
                                             fontFamily: 'PoppinsRegular',
                                             fontSize: 14,
                                           ),
@@ -766,7 +552,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
                                               color:
-                                                  Colors.white.withOpacity(1),
+                                                  Colors.white.withAlpha(255),
                                               width: 1,
                                             ),
                                           ),
@@ -830,7 +616,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlue
-                                                      .withOpacity(0.5),
+                                                      .withAlpha(128),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -850,7 +636,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintStyle: TextStyle(
                                               fontFamily: 'PoppinsRegular',
                                               color: AppColors.customBlack
-                                                  .withOpacity(0.5),
+                                                  .withAlpha(128),
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
                                           filled: true,
@@ -860,7 +646,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
                                               color:
-                                                  Colors.white.withOpacity(1),
+                                                  Colors.white.withAlpha(255),
                                               width: 1,
                                             ),
                                           ),
@@ -913,13 +699,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           FocusScope.of(context)
                                               .requestFocus(FocusNode());
 
-                                          String accountTypeToSend =
-                                              _selectedAccountType ==
-                                                      "Individual"
-                                                  ? "Normal"
-                                                  : "Company";
-
-                                          newUserSignUpScreenViewModel
+                                          companyAddUsersViewModel
                                               .callCheckUserApi(
                                                   _userNameController.text,
                                                   _passwordController.text,
@@ -927,8 +707,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                                   _lastNameController.text,
                                                   _emailController.text,
                                                   _phoneNumberController.text,
-                                                  _companyNameController.text,
-                                                  accountTypeToSend,
+                                                  companyName,
                                                   context);
                                         }
                                       },
@@ -984,21 +763,17 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
 
   bool _validateInputs() {
     bool isValid = true;
-
     if (_userNameController.text.isEmpty) isValid = false;
-    if (_passwordController.text.isEmpty || _passwordController.text.length < 8)
+    if (_passwordController.text.isEmpty ||
+        _passwordController.text.length < 8) {
       isValid = false;
-    if (_emailController.text.isEmpty || !isEmailValid(_emailController.text))
-      isValid = false;
-    if (_phoneNumberController.text.length != 10) isValid = false;
-    if (_selectedAccountType == 'Select') isValid = false;
-    if (_selectedAccountType == 'Individual') {
-      if (_firstNameController.text.isEmpty) isValid = false;
-      if (_lastNameController.text.isEmpty) isValid = false;
-    } else if (_selectedAccountType == 'Company') {
-      if (_companyNameController.text.isEmpty) isValid = false;
     }
-
+    if (_emailController.text.isEmpty || !isEmailValid(_emailController.text)) {
+      isValid = false;
+    }
+    if (_phoneNumberController.text.length != 10) isValid = false;
+    if (_firstNameController.text.isEmpty) isValid = false;
+    if (_lastNameController.text.isEmpty) isValid = false;
     return isValid;
   }
 }

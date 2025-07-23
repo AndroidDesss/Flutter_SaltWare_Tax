@@ -38,6 +38,9 @@ class AppStrings {
   static const logOut = 'Log Out';
   static const noImages = 'No Images..!';
   static const noFolders = 'No Folders..!';
+  static const noProjects = 'No Projects..!';
+  static const noUsers = 'No Users..!';
+  static const noUsersAssigned = 'No Users Assigned for this project..!';
   static const scannedDocuments = 'Scanned Documents';
   static const profile = 'Profile';
   static const batchNameContent = 'Create a Batch Name for your documents..!';
@@ -50,4 +53,10 @@ class AppStrings {
   static const enterFirstName = 'Enter your First Name';
   static const enterLastName = 'Enter your Last Name';
   static const enterTaxPayer = 'Enter your TaxPayer Id';
+  static const enterCompanyName = 'Enter your Company Name';
+  static const accountType = 'Account Type';
+  static const companyName = 'Company Name';
+  static const projectContent = 'Create a Project..!';
+  static const addUsers = 'Add Users';
+  static const update = 'Update';
 }

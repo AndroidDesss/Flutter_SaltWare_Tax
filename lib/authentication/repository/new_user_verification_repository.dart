@@ -30,7 +30,8 @@ class NewUserVerificationRepository {
       String lastName,
       String email,
       String phoneNumber,
-      String taxPayerId) async {
+      String companyName,
+      String loginType) async {
     Map<String, String> body = {
       'is_active': '1',
       'user_name': userName,
@@ -39,7 +40,9 @@ class NewUserVerificationRepository {
       'last_name': lastName,
       'email': email,
       'phone': phoneNumber,
-      'tax_payer_id': taxPayerId
+      'tax_payer_id': '1234567890',
+      'company': companyName,
+      'login_type': loginType,
     };
     try {
       final response = await _apiService.postResponse('sign_up', body);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
+import 'package:intl/intl.dart';
 
 class CommonUtilities {
   static void showToast(
@@ -20,5 +21,9 @@ class CommonUtilities {
       closeButtonShowType: CloseButtonShowType.none,
       alignment: Alignment.bottomCenter, // Set the toast position here
     );
+  }
+
+  static String getCurrentDate() {
+    return DateFormat("MM-dd-yyyy").format(DateTime.now());
   }
 }
