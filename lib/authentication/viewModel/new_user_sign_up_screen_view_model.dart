@@ -22,10 +22,10 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
     CustomLoader.showLoader(context);
     try {
       final response = await _newUserSignUpScreenRepository.checkUser(
-          userName, phoneNumber, loginType, companyName);
+          userName, email, phoneNumber);
 
       if (response.status == 200) {
-        if (response.data.first.msg == 'You can go ahead') {
+        if (response.data.first.success == 'User can proceed with signup') {
           Navigator.pushReplacement(
             context,
             PageRouteBuilder(
@@ -53,12 +53,10 @@ class NewUserSignUpScreenViewModel extends ChangeNotifier {
               },
             ),
           );
-        } else {
-          _showErrorMessage("Already Registered..!", context);
         }
+      } else if (response.status == 400) {
+        _showErrorMessage(response.data.first.errmsg!, context);
       }
-    } catch (e) {
-      _showErrorMessage("Already Registered..!", context);
     } finally {
       CustomLoader.hideLoader();
     }

@@ -7,9 +7,9 @@ class ForgotPasswordVerificationRepository {
 
   Future<CommonApiResponse<ForgotPasswordVerificationResponse>>
       getResendVerificationOtp(String phoneNumber) async {
-    Map<String, String> body = {'phone': phoneNumber, 'region': '1'};
+    Map<String, String> body = {'phone': phoneNumber};
     try {
-      final response = await _apiService.postResponse('otp', body);
+      final response = await _apiService.postResponse('send-reset-otp/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(response,

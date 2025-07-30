@@ -1,9 +1,10 @@
 class CheckUserResponse {
-  final String msg;
+  final String? success;
+  final String? errmsg;
 
-  CheckUserResponse({required this.msg});
+  CheckUserResponse({this.success, this.errmsg});
 
   factory CheckUserResponse.fromJson(Map<String, dynamic> json) {
-    return CheckUserResponse(msg: json['msg']);
+    return CheckUserResponse(success: json['success'], errmsg: json['errmsg']);
   }
 }

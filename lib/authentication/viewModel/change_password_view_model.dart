@@ -16,11 +16,9 @@ class ChangePasswordViewModel extends ChangeNotifier {
           await _changePasswordRepository.changePassword(phoneNumber, password);
 
       if (response.status == 200) {
-        _showErrorMessage("Successfully Changed..!", context);
+        _showErrorMessage(response.data.first.message!, context);
         Navigator.pop(context);
       }
-    } catch (e) {
-      _showErrorMessage("Credentials Wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
     }

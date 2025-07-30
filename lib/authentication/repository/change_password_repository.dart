@@ -7,13 +7,9 @@ class ChangePasswordRepository {
 
   Future<CommonApiResponse<ChangePasswordResponse>> changePassword(
       String phoneNumber, String password) async {
-    Map<String, String> body = {
-      'phone': phoneNumber,
-      'confirm_password': password
-    };
+    Map<String, String> body = {'phone': phoneNumber, 'new_password': password};
     try {
-      final response =
-          await _apiService.postResponse('forgot_new_passwrod', body);
+      final response = await _apiService.postResponse('resetpassword/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(

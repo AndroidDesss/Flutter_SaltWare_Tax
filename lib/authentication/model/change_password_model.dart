@@ -1,10 +1,12 @@
 class ChangePasswordResponse {
-  final String msg;
+  final String? message;
+  final String? usertype;
 
-  ChangePasswordResponse({required this.msg});
+  ChangePasswordResponse({this.message, this.usertype});
 
   // Factory method to convert JSON to UserData object
   factory ChangePasswordResponse.fromJson(Map<String, dynamic> json) {
-    return ChangePasswordResponse(msg: json['msg']);
+    return ChangePasswordResponse(
+        message: json['message'], usertype: json['usertype']);
   }
 }

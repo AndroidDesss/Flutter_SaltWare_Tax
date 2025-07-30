@@ -1,8 +1,10 @@
 class NewUserVerificationResponse {
-  final String otp;
+  final String? otp;
+  final String? errmsg;
 
-  NewUserVerificationResponse({required this.otp});
+  NewUserVerificationResponse({this.otp, this.errmsg});
   factory NewUserVerificationResponse.fromJson(Map<String, dynamic> json) {
-    return NewUserVerificationResponse(otp: json['otp']);
+    return NewUserVerificationResponse(
+        otp: json['otp'], errmsg: json['errmsg']);
   }
 }

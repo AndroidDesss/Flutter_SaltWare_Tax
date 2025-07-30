@@ -13,37 +13,33 @@ class ForgotPasswordViewModel extends ChangeNotifier {
       String phoneNumber, BuildContext context) async {
     CustomLoader.showLoader(context);
     try {
-      final response = await _forgotPasswordRepository.getVerificationOtp(
-          phoneNumber);
+      final response =
+          await _forgotPasswordRepository.getVerificationOtp(phoneNumber);
 
       if (response.status == 200) {
-        if (response.data.first.otp != 'No phone found') {
-          Navigator.pushReplacement(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) {
-                return ForgotPasswordVerificationScreen(
-                    localOtp: response.data.first.otp,
-                    localPhoneNumber: phoneNumber);
-              },
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(1.0, 0.0); // Start from right to left
-                const end = Offset.zero; // End at current position
-                const curve = Curves.easeInOut; // Smooth transition
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: curve));
-                var offsetAnimation = animation.drive(tween);
-                return SlideTransition(position: offsetAnimation, child: child);
-              },
-            ),
-          );
-        } else {
-          _showErrorMessage("Please Register..!", context);
-        }
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return ForgotPasswordVerificationScreen(
+                  localOtp: response.data.first.otp!,
+                  localPhoneNumber: phoneNumber);
+            },
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              const begin = Offset(1.0, 0.0); // Start from right to left
+              const end = Offset.zero; // End at current position
+              const curve = Curves.easeInOut; // Smooth transition
+              var tween =
+                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              var offsetAnimation = animation.drive(tween);
+              return SlideTransition(position: offsetAnimation, child: child);
+            },
+          ),
+        );
+      } else {
+        _showErrorMessage("Please Register..!", context);
       }
-    } catch (e) {
-      _showErrorMessage("Credentials Wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
     }

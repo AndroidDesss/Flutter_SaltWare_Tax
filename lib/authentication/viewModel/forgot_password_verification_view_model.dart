@@ -19,10 +19,10 @@ class ForgotPasswordVerificationViewModel extends ChangeNotifier {
           .getResendVerificationOtp(phoneNumber);
 
       if (response.status == 200) {
-        _setLocalOtp(response.data.first.otp);
+        _setLocalOtp(response.data.first.otp!);
+      } else {
+        _showErrorMessage("Please Register..!", context);
       }
-    } catch (e) {
-      _showErrorMessage("Credentials Wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
     }

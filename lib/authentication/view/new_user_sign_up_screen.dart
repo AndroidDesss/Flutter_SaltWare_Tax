@@ -916,8 +916,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           String accountTypeToSend =
                                               _selectedAccountType ==
                                                       "Individual"
-                                                  ? "Normal"
-                                                  : "Company";
+                                                  ? "individual"
+                                                  : "company";
 
                                           newUserSignUpScreenViewModel
                                               .callCheckUserApi(

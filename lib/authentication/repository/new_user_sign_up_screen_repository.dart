@@ -5,16 +5,15 @@ import 'package:salt_ware_tax/network/network_api_service.dart';
 class NewUserSignUpScreenRepository {
   final NetworkApiService _apiService = NetworkApiService();
 
-  Future<CommonApiResponse<CheckUserResponse>> checkUser(String userName,
-      String phoneNumber, String loginType, String companyName) async {
+  Future<CommonApiResponse<CheckUserResponse>> checkUser(
+      String userName, String email, String phoneNumber) async {
     Map<String, String> body = {
-      'user_name': userName,
-      'phone': phoneNumber,
-      'login_type': loginType,
-      'company': companyName,
+      'username': userName,
+      'email': email,
+      'phone': phoneNumber
     };
     try {
-      final response = await _apiService.postResponse('check_is_user', body);
+      final response = await _apiService.postResponse('check-user/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(

@@ -18,10 +18,10 @@ class NewUserVerificationViewModel extends ChangeNotifier {
           await _newUserVerificationRepository.getVerificationOtp(phoneNumber);
 
       if (response.status == 200) {
-        _setLocalOtp(response.data.first.otp);
+        _setLocalOtp(response.data.first.otp!);
+      } else {
+        _showErrorMessage("Please Check your PhoneNumber..!", context);
       }
-    } catch (e) {
-      _showErrorMessage("Credentials Wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
     }
@@ -40,20 +40,21 @@ class NewUserVerificationViewModel extends ChangeNotifier {
     CustomLoader.showLoader(context);
     try {
       final response = await _newUserVerificationRepository.verifyNewUser(
-          userName,
-          password,
-          firstName,
-          lastName,
-          email,
-          phoneNumber,
-          companyName,
-          loginType);
+        userName,
+        password,
+        email,
+        phoneNumber,
+        loginType,
+        firstName,
+        lastName,
+        companyName,
+      );
       if (response.status == 200) {
         Navigator.pop(context);
         _showErrorMessage("Thanks for signing up..!", context);
       }
     } catch (e) {
-      _showErrorMessage("Wrong..!", context);
+      _showErrorMessage("Try after sometime..!", context);
     } finally {
       CustomLoader.hideLoader();
     }

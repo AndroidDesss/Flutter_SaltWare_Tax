@@ -24,10 +24,10 @@ class CompanyAddUsersViewModel extends ChangeNotifier {
     CustomLoader.showLoader(context);
     try {
       final response = await _newUserSignUpScreenRepository.checkUser(
-          userName, phoneNumber, 'Assigned_by_company', companyName);
+          userName, email, phoneNumber);
 
       if (response.status == 200) {
-        if (response.data.first.msg == 'You can go ahead') {
+        if (response.data.first.success == 'You can go ahead') {
           callSignUpApi(userName, password, firstName, lastName, email,
               phoneNumber, companyName, 'Assigned_by_company', context);
         } else {

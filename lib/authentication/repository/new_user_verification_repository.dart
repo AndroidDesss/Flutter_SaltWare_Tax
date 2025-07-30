@@ -8,9 +8,9 @@ class NewUserVerificationRepository {
 
   Future<CommonApiResponse<NewUserVerificationResponse>> getVerificationOtp(
       String phoneNumber) async {
-    Map<String, String> body = {'region': '1', 'phone': phoneNumber};
+    Map<String, String> body = {'phone': phoneNumber};
     try {
-      final response = await _apiService.postResponse('otp1', body);
+      final response = await _apiService.postResponse('send-signup-otp/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(
@@ -26,26 +26,25 @@ class NewUserVerificationRepository {
   Future<CommonApiResponse<VerifyUserResponse>> verifyNewUser(
       String userName,
       String password,
-      String firstName,
-      String lastName,
       String email,
       String phoneNumber,
-      String companyName,
-      String loginType) async {
+      String loginType,
+      String firstName,
+      String lastName,
+      String companyName) async {
     Map<String, String> body = {
-      'is_active': '1',
-      'user_name': userName,
+      'username': userName,
       'password': password,
-      'first_name': firstName,
-      'last_name': lastName,
       'email': email,
       'phone': phoneNumber,
+      'user_type': loginType,
+      'first_name': firstName,
+      'last_name': lastName,
       'tax_payer_id': '1234567890',
-      'company': companyName,
-      'login_type': loginType,
+      'company_name': companyName,
     };
     try {
-      final response = await _apiService.postResponse('sign_up', body);
+      final response = await _apiService.postResponse('signup/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(
