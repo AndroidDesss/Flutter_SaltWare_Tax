@@ -47,7 +47,6 @@ class ProjectViewModel extends ChangeNotifier {
       _originalProjectsList = [];
       _originalProjects = [];
       _setNoProjects(true);
-      _showErrorMessage("Something went wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
       notifyListeners();
@@ -63,7 +62,7 @@ class ProjectViewModel extends ChangeNotifier {
   // Sort the folders list alphabetically by description
   void sortProjectsList() {
     _projectsList.sort((a, b) =>
-        a.description.toLowerCase().compareTo(b.description.toLowerCase()));
+        a.projectName.toLowerCase().compareTo(b.projectName.toLowerCase()));
     notifyListeners();
   }
 
@@ -84,60 +83,35 @@ class ProjectViewModel extends ChangeNotifier {
       _projectsList = List.from(_originalProjects);
     } else {
       _projectsList = _originalProjects.where((folders) {
-        return folders.description.toLowerCase().contains(query.toLowerCase());
+        return folders.projectName.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
     notifyListeners();
   }
 
-  Future<bool> checkProjects(
-    String userId,
-    String projectName,
-    String createdDate,
-    BuildContext context,
-  ) async {
-    CustomLoader.showLoader(context);
-    try {
-      final checkProjectResponse =
-          await _projectRepository.checkProjectDuplicate(userId, projectName);
-
-      if (checkProjectResponse.data.isNotEmpty &&
-          checkProjectResponse.status == 200) {
-        CustomLoader.hideLoader();
-        _showErrorMessage("Already Exists..!", context);
-        return false;
-      }
-    } catch (e) {
-      await addProjects(userId, projectName, createdDate, context);
-      return true;
-    }
-    return false;
-  }
-
   Future<bool> addProjects(
-    String userId,
     String projectName,
-    String createdDate,
+    String userId,
     BuildContext context,
   ) async {
     try {
-      final response = await _projectRepository.createProject(
-        createdDate,
-        projectName,
-        userId,
-      );
+      CustomLoader.showLoader(context);
+      final response =
+          await _projectRepository.createProject(projectName, userId);
 
-      if (response.data.isNotEmpty && response.status == 200) {
+      if (response.status == 200) {
         _showErrorMessage("Project Created..!", context);
         return true;
+      } else {
+        _showErrorMessage(response.data.first.errmsg!, context);
       }
     } catch (e) {
       CustomLoader.hideLoader();
       return false;
     } finally {
+      CustomLoader.hideLoader();
       notifyListeners();
     }
-
     return false;
   }
 }

@@ -17,15 +17,14 @@ class LoginViewModel extends ChangeNotifier {
       final response = await _loginRepository.login(userName, password);
 
       if (response.status == 200) {
-        if (response.data.first.loginType == 'Normal') {
+        if (response.data.first.userType == 'individual') {
           await SharedPrefsHelper.init();
-          await SharedPrefsHelper.setString('user_id', response.data.first.id);
+          await SharedPrefsHelper.setString(
+              'user_id', response.data.first.userId.toString());
           await SharedPrefsHelper.setString(
               'email_id', response.data.first.email);
           await SharedPrefsHelper.setString(
               'user_name', response.data.first.userName);
-          await SharedPrefsHelper.setString(
-              'password', response.data.first.password);
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
@@ -45,17 +44,14 @@ class LoginViewModel extends ChangeNotifier {
             ),
             (route) => false,
           );
-        } else if (response.data.first.loginType == 'Company') {
+        } else if (response.data.first.userType == 'company') {
           await SharedPrefsHelper.init();
-          await SharedPrefsHelper.setString('user_id', response.data.first.id);
+          await SharedPrefsHelper.setString(
+              'user_id', response.data.first.userId.toString());
           await SharedPrefsHelper.setString(
               'email_id', response.data.first.email);
           await SharedPrefsHelper.setString(
               'user_name', response.data.first.userName);
-          await SharedPrefsHelper.setString(
-              'password', response.data.first.password);
-          await SharedPrefsHelper.setString(
-              'company_name', response.data.first.companyName);
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
@@ -76,9 +72,9 @@ class LoginViewModel extends ChangeNotifier {
             (route) => false,
           );
         }
+      } else {
+        _showErrorMessage("Credentials Wrong..!", context);
       }
-    } catch (e) {
-      _showErrorMessage("Credentials Wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
     }

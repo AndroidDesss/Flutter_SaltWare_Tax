@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/custom_loader.dart';
+import 'package:salt_ware_tax/company/users/model/company_users_model.dart';
 import 'package:salt_ware_tax/company/users/repository/users_repository.dart';
-import 'package:salt_ware_tax/authentication/model/login_model.dart';
 
 class CompanyUsersViewModel extends ChangeNotifier {
   final UsersRepository _usersRepository = UsersRepository();
@@ -10,23 +10,23 @@ class CompanyUsersViewModel extends ChangeNotifier {
   bool _noUsers = false;
   bool get noUsers => _noUsers;
 
-  List<LoginResponse> _usersList = [];
-  List<LoginResponse> get usersList => _usersList;
+  List<CompanyUsersResponse> _usersList = [];
+  List<CompanyUsersResponse> get usersList => _usersList;
 
-  List<LoginResponse> _originalUsersList = [];
+  List<CompanyUsersResponse> _originalUsersList = [];
 
-  List<LoginResponse> _originalUsers = [];
+  List<CompanyUsersResponse> _originalUsers = [];
 
   // Folders API
   Future<void> fetchCompanyBasedUsersList(
-      String companyName, BuildContext context) async {
+      String userId, BuildContext context) async {
     CustomLoader.showLoader(context);
     _setNoProjects(false);
 
     try {
-      final response = await _usersRepository.getCompanyBasedUsers(companyName);
+      final response = await _usersRepository.getCompanyBasedUsers(userId);
       if (response.data.isNotEmpty && response.status == 200) {
-        List<LoginResponse> filteredFoldersList = response.data;
+        List<CompanyUsersResponse> filteredFoldersList = response.data;
         if (filteredFoldersList.isNotEmpty) {
           _usersList = filteredFoldersList;
           _originalUsersList = List.from(filteredFoldersList);

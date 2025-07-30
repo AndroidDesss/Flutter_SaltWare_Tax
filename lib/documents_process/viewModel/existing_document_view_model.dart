@@ -28,6 +28,7 @@ class ExistingDocumentViewModel extends ChangeNotifier {
       if (response.data.isNotEmpty && response.status == 200) {
         List<ExistingDocumentResponse> filteredFoldersList = response.data;
         if (filteredFoldersList.isNotEmpty) {
+          CommonUtilities.showToast(context, message: 'messages');
           _foldersList = filteredFoldersList;
           _originalFoldersList = List.from(filteredFoldersList);
           _originalFolders = List.from(filteredFoldersList);
@@ -43,12 +44,6 @@ class ExistingDocumentViewModel extends ChangeNotifier {
         _originalFolders = [];
         _setNoFolders(true);
       }
-    } catch (e) {
-      _foldersList = [];
-      _originalFoldersList = [];
-      _originalFolders = [];
-      _setNoFolders(true);
-      _showErrorMessage("Something went wrong..!", context);
     } finally {
       CustomLoader.hideLoader();
       notifyListeners();
@@ -64,7 +59,7 @@ class ExistingDocumentViewModel extends ChangeNotifier {
   // Sort the folders list alphabetically by description
   void sortFoldersList() {
     _foldersList.sort((a, b) =>
-        a.description.toLowerCase().compareTo(b.description.toLowerCase()));
+        a.batchName.toLowerCase().compareTo(b.batchName.toLowerCase()));
     notifyListeners();
   }
 
@@ -74,18 +69,13 @@ class ExistingDocumentViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Error message toast
-  void _showErrorMessage(String message, BuildContext context) {
-    CommonUtilities.showToast(context, message: message);
-  }
-
   //search Folders
   void searchFolders(String query) {
     if (query.isEmpty) {
       _foldersList = List.from(_originalFolders);
     } else {
       _foldersList = _originalFolders.where((folders) {
-        return folders.description.toLowerCase().contains(query.toLowerCase());
+        return folders.batchName.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
     notifyListeners();

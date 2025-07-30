@@ -7,12 +7,12 @@ import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ExistingBatchFolderImagesScreen extends StatefulWidget {
+class OverAllImagesScreen extends StatefulWidget {
   final String batchName;
   final List<String> images;
   final String pdfUrl;
 
-  const ExistingBatchFolderImagesScreen({
+  const OverAllImagesScreen({
     super.key,
     required this.batchName,
     required this.images,
@@ -20,12 +20,10 @@ class ExistingBatchFolderImagesScreen extends StatefulWidget {
   });
 
   @override
-  ExistingBatchFolderImagesScreenState createState() =>
-      ExistingBatchFolderImagesScreenState();
+  OverAllImagesScreenState createState() => OverAllImagesScreenState();
 }
 
-class ExistingBatchFolderImagesScreenState
-    extends State<ExistingBatchFolderImagesScreen> {
+class OverAllImagesScreenState extends State<OverAllImagesScreen> {
   Future<void> _launchUrl(String urlToLaunch) async {
     final Uri url = Uri.parse(urlToLaunch);
     if (!await launchUrl(url)) {

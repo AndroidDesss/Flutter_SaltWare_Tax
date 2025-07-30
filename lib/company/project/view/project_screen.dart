@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
-import 'package:salt_ware_tax/company/assigned_employee/view/assigned_employees_screen.dart';
+// import 'package:salt_ware_tax/company/assigned_employee/view/assigned_employees_screen.dart';
 import 'package:salt_ware_tax/company/project/model/project_model.dart';
 import 'package:salt_ware_tax/company/project/viewModel/project_view_model.dart';
 
@@ -232,24 +232,24 @@ class ListViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return AssignedEmployeesScreen(projectId: character.id);
-            },
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0);
-              const end = Offset.zero;
-              const curve = Curves.easeInOut;
-              var tween =
-                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              var offsetAnimation = animation.drive(tween);
-              return SlideTransition(position: offsetAnimation, child: child);
-            },
-          ),
-        );
+        // await Navigator.push(
+        //   context,
+        //   PageRouteBuilder(
+        //     pageBuilder: (context, animation, secondaryAnimation) {
+        //       return AssignedEmployeesScreen(projectId: character.projectId);
+        //     },
+        //     transitionsBuilder:
+        //         (context, animation, secondaryAnimation, child) {
+        //       const begin = Offset(1.0, 0.0);
+        //       const end = Offset.zero;
+        //       const curve = Curves.easeInOut;
+        //       var tween =
+        //           Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        //       var offsetAnimation = animation.drive(tween);
+        //       return SlideTransition(position: offsetAnimation, child: child);
+        //     },
+        //   ),
+        // );
       },
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -264,17 +264,11 @@ class ListViewCard extends StatelessWidget {
               width: 70,
               height: 70,
             ),
-            title: Text(character.description,
+            title: Text(character.projectName,
                 maxLines: 1,
                 style: const TextStyle(
                   color: AppColors.customBlack,
                   fontSize: 14,
-                  fontFamily: 'PoppinsRegular',
-                )),
-            subtitle: Text(character.createdDate,
-                style: const TextStyle(
-                  color: AppColors.customBlack,
-                  fontSize: 10,
                   fontFamily: 'PoppinsRegular',
                 )),
           ),
@@ -301,24 +295,24 @@ class GridViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return AssignedEmployeesScreen(projectId: character.id);
-            },
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0); // Start from right to left
-              const end = Offset.zero; // End at current position
-              const curve = Curves.easeInOut; // Smooth transition
-              var tween =
-                  Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              var offsetAnimation = animation.drive(tween);
-              return SlideTransition(position: offsetAnimation, child: child);
-            },
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   PageRouteBuilder(
+        //     pageBuilder: (context, animation, secondaryAnimation) {
+        //       return AssignedEmployeesScreen(projectId: character.projectId);
+        //     },
+        //     transitionsBuilder:
+        //         (context, animation, secondaryAnimation, child) {
+        //       const begin = Offset(1.0, 0.0); // Start from right to left
+        //       const end = Offset.zero; // End at current position
+        //       const curve = Curves.easeInOut; // Smooth transition
+        //       var tween =
+        //           Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        //       var offsetAnimation = animation.drive(tween);
+        //       return SlideTransition(position: offsetAnimation, child: child);
+        //     },
+        //   ),
+        // );
       },
       child: SizedBox(
         height: 150,
@@ -339,7 +333,7 @@ class GridViewCard extends StatelessWidget {
                 padding: const EdgeInsets.all(2),
                 child: Center(
                   child: Text(
-                    character.description,
+                    character.projectName,
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -349,15 +343,6 @@ class GridViewCard extends StatelessWidget {
                       fontFamily: 'PoppinsSemiBold',
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                character.createdDate,
-                style: const TextStyle(
-                  color: AppColors.customBlack,
-                  fontSize: 10,
-                  fontFamily: 'PoppinsRegular',
                 ),
               ),
               const SizedBox(height: 2),

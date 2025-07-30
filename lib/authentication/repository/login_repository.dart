@@ -7,13 +7,9 @@ class LoginRepository {
 
   Future<CommonApiResponse<LoginResponse>> login(
       String userName, String password) async {
-    Map<String, String> body = {
-      'user_name': userName,
-      'password': password,
-      'logintype': 'normal'
-    };
+    Map<String, String> body = {'username': userName, 'password': password};
     try {
-      final response = await _apiService.postResponse('login', body);
+      final response = await _apiService.postResponse('login/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(

@@ -5,6 +5,7 @@ import 'package:salt_ware_tax/authentication/model/login_model.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
+import 'package:salt_ware_tax/company/users/model/company_users_model.dart';
 import 'package:salt_ware_tax/company/users/view/company_add_users_screen.dart';
 import 'package:salt_ware_tax/company/users/view_model/company_users_screen_view_model.dart';
 
@@ -20,7 +21,7 @@ class CompanyUsersScreenState extends State<CompanyUsersScreen> {
 
   bool isSorted = false;
 
-  late String companyName = '';
+  late String userId = '';
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -32,9 +33,9 @@ class CompanyUsersScreenState extends State<CompanyUsersScreen> {
 
   Future<void> getSharedPrefData() async {
     await SharedPrefsHelper.init();
-    companyName = SharedPrefsHelper.getString('company_name')!;
-    if (companyName.isNotEmpty) {
-      companyUsersViewModel.fetchCompanyBasedUsersList(companyName, context);
+    userId = SharedPrefsHelper.getString('user_id')!;
+    if (userId.isNotEmpty) {
+      companyUsersViewModel.fetchCompanyBasedUsersList(userId, context);
     }
   }
 
@@ -228,7 +229,7 @@ class ListViewCard extends StatelessWidget {
       required this.companyUsersViewModel,
       required this.character});
 
-  final LoginResponse character;
+  final CompanyUsersResponse character;
 
   final int index;
 
@@ -278,7 +279,7 @@ class ListViewCard extends StatelessWidget {
                   fontSize: 14,
                   fontFamily: 'PoppinsRegular',
                 )),
-            subtitle: Text(character.createdDate,
+            subtitle: Text(character.email,
                 style: const TextStyle(
                   color: AppColors.customBlack,
                   fontSize: 10,

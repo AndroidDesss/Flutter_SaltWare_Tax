@@ -1,14 +1,13 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:salt_ware_tax/common/common_utilities.dart';
-import 'package:salt_ware_tax/company/users/view/company_users_screen.dart';
+import 'package:salt_ware_tax/company/overallData/view/over_all_data_screen.dart';
 import 'package:salt_ware_tax/company/project/viewModel/project_view_model.dart';
+import 'package:salt_ware_tax/company/users/view/company_users_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:salt_ware_tax/authentication/view/login_screen.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
-import 'package:salt_ware_tax/company/project/view/project_screen.dart';
 
 class CompanyDashBoardScreen extends StatefulWidget {
   const CompanyDashBoardScreen({super.key});
@@ -24,9 +23,8 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
   final TextEditingController _batchNameController = TextEditingController();
   final FocusNode _batchNameFocusNode = FocusNode();
   final ProjectViewModel projectViewModel = ProjectViewModel();
-
-  final GlobalKey<ProjectScreenState> _projectScreenKey =
-      GlobalKey<ProjectScreenState>();
+  final GlobalKey<OverAllDataScreenState> _overAllDataScreenKey =
+      GlobalKey<OverAllDataScreenState>();
   late List<Widget> pages;
 
   late String userId = '';
@@ -42,8 +40,10 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
     getSharedPrefData();
     visitedPages.add(_selectedIndex);
     pages = [
-      ProjectScreen(key: _projectScreenKey),
-      const CompanyUsersScreen(),
+      // ProjectScreen(key: _projectScreenKey),
+      OverAllDataScreen(key: _overAllDataScreenKey),
+      const CompanyUsersScreen()
+      // const CompanyUsersScreen(),
     ];
   }
 
@@ -169,17 +169,15 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
 
                           if (_batchNameController.text.isNotEmpty) {
                             FocusScope.of(context).unfocus();
-                            final date = CommonUtilities.getCurrentDate();
                             final shouldRefresh =
-                                await projectViewModel.checkProjects(
-                              userId,
+                                await projectViewModel.addProjects(
                               _batchNameController.text.trim(),
-                              date,
+                              userId,
                               context,
                             );
                             Navigator.pop(dialogContext);
                             if (shouldRefresh) {
-                              _projectScreenKey.currentState
+                              _overAllDataScreenKey.currentState
                                   ?.getSharedPrefData();
                             }
                           }

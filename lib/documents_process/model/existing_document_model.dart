@@ -1,24 +1,28 @@
 class ExistingDocumentResponse {
-  final String id;
-  final String createdDate;
-  final String description;
-  final String userId;
-  final String firstName;
+  final int batchId;
+  final String userType;
+  final String batchName;
+  final List<String> images;
+  final String pdfUrl;
+  final int? projectId;
 
-  ExistingDocumentResponse(
-      {required this.id,
-      required this.createdDate,
-      required this.description,
-      required this.userId,
-      required this.firstName});
+  ExistingDocumentResponse({
+    required this.batchId,
+    required this.userType,
+    required this.batchName,
+    required this.images,
+    required this.pdfUrl,
+    this.projectId,
+  });
 
-  // Factory method to convert JSON to UserData object
   factory ExistingDocumentResponse.fromJson(Map<String, dynamic> json) {
     return ExistingDocumentResponse(
-        id: json['id'],
-        createdDate: json['created_date'],
-        description: json['description'],
-        userId: json['user_id'],
-        firstName: json['first_name']);
+      batchId: json['batch_id'],
+      userType: json['user_type'],
+      batchName: json['batch_name'],
+      images: List<String>.from(json['images']),
+      pdfUrl: json['pdf_url'],
+      projectId: json['project_id'],
+    );
   }
 }

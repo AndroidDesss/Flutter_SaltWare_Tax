@@ -4,20 +4,19 @@ import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
-import 'package:salt_ware_tax/documents_process/model/existing_document_model.dart';
-import 'package:salt_ware_tax/documents_process/view/existing_batch_folder_images.dart';
-import 'package:salt_ware_tax/documents_process/viewModel/existing_document_view_model.dart';
+import 'package:salt_ware_tax/company/overallData/model/over_all_data_model.dart';
+import 'package:salt_ware_tax/company/overallData/view/over_all_employees.dart';
+import 'package:salt_ware_tax/company/overallData/viewModel/over_all_data_view_model.dart';
 
-class ExistingBatchDocumentScreen extends StatefulWidget {
-  const ExistingBatchDocumentScreen({super.key});
+class OverAllDataScreen extends StatefulWidget {
+  const OverAllDataScreen({super.key});
 
   @override
-  ExistingBatchDocumentState createState() => ExistingBatchDocumentState();
+  OverAllDataScreenState createState() => OverAllDataScreenState();
 }
 
-class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
-  final ExistingDocumentViewModel existingDocumentViewModel =
-      ExistingDocumentViewModel();
+class OverAllDataScreenState extends State<OverAllDataScreen> {
+  final OverAllDataViewModel overAllDataViewModel = OverAllDataViewModel();
 
   bool isGridView = true;
 
@@ -30,15 +29,14 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
   @override
   void initState() {
     super.initState();
-    _getSharedPrefData();
+    getSharedPrefData();
   }
 
-  Future<void> _getSharedPrefData() async {
+  Future<void> getSharedPrefData() async {
     await SharedPrefsHelper.init();
     userId = SharedPrefsHelper.getString('user_id')!;
-
     if (userId.isNotEmpty) {
-      existingDocumentViewModel.fetchFoldersList(userId, context);
+      overAllDataViewModel.fetchOverAllDataList('2', context);
     }
   }
 
@@ -46,9 +44,9 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
     setState(() {
       isSorted = !isSorted;
       if (isSorted) {
-        existingDocumentViewModel.sortFoldersList();
+        overAllDataViewModel.sortProjectsList();
       } else {
-        existingDocumentViewModel.resetFoldersList();
+        overAllDataViewModel.resetProjectsList();
       }
     });
   }
@@ -57,9 +55,9 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.customWhite,
-      body: ChangeNotifierProvider<ExistingDocumentViewModel>(
-        create: (BuildContext context) => existingDocumentViewModel,
-        child: Consumer<ExistingDocumentViewModel>(
+      body: ChangeNotifierProvider<OverAllDataViewModel>(
+        create: (BuildContext context) => overAllDataViewModel,
+        child: Consumer<OverAllDataViewModel>(
           builder: (context, viewModel, child) {
             return Stack(
               children: [
@@ -85,7 +83,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                               child: TextFormField(
                                 controller: _searchController,
                                 onChanged: (value) {
-                                  viewModel.searchFolders(value);
+                                  viewModel.searchProjects(value);
                                 },
                                 style: const TextStyle(
                                   color: AppColors.customBlack,
@@ -142,7 +140,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Folders",
+                            "Projects",
                             style: TextStyle(
                                 color: AppColors.customBlack,
                                 fontSize: 18.0,
@@ -152,7 +150,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      viewModel.noFolders
+                      viewModel.noOverAllData
                           ? Expanded(
                               child: Center(
                                 child: Column(
@@ -162,7 +160,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                         width: 150, height: 150),
                                     const SizedBox(height: 20),
                                     const Text(
-                                      AppStrings.noFolders,
+                                      AppStrings.noProjects,
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: AppColors.customBlack,
@@ -184,25 +182,27 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                                         childAspectRatio: 1,
                                         crossAxisSpacing: 10.0,
                                       ),
-                                      itemCount: viewModel.foldersList.length,
+                                      itemCount:
+                                          viewModel.overAllDataList.length,
                                       itemBuilder: (context, index) {
                                         return GridViewCard(
                                             index: index,
-                                            documentViewModel:
-                                                existingDocumentViewModel,
-                                            character:
-                                                viewModel.foldersList[index]);
+                                            overAllDataViewModel:
+                                                overAllDataViewModel,
+                                            character: viewModel
+                                                .overAllDataList[index]);
                                       },
                                     )
                                   : ListView.builder(
-                                      itemCount: viewModel.foldersList.length,
+                                      itemCount:
+                                          viewModel.overAllDataList.length,
                                       itemBuilder: (context, index) {
                                         return ListViewCard(
                                             index: index,
-                                            documentViewModel:
-                                                existingDocumentViewModel,
-                                            character:
-                                                viewModel.foldersList[index]);
+                                            overAllDataViewModel:
+                                                overAllDataViewModel,
+                                            character: viewModel
+                                                .overAllDataList[index]);
                                       },
                                     ),
                             ),
@@ -223,33 +223,33 @@ class ListViewCard extends StatelessWidget {
   const ListViewCard(
       {super.key,
       required this.index,
-      required this.documentViewModel,
+      required this.overAllDataViewModel,
       required this.character});
 
-  final ExistingDocumentResponse character;
+  final OverAllResponse character;
 
   final int index;
 
-  final ExistingDocumentViewModel documentViewModel;
+  final OverAllDataViewModel overAllDataViewModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
+      onTap: () async {
+        await Navigator.push(
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ExistingBatchFolderImagesScreen(
-                  batchName: character.batchName,
-                  images: character.images,
-                  pdfUrl: character.pdfUrl);
+              return OverAllEmployeesScreen(
+                projectName: character.projectName,
+                employeeData: character.employees,
+              );
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0); // Start from right to left
-              const end = Offset.zero; // End at current position
-              const curve = Curves.easeInOut; // Smooth transition
+              const begin = Offset(1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.easeInOut;
               var tween =
                   Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
               var offsetAnimation = animation.drive(tween);
@@ -271,7 +271,7 @@ class ListViewCard extends StatelessWidget {
               width: 70,
               height: 70,
             ),
-            title: Text(character.batchName,
+            title: Text(character.projectName,
                 maxLines: 1,
                 style: const TextStyle(
                   color: AppColors.customBlack,
@@ -289,14 +289,14 @@ class GridViewCard extends StatelessWidget {
   const GridViewCard(
       {super.key,
       required this.index,
-      required this.documentViewModel,
+      required this.overAllDataViewModel,
       required this.character});
 
-  final ExistingDocumentResponse character;
+  final OverAllResponse character;
 
   final int index;
 
-  final ExistingDocumentViewModel documentViewModel;
+  final OverAllDataViewModel overAllDataViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -306,10 +306,10 @@ class GridViewCard extends StatelessWidget {
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return ExistingBatchFolderImagesScreen(
-                  batchName: character.batchName,
-                  images: character.images,
-                  pdfUrl: character.pdfUrl);
+              return OverAllEmployeesScreen(
+                projectName: character.projectName,
+                employeeData: character.employees,
+              );
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
@@ -325,7 +325,7 @@ class GridViewCard extends StatelessWidget {
         );
       },
       child: SizedBox(
-        height: 100,
+        height: 150,
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.customLightBlue.withOpacity(0.3),
@@ -340,10 +340,10 @@ class GridViewCard extends StatelessWidget {
                 height: 70,
               ),
               Padding(
-                padding: const EdgeInsets.all(1),
+                padding: const EdgeInsets.all(2),
                 child: Center(
                   child: Text(
-                    character.batchName,
+                    character.projectName,
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -355,7 +355,7 @@ class GridViewCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 2)
+              const SizedBox(height: 2),
             ],
           ),
         ),

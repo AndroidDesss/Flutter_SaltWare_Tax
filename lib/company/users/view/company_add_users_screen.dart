@@ -20,7 +20,7 @@ class CompanyAddUsersScreenState extends State<CompanyAddUsersScreen> {
 
   bool _isSignUpPressed = false;
 
-  late String companyName = '';
+  late String userId = '';
 
   late var _userNameController = TextEditingController();
   late var _firstNameController = TextEditingController();
@@ -73,7 +73,7 @@ class CompanyAddUsersScreenState extends State<CompanyAddUsersScreen> {
 
   Future<void> _getSharedPrefData() async {
     await SharedPrefsHelper.init();
-    companyName = SharedPrefsHelper.getString('company_name')!;
+    userId = SharedPrefsHelper.getString('user_id')!;
   }
 
   @override
@@ -700,14 +700,14 @@ class CompanyAddUsersScreenState extends State<CompanyAddUsersScreen> {
                                               .requestFocus(FocusNode());
 
                                           companyAddUsersViewModel
-                                              .callCheckUserApi(
+                                              .callSignUpApi(
                                                   _userNameController.text,
                                                   _passwordController.text,
                                                   _firstNameController.text,
                                                   _lastNameController.text,
                                                   _emailController.text,
                                                   _phoneNumberController.text,
-                                                  companyName,
+                                                  userId,
                                                   context);
                                         }
                                       },

@@ -19,10 +19,7 @@ class ScannedDocumentsViewModel extends ChangeNotifier {
     CustomLoader.showLoader(context);
     try {
       final response = await _scannedDocumentsRepository.postScannedDocuments(
-        description,
-        userId,
-        files,
-      );
+          description, userId, files, '');
       if (response.data.isNotEmpty && response.status == 200) {
         Navigator.pushAndRemoveUntil(
           context,
