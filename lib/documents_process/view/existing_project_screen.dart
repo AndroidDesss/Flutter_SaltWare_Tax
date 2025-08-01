@@ -4,19 +4,20 @@ import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
-import 'package:salt_ware_tax/company/overallData/model/over_all_data_model.dart';
-import 'package:salt_ware_tax/company/overallData/view/over_all_employees.dart';
-import 'package:salt_ware_tax/company/overallData/viewModel/over_all_data_view_model.dart';
+import 'package:salt_ware_tax/documents_process/model/existing_project_model.dart';
+import 'package:salt_ware_tax/documents_process/view/employee_existing_batch_screen.dart';
+import 'package:salt_ware_tax/documents_process/viewModel/existing_project_view_model.dart';
 
-class OverAllDataScreen extends StatefulWidget {
-  const OverAllDataScreen({super.key});
+class ExistingProjectScreen extends StatefulWidget {
+  const ExistingProjectScreen({super.key});
 
   @override
-  OverAllDataScreenState createState() => OverAllDataScreenState();
+  ExistingProjectScreenState createState() => ExistingProjectScreenState();
 }
 
-class OverAllDataScreenState extends State<OverAllDataScreen> {
-  final OverAllDataViewModel overAllDataViewModel = OverAllDataViewModel();
+class ExistingProjectScreenState extends State<ExistingProjectScreen> {
+  final ExistingProjectViewModel existingProjectViewModel =
+      ExistingProjectViewModel();
 
   bool isGridView = true;
 
@@ -29,14 +30,15 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
   @override
   void initState() {
     super.initState();
-    getSharedPrefData();
+    _getSharedPrefData();
   }
 
-  Future<void> getSharedPrefData() async {
+  Future<void> _getSharedPrefData() async {
     await SharedPrefsHelper.init();
     userId = SharedPrefsHelper.getString('user_id')!;
+
     if (userId.isNotEmpty) {
-      overAllDataViewModel.fetchOverAllDataList(userId, context);
+      existingProjectViewModel.fetchFoldersList(userId, context);
     }
   }
 
@@ -44,9 +46,9 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
     setState(() {
       isSorted = !isSorted;
       if (isSorted) {
-        overAllDataViewModel.sortProjectsList();
+        existingProjectViewModel.sortFoldersList();
       } else {
-        overAllDataViewModel.resetProjectsList();
+        existingProjectViewModel.resetFoldersList();
       }
     });
   }
@@ -55,9 +57,9 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.customWhite,
-      body: ChangeNotifierProvider<OverAllDataViewModel>(
-        create: (BuildContext context) => overAllDataViewModel,
-        child: Consumer<OverAllDataViewModel>(
+      body: ChangeNotifierProvider<ExistingProjectViewModel>(
+        create: (BuildContext context) => existingProjectViewModel,
+        child: Consumer<ExistingProjectViewModel>(
           builder: (context, viewModel, child) {
             return Stack(
               children: [
@@ -83,7 +85,7 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
                               child: TextFormField(
                                 controller: _searchController,
                                 onChanged: (value) {
-                                  viewModel.searchProjects(value);
+                                  viewModel.searchFolders(value);
                                 },
                                 style: const TextStyle(
                                   color: AppColors.customBlack,
@@ -150,7 +152,7 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      viewModel.noOverAllData
+                      viewModel.noFolders
                           ? Expanded(
                               child: Center(
                                 child: Column(
@@ -182,27 +184,25 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
                                         childAspectRatio: 1,
                                         crossAxisSpacing: 10.0,
                                       ),
-                                      itemCount:
-                                          viewModel.overAllDataList.length,
+                                      itemCount: viewModel.foldersList.length,
                                       itemBuilder: (context, index) {
                                         return GridViewCard(
                                             index: index,
-                                            overAllDataViewModel:
-                                                overAllDataViewModel,
-                                            character: viewModel
-                                                .overAllDataList[index]);
+                                            documentViewModel:
+                                                existingProjectViewModel,
+                                            character:
+                                                viewModel.foldersList[index]);
                                       },
                                     )
                                   : ListView.builder(
-                                      itemCount:
-                                          viewModel.overAllDataList.length,
+                                      itemCount: viewModel.foldersList.length,
                                       itemBuilder: (context, index) {
                                         return ListViewCard(
                                             index: index,
-                                            overAllDataViewModel:
-                                                overAllDataViewModel,
-                                            character: viewModel
-                                                .overAllDataList[index]);
+                                            documentViewModel:
+                                                existingProjectViewModel,
+                                            character:
+                                                viewModel.foldersList[index]);
                                       },
                                     ),
                             ),
@@ -223,32 +223,32 @@ class ListViewCard extends StatelessWidget {
   const ListViewCard(
       {super.key,
       required this.index,
-      required this.overAllDataViewModel,
+      required this.documentViewModel,
       required this.character});
 
-  final OverAllResponse character;
+  final ExistingProjectResponse character;
 
   final int index;
 
-  final OverAllDataViewModel overAllDataViewModel;
+  final ExistingProjectViewModel documentViewModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        await Navigator.push(
+      onTap: () {
+        Navigator.push(
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return OverAllEmployeesScreen(
+              return EmployeeExistingBatchScreen(
                   projectId: character.projectId.toString(),
                   projectName: character.projectName);
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0);
-              const end = Offset.zero;
-              const curve = Curves.easeInOut;
+              const begin = Offset(1.0, 0.0); // Start from right to left
+              const end = Offset.zero; // End at current position
+              const curve = Curves.easeInOut; // Smooth transition
               var tween =
                   Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
               var offsetAnimation = animation.drive(tween);
@@ -288,14 +288,14 @@ class GridViewCard extends StatelessWidget {
   const GridViewCard(
       {super.key,
       required this.index,
-      required this.overAllDataViewModel,
+      required this.documentViewModel,
       required this.character});
 
-  final OverAllResponse character;
+  final ExistingProjectResponse character;
 
   final int index;
 
-  final OverAllDataViewModel overAllDataViewModel;
+  final ExistingProjectViewModel documentViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +305,7 @@ class GridViewCard extends StatelessWidget {
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return OverAllEmployeesScreen(
+              return EmployeeExistingBatchScreen(
                   projectId: character.projectId.toString(),
                   projectName: character.projectName);
             },
@@ -323,7 +323,7 @@ class GridViewCard extends StatelessWidget {
         );
       },
       child: SizedBox(
-        height: 150,
+        height: 100,
         child: Container(
           decoration: BoxDecoration(
             color: AppColors.customLightBlue.withOpacity(0.3),
@@ -338,7 +338,7 @@ class GridViewCard extends StatelessWidget {
                 height: 70,
               ),
               Padding(
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(1),
                 child: Center(
                   child: Text(
                     character.projectName,
@@ -353,7 +353,7 @@ class GridViewCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: 2)
             ],
           ),
         ),

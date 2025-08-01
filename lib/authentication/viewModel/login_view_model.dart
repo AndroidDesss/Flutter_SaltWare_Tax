@@ -5,6 +5,7 @@ import 'package:salt_ware_tax/common/custom_loader.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/dashBoard/view/company_dash_board_screen.dart';
 import 'package:salt_ware_tax/dashBoard/view/dash_board_screen.dart';
+import 'package:salt_ware_tax/dashBoard/view/employee_dash_board_screen.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final LoginRepository _loginRepository = LoginRepository();
@@ -22,9 +23,17 @@ class LoginViewModel extends ChangeNotifier {
           await SharedPrefsHelper.setString(
               'user_id', response.data.first.userId.toString());
           await SharedPrefsHelper.setString(
-              'email_id', response.data.first.email);
+              'email_id', response.data.first.email!);
           await SharedPrefsHelper.setString(
-              'user_name', response.data.first.userName);
+              'user_name', response.data.first.userName!);
+          await SharedPrefsHelper.setString(
+              'user_type', response.data.first.userType!);
+          await SharedPrefsHelper.setString(
+              'first_name', response.data.first.firstName!);
+          await SharedPrefsHelper.setString(
+              'last_name', response.data.first.lastName!);
+          await SharedPrefsHelper.setString(
+              'phone_number', response.data.first.phone!);
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
@@ -49,14 +58,51 @@ class LoginViewModel extends ChangeNotifier {
           await SharedPrefsHelper.setString(
               'user_id', response.data.first.userId.toString());
           await SharedPrefsHelper.setString(
-              'email_id', response.data.first.email);
+              'email_id', response.data.first.email!);
           await SharedPrefsHelper.setString(
-              'user_name', response.data.first.userName);
+              'user_name', response.data.first.userName!);
+          await SharedPrefsHelper.setString(
+              'user_type', response.data.first.userType!);
           Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
                 return const CompanyDashBoardScreen();
+              },
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(1.0, 0.0);
+                const end = Offset.zero;
+                const curve = Curves.easeInOut;
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                var offsetAnimation = animation.drive(tween);
+                return SlideTransition(position: offsetAnimation, child: child);
+              },
+            ),
+            (route) => false,
+          );
+        } else if (response.data.first.userType == 'employee') {
+          await SharedPrefsHelper.init();
+          await SharedPrefsHelper.setString(
+              'user_id', response.data.first.userId.toString());
+          await SharedPrefsHelper.setString(
+              'email_id', response.data.first.email!);
+          await SharedPrefsHelper.setString(
+              'user_name', response.data.first.userName!);
+          await SharedPrefsHelper.setString(
+              'user_type', response.data.first.userType!);
+          await SharedPrefsHelper.setString(
+              'first_name', response.data.first.firstName!);
+          await SharedPrefsHelper.setString(
+              'last_name', response.data.first.lastName!);
+          await SharedPrefsHelper.setString(
+              'phone_number', response.data.first.phone!);
+          Navigator.pushAndRemoveUntil(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return const EmployeeDashBoardScreen();
               },
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {

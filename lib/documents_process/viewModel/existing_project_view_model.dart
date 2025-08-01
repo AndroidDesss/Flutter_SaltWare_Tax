@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/common/custom_loader.dart';
-import 'package:salt_ware_tax/documents_process/model/existing_document_model.dart';
-import 'package:salt_ware_tax/documents_process/repository/existing_document_repository.dart';
+import 'package:salt_ware_tax/documents_process/model/existing_project_model.dart';
+import 'package:salt_ware_tax/documents_process/repository/existing_project_repository.dart';
 
-class ExistingDocumentViewModel extends ChangeNotifier {
-  final ExistingDocumentRepository _existingDocumentRepository =
-      ExistingDocumentRepository();
+class ExistingProjectViewModel extends ChangeNotifier {
+  final ExistingProjectRepository _existingProjectRepository =
+      ExistingProjectRepository();
 
   bool _noFolders = false;
   bool get noFolders => _noFolders;
 
-  List<ExistingDocumentResponse> _foldersList = [];
-  List<ExistingDocumentResponse> get foldersList => _foldersList;
+  List<ExistingProjectResponse> _foldersList = [];
+  List<ExistingProjectResponse> get foldersList => _foldersList;
 
-  List<ExistingDocumentResponse> _originalFoldersList = [];
+  List<ExistingProjectResponse> _originalFoldersList = [];
 
-  List<ExistingDocumentResponse> _originalFolders = [];
+  List<ExistingProjectResponse> _originalFolders = [];
 
   // Folders API
   Future<void> fetchFoldersList(String userId, BuildContext context) async {
@@ -23,9 +23,9 @@ class ExistingDocumentViewModel extends ChangeNotifier {
     _setNoFolders(false);
 
     try {
-      final response = await _existingDocumentRepository.getFoldersList(userId);
+      final response = await _existingProjectRepository.getProjectList(userId);
       if (response.data.isNotEmpty && response.status == 200) {
-        List<ExistingDocumentResponse> filteredFoldersList = response.data;
+        List<ExistingProjectResponse> filteredFoldersList = response.data;
         if (filteredFoldersList.isNotEmpty) {
           _foldersList = filteredFoldersList;
           _originalFoldersList = List.from(filteredFoldersList);
@@ -57,7 +57,7 @@ class ExistingDocumentViewModel extends ChangeNotifier {
   // Sort the folders list alphabetically by description
   void sortFoldersList() {
     _foldersList.sort((a, b) =>
-        a.batchName.toLowerCase().compareTo(b.batchName.toLowerCase()));
+        a.projectName.toLowerCase().compareTo(b.projectName.toLowerCase()));
     notifyListeners();
   }
 
@@ -73,7 +73,7 @@ class ExistingDocumentViewModel extends ChangeNotifier {
       _foldersList = List.from(_originalFolders);
     } else {
       _foldersList = _originalFolders.where((folders) {
-        return folders.batchName.toLowerCase().contains(query.toLowerCase());
+        return folders.projectName.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
     notifyListeners();

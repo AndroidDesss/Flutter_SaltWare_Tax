@@ -205,6 +205,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                 return ScannedDocumentsScreen(
                   imagePaths: _scannedImagePaths,
                   batchName: batchName,
+                  projectId: '',
                 );
               },
               transitionsBuilder:

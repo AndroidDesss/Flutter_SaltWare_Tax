@@ -11,9 +11,13 @@ import 'package:salt_ware_tax/documents_process/viewModel/scanned_documents_view
 class ScannedDocumentsScreen extends StatefulWidget {
   final List<String> imagePaths;
   final String batchName;
+  final String projectId;
 
   const ScannedDocumentsScreen(
-      {super.key, required this.imagePaths, required this.batchName});
+      {super.key,
+      required this.imagePaths,
+      required this.batchName,
+      required this.projectId});
 
   @override
   ScannedDocumentsScreenState createState() => ScannedDocumentsScreenState();
@@ -90,6 +94,7 @@ class ScannedDocumentsScreenState extends State<ScannedDocumentsScreen> {
         widget.batchName,
         userId,
         files,
+        widget.projectId,
         context,
       );
     }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/view/login_screen.dart';
 import 'package:salt_ware_tax/common/AppColors.dart';
 import 'package:salt_ware_tax/common/AppStrings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
-import 'package:salt_ware_tax/profile/viewModel/profile_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -16,19 +14,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
-  final ProfileViewModel profileViewModel = ProfileViewModel();
-
-  late String userId = '';
+  late String userName = '';
+  late String firstName = '';
+  late String lastName = '';
+  late String email = '';
+  late String phoneNumber = '';
 
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _userNameController = TextEditingController();
 
   final _nameFocusNode = FocusNode();
   final _phoneNumberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
-  final _passwordFocusNode = FocusNode();
+  final _userNameFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -38,8 +38,8 @@ class ProfileScreenState extends State<ProfileScreen> {
     _phoneNumberFocusNode.dispose();
     _emailController.dispose();
     _emailFocusNode.dispose();
-    _passwordController.dispose();
-    _passwordFocusNode.dispose();
+    _userNameController.dispose();
+    _userNameFocusNode.dispose();
     super.dispose();
   }
 
@@ -51,10 +51,16 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _getSharedPrefData() async {
     await SharedPrefsHelper.init();
-    userId = SharedPrefsHelper.getString('user_id')!;
-    if (userId.isNotEmpty) {
-      profileViewModel.getProfileDetails(userId, context);
-    }
+    userName = SharedPrefsHelper.getString('user_name')!;
+    firstName = SharedPrefsHelper.getString('first_name')!;
+    lastName = SharedPrefsHelper.getString('last_name')!;
+    email = SharedPrefsHelper.getString('email_id')!;
+    phoneNumber = SharedPrefsHelper.getString('phone_number')!;
+
+    _nameController.text = '$firstName ${lastName}'.trim();
+    _emailController.text = email;
+    _phoneNumberController.text = phoneNumber;
+    _userNameController.text = userName;
   }
 
   @override
@@ -134,331 +140,305 @@ class ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(width: 10),
         ],
       ),
-      body: ChangeNotifierProvider<ProfileViewModel>(
-        create: (BuildContext context) => profileViewModel,
-        child: Consumer<ProfileViewModel>(
-          builder: (context, viewModel, child) {
-            if (viewModel.userProfileDetails != null &&
-                viewModel.userNameDetails != null) {
-              _nameController.text = viewModel.userNameDetails!.firstName;
-              _phoneNumberController.text = viewModel.userProfileDetails!.phone;
-              _emailController.text = viewModel.userProfileDetails!.email;
-              _passwordController.text = viewModel.userProfileDetails!.password;
-            }
-            return Stack(
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 25),
-                      Center(
-                        child: Container(
-                          width: 140,
-                          height: 140,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: AppColors.customBlue, // Border color
-                              width: 2, // Border width
-                            ),
-                          ),
-                          child: Lottie.asset('assets/loader/profile.json'),
-                        ),
+                const SizedBox(height: 25),
+                Center(
+                  child: Container(
+                    width: 140,
+                    height: 140,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.customBlue, // Border color
+                        width: 2, // Border width
                       ),
-                      const SizedBox(height: 25),
-                      const Text(
-                        AppStrings.name,
-                        style: TextStyle(
-                          color: AppColors.customBlack,
-                          fontFamily: 'PoppinsSemiBold',
-                          fontSize: 15,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: _nameFocusNode.hasFocus
-                              ? [
-                                  BoxShadow(
-                                    color:
-                                        AppColors.customBlue.withOpacity(0.5),
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ]
-                              : [],
-                        ),
-                        child: TextFormField(
-                          controller: _nameController,
-                          focusNode: _nameFocusNode,
-                          readOnly: true,
-                          style: const TextStyle(
-                              color: AppColors.customBlack,
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 16),
-                          cursorColor: AppColors.customBlue,
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 14,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.customGrey,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: const BorderSide(
-                                color: AppColors.customBlue,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {});
-                          },
-                          onEditingComplete: () {
-                            setState(() {});
-                          },
-                          buildCounter: (BuildContext context,
-                              {int? currentLength,
-                              int? maxLength,
-                              bool? isFocused}) {
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        AppStrings.phoneNumber,
-                        style: TextStyle(
-                          color: AppColors.customBlack,
-                          fontFamily: 'PoppinsSemiBold',
-                          fontSize: 15,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: _phoneNumberFocusNode.hasFocus
-                              ? [
-                                  BoxShadow(
-                                    color:
-                                        AppColors.customBlue.withOpacity(0.5),
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ]
-                              : [],
-                        ),
-                        child: TextFormField(
-                          controller: _phoneNumberController,
-                          focusNode: _phoneNumberFocusNode,
-                          readOnly: true,
-                          style: const TextStyle(
-                              color: AppColors.customBlack,
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 16),
-                          cursorColor: AppColors.customBlue,
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 14,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.customGrey,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: const BorderSide(
-                                color: AppColors.customBlue,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {});
-                          },
-                          onEditingComplete: () {
-                            setState(() {});
-                          },
-                          buildCounter: (BuildContext context,
-                              {int? currentLength,
-                              int? maxLength,
-                              bool? isFocused}) {
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        AppStrings.email,
-                        style: TextStyle(
-                          color: AppColors.customBlack,
-                          fontFamily: 'PoppinsSemiBold',
-                          fontSize: 15,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: _emailFocusNode.hasFocus
-                              ? [
-                                  BoxShadow(
-                                    color:
-                                        AppColors.customBlue.withOpacity(0.5),
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ]
-                              : [],
-                        ),
-                        child: TextFormField(
-                          controller: _emailController,
-                          focusNode: _emailFocusNode,
-                          readOnly: true,
-                          style: const TextStyle(
-                              color: AppColors.customBlack,
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 16),
-                          cursorColor: AppColors.customBlue,
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 14,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.customGrey,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: const BorderSide(
-                                color: AppColors.customBlue,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {});
-                          },
-                          onEditingComplete: () {
-                            setState(() {});
-                          },
-                          buildCounter: (BuildContext context,
-                              {int? currentLength,
-                              int? maxLength,
-                              bool? isFocused}) {
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        AppStrings.password,
-                        style: TextStyle(
-                          color: AppColors.customBlack,
-                          fontFamily: 'PoppinsSemiBold',
-                          fontSize: 15,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: _passwordFocusNode.hasFocus
-                              ? [
-                                  BoxShadow(
-                                    color:
-                                        AppColors.customBlue.withOpacity(0.5),
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ]
-                              : [],
-                        ),
-                        child: TextFormField(
-                          controller: _passwordController,
-                          focusNode: _passwordFocusNode,
-                          readOnly: true,
-                          style: const TextStyle(
-                              color: AppColors.customBlack,
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 16),
-                          cursorColor: AppColors.customBlue,
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
-                              fontFamily: 'PoppinsRegular',
-                              fontSize: 14,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.customGrey,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
-                                width: 1,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6),
-                              borderSide: const BorderSide(
-                                color: AppColors.customBlue,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            setState(() {});
-                          },
-                          onEditingComplete: () {
-                            setState(() {});
-                          },
-                          buildCounter: (BuildContext context,
-                              {int? currentLength,
-                              int? maxLength,
-                              bool? isFocused}) {
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
+                    ),
+                    child: Lottie.asset('assets/loader/profile.json'),
                   ),
                 ),
+                const SizedBox(height: 25),
+                const Text(
+                  AppStrings.name,
+                  style: TextStyle(
+                    color: AppColors.customBlack,
+                    fontFamily: 'PoppinsSemiBold',
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: _nameFocusNode.hasFocus
+                        ? [
+                            BoxShadow(
+                              color: AppColors.customBlue.withOpacity(0.5),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 1),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  child: TextFormField(
+                    controller: _nameController,
+                    focusNode: _nameFocusNode,
+                    readOnly: true,
+                    style: const TextStyle(
+                        color: AppColors.customBlack,
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 16),
+                    cursorColor: AppColors.customBlue,
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 14,
+                      ),
+                      filled: true,
+                      fillColor: AppColors.customGrey,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(
+                          color: Colors.white.withOpacity(1),
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: const BorderSide(
+                          color: AppColors.customBlue,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {});
+                    },
+                    onEditingComplete: () {
+                      setState(() {});
+                    },
+                    buildCounter: (BuildContext context,
+                        {int? currentLength, int? maxLength, bool? isFocused}) {
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  AppStrings.phoneNumber,
+                  style: TextStyle(
+                    color: AppColors.customBlack,
+                    fontFamily: 'PoppinsSemiBold',
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: _phoneNumberFocusNode.hasFocus
+                        ? [
+                            BoxShadow(
+                              color: AppColors.customBlue.withOpacity(0.5),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 1),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  child: TextFormField(
+                    controller: _phoneNumberController,
+                    focusNode: _phoneNumberFocusNode,
+                    readOnly: true,
+                    style: const TextStyle(
+                        color: AppColors.customBlack,
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 16),
+                    cursorColor: AppColors.customBlue,
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 14,
+                      ),
+                      filled: true,
+                      fillColor: AppColors.customGrey,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(
+                          color: Colors.white.withOpacity(1),
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: const BorderSide(
+                          color: AppColors.customBlue,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {});
+                    },
+                    onEditingComplete: () {
+                      setState(() {});
+                    },
+                    buildCounter: (BuildContext context,
+                        {int? currentLength, int? maxLength, bool? isFocused}) {
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  AppStrings.email,
+                  style: TextStyle(
+                    color: AppColors.customBlack,
+                    fontFamily: 'PoppinsSemiBold',
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: _emailFocusNode.hasFocus
+                        ? [
+                            BoxShadow(
+                              color: AppColors.customBlue.withOpacity(0.5),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 1),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  child: TextFormField(
+                    controller: _emailController,
+                    focusNode: _emailFocusNode,
+                    readOnly: true,
+                    style: const TextStyle(
+                        color: AppColors.customBlack,
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 16),
+                    cursorColor: AppColors.customBlue,
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 14,
+                      ),
+                      filled: true,
+                      fillColor: AppColors.customGrey,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(
+                          color: Colors.white.withOpacity(1),
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: const BorderSide(
+                          color: AppColors.customBlue,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {});
+                    },
+                    onEditingComplete: () {
+                      setState(() {});
+                    },
+                    buildCounter: (BuildContext context,
+                        {int? currentLength, int? maxLength, bool? isFocused}) {
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  AppStrings.userName,
+                  style: TextStyle(
+                    color: AppColors.customBlack,
+                    fontFamily: 'PoppinsSemiBold',
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: _userNameFocusNode.hasFocus
+                        ? [
+                            BoxShadow(
+                              color: AppColors.customBlue.withOpacity(0.5),
+                              blurRadius: 5,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 1),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  child: TextFormField(
+                    controller: _userNameController,
+                    focusNode: _userNameFocusNode,
+                    readOnly: true,
+                    style: const TextStyle(
+                        color: AppColors.customBlack,
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 16),
+                    cursorColor: AppColors.customBlue,
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.white.withOpacity(0.5),
+                        fontFamily: 'PoppinsRegular',
+                        fontSize: 14,
+                      ),
+                      filled: true,
+                      fillColor: AppColors.customGrey,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide(
+                          color: Colors.white.withOpacity(1),
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: const BorderSide(
+                          color: AppColors.customBlue,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {});
+                    },
+                    onEditingComplete: () {
+                      setState(() {});
+                    },
+                    buildCounter: (BuildContext context,
+                        {int? currentLength, int? maxLength, bool? isFocused}) {
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
               ],
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

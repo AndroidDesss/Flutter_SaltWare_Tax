@@ -3,7 +3,7 @@ import 'package:salt_ware_tax/common/custom_loader.dart';
 import 'package:salt_ware_tax/documents_process/model/existing_document_model.dart';
 import 'package:salt_ware_tax/documents_process/repository/existing_document_repository.dart';
 
-class ExistingDocumentViewModel extends ChangeNotifier {
+class ExistingDocumentBasedOnEmployeeViewModel extends ChangeNotifier {
   final ExistingDocumentRepository _existingDocumentRepository =
       ExistingDocumentRepository();
 
@@ -18,12 +18,14 @@ class ExistingDocumentViewModel extends ChangeNotifier {
   List<ExistingDocumentResponse> _originalFolders = [];
 
   // Folders API
-  Future<void> fetchFoldersList(String userId, BuildContext context) async {
+  Future<void> fetchFoldersList(
+      String userId, String projectId, BuildContext context) async {
     CustomLoader.showLoader(context);
     _setNoFolders(false);
 
     try {
-      final response = await _existingDocumentRepository.getFoldersList(userId);
+      final response = await _existingDocumentRepository
+          .getFoldersBasedOnProjectList(userId, projectId);
       if (response.data.isNotEmpty && response.status == 200) {
         List<ExistingDocumentResponse> filteredFoldersList = response.data;
         if (filteredFoldersList.isNotEmpty) {

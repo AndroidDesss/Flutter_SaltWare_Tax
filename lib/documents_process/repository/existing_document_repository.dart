@@ -11,7 +11,29 @@ class ExistingDocumentRepository {
       'user_id': userId,
     };
     try {
-      final response = await _apiService.postResponse('view-batches/', body);
+      final response =
+          await _apiService.postResponse('view-batches-individual/', body);
+
+      if (response != null) {
+        return CommonApiResponse.fromJson(
+            response, (item) => ExistingDocumentResponse.fromJson(item));
+      } else {
+        throw Exception('Invalid response from server');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<CommonApiResponse<ExistingDocumentResponse>>
+      getFoldersBasedOnProjectList(String userId, String projectId) async {
+    Map<String, String> body = {
+      'user_id': userId,
+      'project_id': projectId,
+    };
+    try {
+      final response =
+          await _apiService.postResponse('view-batches-employee/', body);
 
       if (response != null) {
         return CommonApiResponse.fromJson(

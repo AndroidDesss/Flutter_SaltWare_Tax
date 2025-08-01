@@ -40,10 +40,9 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
     getSharedPrefData();
     visitedPages.add(_selectedIndex);
     pages = [
-      // ProjectScreen(key: _projectScreenKey),
       OverAllDataScreen(key: _overAllDataScreenKey),
+      const CompanyUsersScreen(),
       const CompanyUsersScreen()
-      // const CompanyUsersScreen(),
     ];
   }
 
@@ -289,8 +288,7 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
               size: 30, // You can adjust the size as needed
             ),
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           bottomNavigationBar: AnimatedBottomNavigationBar.builder(
             height: 60,
             itemCount: _iconList.length,
@@ -304,9 +302,8 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
                       _iconList[index],
                       width: 30,
                       height: 30,
-                      color: isActive
-                          ? AppColors.customBlue
-                          : AppColors.customBlue,
+                      // if you plan to differentiate active/inactive, adjust colors here
+                      color: AppColors.customBlue,
                     ),
                     if (isActive)
                       Container(
@@ -320,10 +317,9 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
               );
             },
             activeIndex: _selectedIndex,
-            gapLocation: GapLocation.center,
-            notchSmoothness: NotchSmoothness.smoothEdge,
             onTap: navigateToPage,
             backgroundColor: AppColors.customGrey,
+            // No gapLocation / notchSmoothness since FAB is independent
           ),
         ),
       ),
