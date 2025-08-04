@@ -145,11 +145,23 @@ class OverAllBatchesScreenState extends State<OverAllBatchesScreen> {
                         Expanded(
                           child: Builder(builder: (context) {
                             // filter out responses that have no batches
-                            final displayList = viewModel.overAllDataList
+                            // final displayList = viewModel.overAllDataList
+                            //     .where((e) => e.batches.length > 0)
+                            //     .toList();
+
+                            final List<BatchData> batchEntries = viewModel
+                                .overAllDataList
                                 .where((e) => e.batches.isNotEmpty)
+                                .expand((e) => e.batches.map((b) => BatchData(
+                                    batchId: b.batchId,
+                                    batchName: b.batchName,
+                                    images: b.images,
+                                    pdfUrl: b.pdfUrl)))
                                 .toList();
 
-                            final noDisplayData = displayList.isEmpty;
+                            final noDisplayData = batchEntries.isEmpty;
+
+                            print("ServerResponse${batchEntries.length}");
 
                             if (noDisplayData) {
                               return Center(
@@ -177,13 +189,13 @@ class OverAllBatchesScreenState extends State<OverAllBatchesScreen> {
                             }
 
                             return ListView.builder(
-                              itemCount: displayList.length,
+                              itemCount: batchEntries.length,
                               itemBuilder: (context, index) {
                                 return ListViewCard(
                                   index: index,
                                   overAllDataViewModel:
                                       overAllEmployeeBatchDataViewModel,
-                                  character: displayList[index],
+                                  character: batchEntries[index],
                                 );
                               },
                             );
@@ -210,7 +222,7 @@ class ListViewCard extends StatelessWidget {
       required this.overAllDataViewModel,
       required this.character});
 
-  final OverAllEmployeeBatchResponse character;
+  final BatchData character;
 
   final int index;
 
@@ -225,9 +237,9 @@ class ListViewCard extends StatelessWidget {
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return OverAllImagesScreen(
-                batchName: character.batches.first.batchName,
-                images: character.batches.first.images,
-                pdfUrl: character.batches.first.pdfUrl,
+                batchName: character.batchName,
+                images: character.images,
+                pdfUrl: character.pdfUrl,
               );
             },
             transitionsBuilder:
@@ -257,7 +269,7 @@ class ListViewCard extends StatelessWidget {
               height: 70,
             ),
             title: Text(
-              character.batches.first.batchName,
+              character.batchName,
               maxLines: 1,
               style: const TextStyle(
                 color: Colors.black,
