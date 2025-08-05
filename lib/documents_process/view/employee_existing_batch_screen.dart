@@ -309,11 +309,11 @@ class EmployeeExistingBatchScreenState
                           borderRadius: BorderRadius.circular(6),
                           boxShadow: _batchNameFocusNode.hasFocus
                               ? [
-                                  BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                  const BoxShadow(
+                                    color: Colors.blue,
                                     blurRadius: 5,
                                     spreadRadius: 1,
-                                    offset: const Offset(0, 1),
+                                    offset: Offset(0, 1),
                                   ),
                                 ]
                               : [],
@@ -337,8 +337,8 @@ class EmployeeExistingBatchScreenState
                             fillColor: const Color(0xFF0E0E22),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
                                 width: 1,
                               ),
                             ),
@@ -475,9 +475,9 @@ class ListViewCard extends StatelessWidget {
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0); // Start from right to left
-              const end = Offset.zero; // End at current position
-              const curve = Curves.easeInOut; // Smooth transition
+              const begin = Offset(1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.easeInOut;
               var tween =
                   Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
               var offsetAnimation = animation.drive(tween);

@@ -57,7 +57,7 @@ class ProfileScreenState extends State<ProfileScreen> {
     email = SharedPrefsHelper.getString('email_id')!;
     phoneNumber = SharedPrefsHelper.getString('phone_number')!;
 
-    _nameController.text = '$firstName ${lastName}'.trim();
+    _nameController.text = '$firstName $lastName'.trim();
     _emailController.text = email;
     _phoneNumberController.text = phoneNumber;
     _userNameController.text = userName;
@@ -178,7 +178,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                     boxShadow: _nameFocusNode.hasFocus
                         ? [
                             BoxShadow(
-                              color: AppColors.customBlue.withOpacity(0.5),
+                              color: AppColors.customBlue
+                                  .withAlpha((0.5 * 255).round()),
                               blurRadius: 5,
                               spreadRadius: 1,
                               offset: const Offset(0, 1),
@@ -197,7 +198,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     cursorColor: AppColors.customBlue,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withAlpha((0.5 * 255).round()),
                         fontFamily: 'PoppinsRegular',
                         fontSize: 14,
                       ),
@@ -205,8 +206,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                       fillColor: AppColors.customGrey,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6),
-                        borderSide: BorderSide(
-                          color: Colors.white.withOpacity(1),
+                        borderSide: const BorderSide(
+                          color: Colors.white,
                           width: 1,
                         ),
                       ),
@@ -246,7 +247,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                     boxShadow: _phoneNumberFocusNode.hasFocus
                         ? [
                             BoxShadow(
-                              color: AppColors.customBlue.withOpacity(0.5),
+                              color: AppColors.customBlue
+                                  .withAlpha((0.5 * 255).round()),
                               blurRadius: 5,
                               spreadRadius: 1,
                               offset: const Offset(0, 1),
@@ -265,7 +267,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     cursorColor: AppColors.customBlue,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withAlpha((0.5 * 255).round()),
                         fontFamily: 'PoppinsRegular',
                         fontSize: 14,
                       ),
@@ -273,8 +275,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                       fillColor: AppColors.customGrey,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6),
-                        borderSide: BorderSide(
-                          color: Colors.white.withOpacity(1),
+                        borderSide: const BorderSide(
+                          color: Colors.white,
                           width: 1,
                         ),
                       ),
@@ -314,7 +316,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                     boxShadow: _emailFocusNode.hasFocus
                         ? [
                             BoxShadow(
-                              color: AppColors.customBlue.withOpacity(0.5),
+                              color: AppColors.customBlue
+                                  .withAlpha((0.5 * 255).round()),
                               blurRadius: 5,
                               spreadRadius: 1,
                               offset: const Offset(0, 1),
@@ -333,7 +336,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     cursorColor: AppColors.customBlue,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withAlpha((0.5 * 255).round()),
                         fontFamily: 'PoppinsRegular',
                         fontSize: 14,
                       ),
@@ -341,8 +344,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                       fillColor: AppColors.customGrey,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6),
-                        borderSide: BorderSide(
-                          color: Colors.white.withOpacity(1),
+                        borderSide: const BorderSide(
+                          color: Colors.white,
                           width: 1,
                         ),
                       ),
@@ -382,7 +385,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                     boxShadow: _userNameFocusNode.hasFocus
                         ? [
                             BoxShadow(
-                              color: AppColors.customBlue.withOpacity(0.5),
+                              color: AppColors.customBlue
+                                  .withAlpha((0.5 * 255).round()),
                               blurRadius: 5,
                               spreadRadius: 1,
                               offset: const Offset(0, 1),
@@ -401,7 +405,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     cursorColor: AppColors.customBlue,
                     decoration: InputDecoration(
                       hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withAlpha((0.5 * 255).round()),
                         fontFamily: 'PoppinsRegular',
                         fontSize: 14,
                       ),
@@ -409,8 +413,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                       fillColor: AppColors.customGrey,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6),
-                        borderSide: BorderSide(
-                          color: Colors.white.withOpacity(1),
+                        borderSide: const BorderSide(
+                          color: Colors.white,
                           width: 1,
                         ),
                       ),
