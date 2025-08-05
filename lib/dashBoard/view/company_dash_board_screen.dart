@@ -41,7 +41,6 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
     visitedPages.add(_selectedIndex);
     pages = [
       OverAllDataScreen(key: _overAllDataScreenKey),
-      const CompanyUsersScreen(),
       const CompanyUsersScreen()
     ];
   }
