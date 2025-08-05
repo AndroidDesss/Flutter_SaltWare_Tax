@@ -7,6 +7,7 @@ class LoginResponse {
   final String? phone;
   final String? firstName;
   final String? lastName;
+  final String? errmsg;
 
   LoginResponse(
       {this.success,
@@ -16,7 +17,8 @@ class LoginResponse {
       this.email,
       this.phone,
       this.firstName,
-      this.lastName});
+      this.lastName,
+      this.errmsg});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
@@ -27,6 +29,7 @@ class LoginResponse {
         email: json['email'] ?? '',
         phone: json['phone'] ?? '',
         firstName: json['first_name'] ?? '',
-        lastName: json['last_name'] ?? '');
+        lastName: json['last_name'] ?? '',
+        errmsg: json['errmsg'] ?? '');
   }
 }
