@@ -1,6 +1,6 @@
 class AppStrings {
   static const loginContentText =
-      'Enter your mobile number and password to login.';
+      'Enter your credentials to login.';
   static const enterPhoneNumber = 'Enter your Phone Number';
   static const enterPassword = 'Enter your Password';
   static const password = 'Password';

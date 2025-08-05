@@ -89,8 +89,8 @@ class OverAllRepository {
   }
 
   Future<CommonApiResponse<OverAllEmployeeBatchResponse>>
-      getOverAllEmployeeBatchDetails(String employeeId, String userId) async {
-    Map<String, String> body = {'user_id': userId, 'employee_id': employeeId};
+      getOverAllEmployeeBatchDetails(String employeeId, String userId, String projectId) async {
+    Map<String, String> body = {'user_id': userId, 'employee_id': employeeId, 'project_id': projectId};
     try {
       final response =
           await _apiService.postResponse('company_view_employee_files/', body);

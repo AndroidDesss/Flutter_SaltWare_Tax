@@ -287,7 +287,7 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
               size: 30, // You can adjust the size as needed
             ),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: AnimatedBottomNavigationBar.builder(
             height: 60,
             itemCount: _iconList.length,
@@ -316,6 +316,8 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
               );
             },
             activeIndex: _selectedIndex,
+            gapLocation: GapLocation.center,
+            notchSmoothness: NotchSmoothness.smoothEdge,
             onTap: navigateToPage,
             backgroundColor: AppColors.customGrey,
             // No gapLocation / notchSmoothness since FAB is independent

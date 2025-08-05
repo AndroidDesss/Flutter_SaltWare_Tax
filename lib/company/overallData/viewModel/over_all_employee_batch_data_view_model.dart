@@ -18,13 +18,13 @@ class OverAllEmployeeBatchDataViewModel extends ChangeNotifier {
 
   // OverAllData API
   Future<void> fetchOverAllEmployeeBatchDataList(
-      String employeeId, String userId, BuildContext context) async {
+      String employeeId, String userId, String projectId,BuildContext context) async {
     CustomLoader.showLoader(context);
     _setNoProjects(false);
 
     try {
       final response = await _overAllRepository.getOverAllEmployeeBatchDetails(
-          employeeId, userId);
+          employeeId, userId,projectId);
       if (response.data.isNotEmpty && response.status == 200) {
         List<OverAllEmployeeBatchResponse> filteredOverAllDataList =
             response.data;

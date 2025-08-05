@@ -11,9 +11,10 @@ import 'package:salt_ware_tax/company/overallData/viewModel/over_all_employee_ba
 class OverAllBatchesScreen extends StatefulWidget {
   final String employeeId;
   final String employeeName;
+  final String projectId;
 
   const OverAllBatchesScreen(
-      {super.key, required this.employeeId, required this.employeeName});
+      {super.key, required this.employeeId, required this.employeeName, required this.projectId});
 
   @override
   OverAllBatchesScreenState createState() => OverAllBatchesScreenState();
@@ -38,7 +39,7 @@ class OverAllBatchesScreenState extends State<OverAllBatchesScreen> {
     userId = SharedPrefsHelper.getString('user_id')!;
     if (userId.isNotEmpty && widget.employeeId.isNotEmpty) {
       overAllEmployeeBatchDataViewModel.fetchOverAllEmployeeBatchDataList(
-          widget.employeeId, userId, context);
+          widget.employeeId, userId,widget.projectId, context);
     }
   }
 

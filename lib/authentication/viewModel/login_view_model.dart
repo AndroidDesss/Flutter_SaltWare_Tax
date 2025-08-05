@@ -121,7 +121,11 @@ class LoginViewModel extends ChangeNotifier {
       } else {
         _showErrorMessage("Credentials Wrong..!", context);
       }
-    } finally {
+    }
+    catch(e)
+    {
+      _showErrorMessage("Credentials Wrong..!", context);
+    }finally {
       CustomLoader.hideLoader();
     }
   }

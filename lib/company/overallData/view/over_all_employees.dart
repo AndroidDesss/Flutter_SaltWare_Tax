@@ -384,7 +384,8 @@ class OverAllEmployeesScreenState extends State<OverAllEmployeesScreen> {
                                         overAllDataViewModel:
                                             overAllEmployeeViewModel,
                                         character:
-                                            viewModel.overAllDataList[index]);
+                                            viewModel.overAllDataList[index],
+                                    projectId: widget.projectId,);
                                   },
                                 ),
                               ),
@@ -407,11 +408,14 @@ class ListViewCard extends StatelessWidget {
       {super.key,
       required this.index,
       required this.overAllDataViewModel,
-      required this.character});
+      required this.character,
+      required this.projectId});
 
   final OverAllEmployeeResponse character;
 
   final int index;
+
+  final String projectId;
 
   final OverAllEmployeeViewModel overAllDataViewModel;
 
@@ -426,7 +430,8 @@ class ListViewCard extends StatelessWidget {
               return OverAllBatchesScreen(
                   employeeName: character.assignedEmployees.first.employeeName,
                   employeeId:
-                      character.assignedEmployees.first.employeeId.toString());
+                      character.assignedEmployees.first.employeeId.toString(),
+              projectId: projectId,);
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
