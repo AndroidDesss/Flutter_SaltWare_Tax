@@ -1,6 +1,5 @@
 class AppStrings {
-  static const loginContentText =
-      'Enter your credentials to login.';
+  static const loginContentText = 'Enter your credentials to login.';
   static const enterPhoneNumber = 'Enter your Phone Number';
   static const enterPassword = 'Enter your Password';
   static const password = 'Password';
@@ -37,6 +36,7 @@ class AppStrings {
   static const enterEmail = 'Enter your E-Mail Id';
   static const logOut = 'Log Out';
   static const noImages = 'No Images..!';
+  static const noBatches = 'No Batches..!';
   static const noFolders = 'No Folders..!';
   static const noProjects = 'No Projects..!';
   static const noUsers = 'No Users..!';

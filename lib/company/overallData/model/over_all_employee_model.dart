@@ -24,11 +24,13 @@ class EmployeeData {
   final int employeeId;
   final String employeeName;
   final String email;
+  final String type;
 
   EmployeeData({
     required this.employeeId,
     required this.employeeName,
     required this.email,
+    required this.type,
   });
 
   factory EmployeeData.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,7 @@ class EmployeeData {
       employeeId: json['employee_id'],
       employeeName: json['employee_name'],
       email: json['email'],
+      type: json['type'],
     );
   }
 }

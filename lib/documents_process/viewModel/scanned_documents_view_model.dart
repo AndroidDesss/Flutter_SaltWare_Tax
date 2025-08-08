@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/custom_loader.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
+import 'package:salt_ware_tax/dashBoard/view/company_dash_board_screen.dart';
 import 'package:salt_ware_tax/dashBoard/view/dash_board_screen.dart';
 import 'package:salt_ware_tax/dashBoard/view/employee_dash_board_screen.dart';
 import 'package:salt_ware_tax/documents_process/repository/scanned_documents_repository.dart';
@@ -53,6 +54,26 @@ class ScannedDocumentsViewModel extends ChangeNotifier {
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
                 return const EmployeeDashBoardScreen(); // The target screen
+              },
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                const begin = Offset(1.0, 0.0); // Start from right to left
+                const end = Offset.zero; // End at current position
+                const curve = Curves.easeInOut; // Smooth transition
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+                var offsetAnimation = animation.drive(tween);
+                return SlideTransition(position: offsetAnimation, child: child);
+              },
+            ),
+            (route) => false,
+          );
+        } else if (userType == 'company') {
+          Navigator.pushAndRemoveUntil(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return const CompanyDashBoardScreen(); // The target screen
               },
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {

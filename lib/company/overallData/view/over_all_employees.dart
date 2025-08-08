@@ -380,12 +380,13 @@ class OverAllEmployeesScreenState extends State<OverAllEmployeesScreen> {
                                   itemCount: viewModel.overAllDataList.length,
                                   itemBuilder: (context, index) {
                                     return ListViewCard(
-                                        index: index,
-                                        overAllDataViewModel:
-                                            overAllEmployeeViewModel,
-                                        character:
-                                            viewModel.overAllDataList[index],
-                                    projectId: widget.projectId,);
+                                      index: index,
+                                      overAllDataViewModel:
+                                          overAllEmployeeViewModel,
+                                      character:
+                                          viewModel.overAllDataList[index],
+                                      projectId: widget.projectId,
+                                    );
                                   },
                                 ),
                               ),
@@ -411,7 +412,7 @@ class ListViewCard extends StatelessWidget {
       required this.character,
       required this.projectId});
 
-  final OverAllEmployeeResponse character;
+  final EmployeeData character;
 
   final int index;
 
@@ -428,10 +429,11 @@ class ListViewCard extends StatelessWidget {
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
               return OverAllBatchesScreen(
-                  employeeName: character.assignedEmployees.first.employeeName,
-                  employeeId:
-                      character.assignedEmployees.first.employeeId.toString(),
-              projectId: projectId,);
+                employeeName: character.employeeName,
+                employeeId: character.employeeId.toString(),
+                employeeType: character.type,
+                projectId: projectId,
+              );
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
@@ -460,7 +462,7 @@ class ListViewCard extends StatelessWidget {
               height: 70,
             ),
             title: Text(
-              character.assignedEmployees.first.employeeName,
+              character.employeeName,
               maxLines: 1,
               style: const TextStyle(
                 color: Colors.black,

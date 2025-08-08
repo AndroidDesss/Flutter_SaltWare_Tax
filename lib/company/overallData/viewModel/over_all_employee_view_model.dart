@@ -11,12 +11,12 @@ class OverAllEmployeeViewModel extends ChangeNotifier {
   bool _noOverAllData = false;
   bool get noOverAllData => _noOverAllData;
 
-  List<OverAllEmployeeResponse> _overAllDataList = [];
-  List<OverAllEmployeeResponse> get overAllDataList => _overAllDataList;
+  List<EmployeeData> _overAllDataList = [];
+  List<EmployeeData> get overAllDataList => _overAllDataList;
 
-  List<OverAllEmployeeResponse> _originalOverAllDataList = [];
+  List<EmployeeData> _originalOverAllDataList = [];
 
-  List<OverAllEmployeeResponse> _originalOverAllData = [];
+  List<EmployeeData> _originalOverAllData = [];
 
   bool _noOverAllUnAssignedData = false;
   bool get noOverAllUnAssignedData => _noOverAllUnAssignedData;
@@ -35,7 +35,11 @@ class OverAllEmployeeViewModel extends ChangeNotifier {
       final response =
           await _overAllRepository.getOverAllEmployeeDetails(userId, projectId);
       if (response.data.isNotEmpty && response.status == 200) {
-        List<OverAllEmployeeResponse> filteredOverAllDataList = response.data;
+        List<EmployeeData> filteredOverAllDataList = [];
+        for (var assignedEmployeesList in response.data) {
+          filteredOverAllDataList
+              .addAll(assignedEmployeesList.assignedEmployees);
+        }
         if (filteredOverAllDataList.isNotEmpty) {
           _overAllDataList = filteredOverAllDataList;
           _originalOverAllDataList = List.from(filteredOverAllDataList);
@@ -72,7 +76,7 @@ class OverAllEmployeeViewModel extends ChangeNotifier {
   // Sort the folders list alphabetically by description
   void sortProjectsList() {
     _overAllDataList.sort((a, b) =>
-        a.projectName.toLowerCase().compareTo(b.projectName.toLowerCase()));
+        a.employeeName.toLowerCase().compareTo(b.employeeName.toLowerCase()));
     notifyListeners();
   }
 
@@ -88,7 +92,7 @@ class OverAllEmployeeViewModel extends ChangeNotifier {
       _overAllDataList = List.from(_originalOverAllData);
     } else {
       _overAllDataList = _originalOverAllData.where((folders) {
-        return folders.projectName.toLowerCase().contains(query.toLowerCase());
+        return folders.employeeName.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
     notifyListeners();

@@ -1,5 +1,5 @@
 class OverAllEmployeeBatchResponse {
-  final int employeeId;
+  final int? employeeId;
   final String employeeName;
   final List<BatchData> batches;
 
