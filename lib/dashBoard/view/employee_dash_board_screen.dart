@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/authentication/view/login_screen.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/documents_process/view/existing_project_screen.dart';
 import 'package:salt_ware_tax/profile/view/profile_screen.dart';

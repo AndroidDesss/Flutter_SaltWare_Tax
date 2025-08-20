@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/viewModel/forgot_password_view_model.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -101,7 +101,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       ? [
                                           BoxShadow(
                                             color: AppColors.customBlue
-                                                .withOpacity(0.5),
+                                                .withValues(alpha: 0.5),
                                             blurRadius: 5,
                                             spreadRadius: 1,
                                             offset: const Offset(0, 1),
@@ -121,7 +121,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     hintText: AppStrings.enterPhoneNumber,
                                     hintStyle: TextStyle(
                                       color: AppColors.customBlack
-                                          .withOpacity(0.5),
+                                          .withValues(alpha: 0.5),
                                       fontSize: 14,
                                     ),
                                     filled: true,
@@ -129,7 +129,8 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
                                       borderSide: BorderSide(
-                                        color: Colors.white.withOpacity(1),
+                                        color:
+                                            Colors.white.withValues(alpha: 1),
                                         width: 1,
                                       ),
                                     ),

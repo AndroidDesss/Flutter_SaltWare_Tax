@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/company/overallData/model/over_all_employee_model.dart';
@@ -109,8 +109,8 @@ class OverAllEmployeesScreenState extends State<OverAllEmployeesScreen> {
                                   color: AppColors.customGrey,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey
-                                          .withOpacity(0.3), // visible shadow
+                                      color: Colors.grey.withValues(
+                                          alpha: 0.3), // visible shadow
                                       blurRadius: 6,
                                       offset: const Offset(0, 2),
                                     ),
@@ -217,7 +217,7 @@ class OverAllEmployeesScreenState extends State<OverAllEmployeesScreen> {
                                                           });
                                                         },
                                                         title: Text(
-                                                          '${user.userName}',
+                                                          user.userName,
                                                           style:
                                                               const TextStyle(
                                                             color: AppColors
@@ -452,7 +452,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.lightBlue.withOpacity(0.3),
+            color: Colors.lightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(

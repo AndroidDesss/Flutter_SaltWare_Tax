@@ -2,8 +2,8 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:salt_ware_tax/authentication/view/login_screen.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/documents_process/view/existing_batch_document.dart';
@@ -93,7 +93,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                           boxShadow: _batchNameFocusNode.hasFocus
                               ? [
                                   BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                    color: Colors.blue.withValues(alpha: 1),
                                     blurRadius: 5,
                                     spreadRadius: 1,
                                     offset: const Offset(0, 1),
@@ -121,7 +121,7 @@ class DashBoardScreenState extends State<DashBoardScreen> {
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
+                                color: Colors.white.withValues(alpha: 1),
                                 width: 1,
                               ),
                             ),

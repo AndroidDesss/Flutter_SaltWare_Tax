@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/company/users/view_model/company_add_users_view_model.dart';
 

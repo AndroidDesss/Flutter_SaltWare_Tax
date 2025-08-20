@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/view/forgot_password_screen.dart';
 import 'package:salt_ware_tax/authentication/view/new_user_sign_up_screen.dart';
 import 'package:salt_ware_tax/authentication/viewModel/login_view_model.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -121,7 +121,7 @@ class LoginScreenState extends State<LoginScreen> {
                                         ? [
                                             BoxShadow(
                                               color: AppColors.customBlue
-                                                  .withOpacity(0.5),
+                                                  .withValues(alpha: 0.5),
                                               blurRadius: 5,
                                               spreadRadius: 1,
                                               offset: const Offset(0, 1),
@@ -142,7 +142,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       hintText: AppStrings.enterUserName,
                                       hintStyle: TextStyle(
                                         color: AppColors.customBlack
-                                            .withOpacity(0.5),
+                                            .withValues(alpha: 0.5),
                                         fontFamily: 'PoppinsRegular',
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
@@ -152,7 +152,8 @@ class LoginScreenState extends State<LoginScreen> {
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: BorderSide(
-                                          color: Colors.white.withOpacity(1),
+                                          color:
+                                              Colors.white.withValues(alpha: 1),
                                           width: 1,
                                         ),
                                       ),
@@ -214,7 +215,7 @@ class LoginScreenState extends State<LoginScreen> {
                                         ? [
                                             BoxShadow(
                                               color: AppColors.customBlue
-                                                  .withOpacity(0.5),
+                                                  .withValues(alpha: 0.5),
                                               blurRadius: 5,
                                               spreadRadius: 1,
                                               offset: const Offset(0, 1),
@@ -236,7 +237,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       hintText: AppStrings.enterPassword,
                                       hintStyle: TextStyle(
                                         color: AppColors.customBlack
-                                            .withOpacity(0.5),
+                                            .withValues(alpha: 0.5),
                                         fontFamily: 'PoppinsRegular',
                                         fontSize: 14,
                                       ),
@@ -245,7 +246,8 @@ class LoginScreenState extends State<LoginScreen> {
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: BorderSide(
-                                          color: Colors.white.withOpacity(1),
+                                          color:
+                                              Colors.white.withValues(alpha: 1),
                                           width: 1,
                                         ),
                                       ),

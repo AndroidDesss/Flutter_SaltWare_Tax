@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/documents_process/model/existing_document_model.dart';
 import 'package:salt_ware_tax/documents_process/view/existing_batch_folder_images.dart';
@@ -74,7 +74,7 @@ class ExistingBatchDocumentState extends State<ExistingBatchDocumentScreen> {
                           color: AppColors.customGrey,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.7),
+                              color: Colors.grey.withValues(alpha: 0.7),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(10),
@@ -247,9 +247,9 @@ class ListViewCard extends StatelessWidget {
             },
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0); // Start from right to left
-              const end = Offset.zero; // End at current position
-              const curve = Curves.easeInOut; // Smooth transition
+              const begin = Offset(1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.easeInOut;
               var tween =
                   Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
               var offsetAnimation = animation.drive(tween);
@@ -262,7 +262,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlue.withOpacity(0.3),
+            color: AppColors.customLightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
@@ -328,7 +328,7 @@ class GridViewCard extends StatelessWidget {
         height: 100,
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlue.withOpacity(0.3),
+            color: AppColors.customLightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(

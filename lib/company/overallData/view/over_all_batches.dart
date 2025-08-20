@@ -2,8 +2,8 @@ import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/common_utilities.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/company/overallData/model/over_all_employee_batch_model.dart';
@@ -129,8 +129,8 @@ class OverAllBatchesScreenState extends State<OverAllBatchesScreen> {
                                   color: AppColors.customGrey,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey
-                                          .withOpacity(0.3), // visible shadow
+                                      color: Colors.grey.withValues(
+                                          alpha: 0.3), // visible shadow
                                       blurRadius: 6,
                                       offset: const Offset(0, 2),
                                     ),
@@ -300,7 +300,7 @@ class OverAllBatchesScreenState extends State<OverAllBatchesScreen> {
                           boxShadow: _batchNameFocusNode.hasFocus
                               ? [
                                   BoxShadow(
-                                    color: Colors.blue.withOpacity(1),
+                                    color: Colors.blue.withValues(alpha: 1),
                                     blurRadius: 5,
                                     spreadRadius: 1,
                                     offset: const Offset(0, 1),
@@ -328,7 +328,7 @@ class OverAllBatchesScreenState extends State<OverAllBatchesScreen> {
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
                               borderSide: BorderSide(
-                                color: Colors.white.withOpacity(1),
+                                color: Colors.white.withValues(alpha: 1),
                                 width: 1,
                               ),
                             ),
@@ -482,7 +482,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.lightBlue.withOpacity(0.3),
+            color: Colors.lightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(

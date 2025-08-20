@@ -5,8 +5,8 @@ import 'package:salt_ware_tax/company/project/viewModel/project_view_model.dart'
 import 'package:salt_ware_tax/company/users/view/company_users_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:salt_ware_tax/authentication/view/login_screen.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 
 class CompanyDashBoardScreen extends StatefulWidget {
@@ -100,7 +100,7 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
                               boxShadow: _batchNameFocusNode.hasFocus
                                   ? [
                                       BoxShadow(
-                                        color: Colors.blue.withOpacity(1),
+                                        color: Colors.blue.withValues(alpha: 1),
                                         blurRadius: 5,
                                         spreadRadius: 1,
                                         offset: const Offset(0, 1),
@@ -129,7 +129,7 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
                                   borderSide: BorderSide(
-                                    color: Colors.white.withOpacity(1),
+                                    color: Colors.white.withValues(alpha: 1),
                                     width: 1,
                                   ),
                                 ),
@@ -287,7 +287,8 @@ class CompanyDashBoardScreenState extends State<CompanyDashBoardScreen> {
               size: 30, // You can adjust the size as needed
             ),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: AnimatedBottomNavigationBar.builder(
             height: 60,
             itemCount: _iconList.length,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/company/overallData/model/over_all_data_model.dart';
 import 'package:salt_ware_tax/company/overallData/view/over_all_employees.dart';
@@ -72,7 +72,7 @@ class OverAllDataScreenState extends State<OverAllDataScreen> {
                           color: AppColors.customGrey,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.7),
+                              color: Colors.grey.withValues(alpha: 0.7),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(10),
@@ -261,7 +261,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlue.withOpacity(0.3),
+            color: AppColors.customLightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
@@ -326,7 +326,7 @@ class GridViewCard extends StatelessWidget {
         height: 150,
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlue.withOpacity(0.3),
+            color: AppColors.customLightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(

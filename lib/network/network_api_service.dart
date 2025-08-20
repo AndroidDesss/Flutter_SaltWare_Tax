@@ -8,7 +8,7 @@ class NetworkApiService extends BaseApiService {
   Future postResponse(String url, Map<String, String> jsonBody) async {
     dynamic responseJson;
     try {
-      final fullUrl = baseUrl + url;
+      // final fullUrl = baseUrl + url;
       // print("ServerResponse: $fullUrl");
       // jsonBody.forEach((key, value) {
       //   print("ServerResponse: $key: $value");
@@ -19,8 +19,6 @@ class NetworkApiService extends BaseApiService {
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
-    } catch (e) {
-      print(e);
     }
     return responseJson;
   }
@@ -40,8 +38,7 @@ class NetworkApiService extends BaseApiService {
       case 500:
       default:
         throw FetchDataException(
-            'Error occured while communication with server' +
-                ' with status code : ${response.statusCode}');
+            'Error Occured while communication with server with status code : ${response.statusCode}');
     }
   }
 }

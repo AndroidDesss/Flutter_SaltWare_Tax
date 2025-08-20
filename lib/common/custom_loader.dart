@@ -11,7 +11,7 @@ class CustomLoader {
       builder: (context) => Stack(
         children: [
           ModalBarrier(
-              color: Colors.black.withOpacity(0.9), dismissible: false),
+              color: Colors.black.withValues(alpha: 0.9), dismissible: false),
           Center(
             child: Lottie.asset('assets/loader/loading.json',
                 width: 130, height: 130),

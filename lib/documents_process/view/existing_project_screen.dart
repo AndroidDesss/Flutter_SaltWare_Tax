@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 import 'package:salt_ware_tax/common/shared_pref.dart';
 import 'package:salt_ware_tax/documents_process/model/existing_project_model.dart';
 import 'package:salt_ware_tax/documents_process/view/employee_existing_batch_screen.dart';
@@ -74,7 +74,7 @@ class ExistingProjectScreenState extends State<ExistingProjectScreen> {
                           color: AppColors.customGrey,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.7),
+                              color: Colors.grey.withValues(alpha: 0.3),
                             ),
                           ],
                           borderRadius: BorderRadius.circular(10),
@@ -261,7 +261,7 @@ class ListViewCard extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlue.withOpacity(0.3),
+            color: AppColors.customLightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: ListTile(
@@ -326,7 +326,7 @@ class GridViewCard extends StatelessWidget {
         height: 100,
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.customLightBlue.withOpacity(0.3),
+            color: AppColors.customLightBlue.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(

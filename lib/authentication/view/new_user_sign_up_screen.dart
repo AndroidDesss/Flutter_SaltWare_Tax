@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salt_ware_tax/authentication/viewModel/new_user_sign_up_screen_view_model.dart';
-import 'package:salt_ware_tax/common/AppColors.dart';
-import 'package:salt_ware_tax/common/AppStrings.dart';
+import 'package:salt_ware_tax/common/app_colors.dart';
+import 'package:salt_ware_tax/common/app_strings.dart';
 
 class NewUserSignUpScreen extends StatefulWidget {
   const NewUserSignUpScreen({super.key});
@@ -147,7 +147,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlack
-                                                      .withOpacity(0.5),
+                                                      .withValues(alpha: 0.5),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -165,8 +165,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
+                                              color: Colors.white
+                                                  .withValues(alpha: 1),
                                               width: 1,
                                             ),
                                           ),
@@ -249,7 +249,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlack
-                                                      .withOpacity(0.5),
+                                                      .withValues(alpha: 0.5),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -269,7 +269,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintText: AppStrings.enterUserName,
                                           hintStyle: TextStyle(
                                               color: AppColors.customBlack
-                                                  .withOpacity(0.5),
+                                                  .withValues(alpha: 0.5),
                                               fontFamily: 'PoppinsRegular',
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
@@ -279,8 +279,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
+                                              color: Colors.white
+                                                  .withValues(alpha: 1),
                                               width: 1,
                                             ),
                                           ),
@@ -342,7 +342,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlue
-                                                      .withOpacity(0.5),
+                                                      .withValues(alpha: 0.5),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -362,7 +362,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintText: AppStrings.enterPassword,
                                           hintStyle: TextStyle(
                                               color: AppColors.customBlack
-                                                  .withOpacity(0.5),
+                                                  .withValues(alpha: 0.5),
                                               fontFamily: 'PoppinsRegular',
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
@@ -372,8 +372,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
+                                              color: Colors.white
+                                                  .withValues(alpha: 1),
                                               width: 1,
                                             ),
                                           ),
@@ -441,7 +441,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                               ? [
                                                   BoxShadow(
                                                     color: AppColors.customBlack
-                                                        .withOpacity(0.5),
+                                                        .withValues(alpha: 0.5),
                                                     blurRadius: 5,
                                                     spreadRadius: 1,
                                                     offset: const Offset(0, 1),
@@ -462,7 +462,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                                 AppStrings.enterCompanyName,
                                             hintStyle: TextStyle(
                                                 color: AppColors.customBlack
-                                                    .withOpacity(0.5),
+                                                    .withValues(alpha: 0.5),
                                                 fontFamily: 'PoppinsRegular',
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold),
@@ -472,8 +472,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(6),
                                               borderSide: BorderSide(
-                                                color:
-                                                    Colors.white.withOpacity(1),
+                                                color: Colors.white
+                                                    .withValues(alpha: 1),
                                                 width: 1,
                                               ),
                                             ),
@@ -541,7 +541,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                               ? [
                                                   BoxShadow(
                                                     color: AppColors.customBlack
-                                                        .withOpacity(0.5),
+                                                        .withValues(alpha: 0.5),
                                                     blurRadius: 5,
                                                     spreadRadius: 1,
                                                     offset: const Offset(0, 1),
@@ -561,7 +561,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             hintText: AppStrings.enterFirstName,
                                             hintStyle: TextStyle(
                                                 color: AppColors.customBlack
-                                                    .withOpacity(0.5),
+                                                    .withValues(alpha: 0.5),
                                                 fontFamily: 'PoppinsRegular',
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold),
@@ -571,8 +571,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(6),
                                               borderSide: BorderSide(
-                                                color:
-                                                    Colors.white.withOpacity(1),
+                                                color: Colors.white
+                                                    .withValues(alpha: 1),
                                                 width: 1,
                                               ),
                                             ),
@@ -638,7 +638,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                               ? [
                                                   BoxShadow(
                                                     color: AppColors.customBlack
-                                                        .withOpacity(0.5),
+                                                        .withValues(alpha: 0.5),
                                                     blurRadius: 5,
                                                     spreadRadius: 1,
                                                     offset: const Offset(0, 1),
@@ -658,7 +658,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             hintText: AppStrings.enterLastName,
                                             hintStyle: TextStyle(
                                                 color: AppColors.customBlack
-                                                    .withOpacity(0.5),
+                                                    .withValues(alpha: 0.5),
                                                 fontFamily: 'PoppinsRegular',
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold),
@@ -668,8 +668,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(6),
                                               borderSide: BorderSide(
-                                                color:
-                                                    Colors.white.withOpacity(1),
+                                                color: Colors.white
+                                                    .withValues(alpha: 1),
                                                 width: 1,
                                               ),
                                             ),
@@ -734,7 +734,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlue
-                                                      .withOpacity(0.5),
+                                                      .withValues(alpha: 0.5),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -755,7 +755,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintText: AppStrings.enterEmail,
                                           hintStyle: TextStyle(
                                             color: AppColors.customBlack
-                                                .withOpacity(0.5),
+                                                .withValues(alpha: 0.5),
                                             fontFamily: 'PoppinsRegular',
                                             fontSize: 14,
                                           ),
@@ -765,8 +765,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
+                                              color: Colors.white
+                                                  .withValues(alpha: 1),
                                               width: 1,
                                             ),
                                           ),
@@ -830,7 +830,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             ? [
                                                 BoxShadow(
                                                   color: AppColors.customBlue
-                                                      .withOpacity(0.5),
+                                                      .withValues(alpha: 0.5),
                                                   blurRadius: 5,
                                                   spreadRadius: 1,
                                                   offset: const Offset(0, 1),
@@ -850,7 +850,7 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                           hintStyle: TextStyle(
                                               fontFamily: 'PoppinsRegular',
                                               color: AppColors.customBlack
-                                                  .withOpacity(0.5),
+                                                  .withValues(alpha: 0.5),
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
                                           filled: true,
@@ -859,8 +859,8 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(6),
                                             borderSide: BorderSide(
-                                              color:
-                                                  Colors.white.withOpacity(1),
+                                              color: Colors.white
+                                                  .withValues(alpha: 1),
                                               width: 1,
                                             ),
                                           ),
@@ -986,10 +986,13 @@ class NewUserSignUpScreenState extends State<NewUserSignUpScreen> {
     bool isValid = true;
 
     if (_userNameController.text.isEmpty) isValid = false;
-    if (_passwordController.text.isEmpty || _passwordController.text.length < 8)
+    if (_passwordController.text.isEmpty ||
+        _passwordController.text.length < 8) {
       isValid = false;
-    if (_emailController.text.isEmpty || !isEmailValid(_emailController.text))
+    }
+    if (_emailController.text.isEmpty || !isEmailValid(_emailController.text)) {
       isValid = false;
+    }
     if (_phoneNumberController.text.length != 10) isValid = false;
     if (_selectedAccountType == 'Select') isValid = false;
     if (_selectedAccountType == 'Individual') {
